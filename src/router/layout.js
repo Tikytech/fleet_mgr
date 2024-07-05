@@ -1,7 +1,7 @@
 export const layoutRoutes = [
   {
     path: '',
-    name: 'layout',
+    name: 'Layout',
     component: () => import('../views/dashboard/LayoutView.vue')
   }
 ]

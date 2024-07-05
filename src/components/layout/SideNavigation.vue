@@ -11,28 +11,56 @@
     </div>
 
     <div>
-      <ul>
-        <template v-for="item in links" :key="item.name">
-          <router-link :to="{}">
-            <li
-              class="gray-text mb-6 flex justify-between items-center hover:text-[#eee] cursor-pointer transition"
-            >
-              <span>{{ item.name }}</span
-              ><Icon icon="heroicons:chevron-right-16-solid" />
-            </li>
-          </router-link>
-        </template>
-      </ul>
+      <template v-for="item in sideMenu" :key="item.name">
+        <div>
+          <p
+            class="gray-text mb-6 flex justify-between items-center hover:text-[#eee] cursor-pointer transition"
+          >
+            <span>{{ item.name }}</span
+            ><Icon icon="heroicons:chevron-right-16-solid" />
+          </p>
+
+          <ul class="ml-2 text-sm">
+            <template v-for="link in item.links" :key="link.name">
+              <router-link :to="link.link">
+                <li
+                  class="gray-text mb-6 flex justify-between items-center hover:text-[#eee] cursor-pointer transition"
+                >
+                  <span>- {{ link.name }}</span>
+                </li>
+              </router-link>
+            </template>
+          </ul>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
 import { Icon } from '@iconify/vue'
-const links = [
-  { name: 'Staff Management', link: '#' },
-  { name: 'Vehicle Management', link: '#' },
-  { name: 'Supplier Management', link: '#' }
+const sideMenu = [
+  {
+    name: 'Staff Management',
+    links: [
+      { name: 'All Staff', link: { name: 'Layout' } },
+      { name: 'Add Staff Member', link: { name: 'Layout' } }
+    ]
+  },
+  {
+    name: 'Vehicle Management',
+    links: [
+      { name: 'All Vehicles', link: { name: 'Layout' } },
+      { name: 'Add Vehicle', link: { name: 'Layout' } }
+    ]
+  },
+  {
+    name: 'Supplier Management',
+    links: [
+      { name: 'All Suppliers', link: '#' },
+      { name: 'Add Supplier', link: '#' }
+    ]
+  }
 ]
 </script>
 
