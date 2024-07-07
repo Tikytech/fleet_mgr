@@ -11,28 +11,18 @@
     </div>
 
     <div>
-      <template v-for="item in sideMenu" :key="item.name">
-        <div>
-          <p
-            class="gray-text mb-6 flex justify-between items-center hover:text-[#eee] cursor-pointer transition"
-          >
-            <span>{{ item.name }}</span
-            ><Icon icon="heroicons:chevron-right-16-solid" />
-          </p>
-
-          <ul class="ml-2 text-sm">
-            <template v-for="link in item.links" :key="link.name">
-              <router-link :to="link.link">
-                <li
-                  class="gray-text mb-6 flex justify-between items-center hover:text-[#eee] cursor-pointer transition"
-                >
-                  <span>- {{ link.name }}</span>
-                </li>
-              </router-link>
-            </template>
-          </ul>
-        </div>
-      </template>
+      <ul class="text-sm">
+        <template v-for="item in sideMenu" :key="item.name">
+          <router-link :to="item.link">
+            <li
+              class="gray-text text-base mb-6 flex justify-start gap-2 items-center hover:text-[#eee] cursor-pointer transition"
+            >
+              <Icon :icon="item.icon" class="text-lg" />
+              <span>{{ item.name }}</span>
+            </li>
+          </router-link>
+        </template>
+      </ul>
     </div>
   </div>
 </template>
@@ -41,27 +31,30 @@
 import { Icon } from '@iconify/vue'
 const sideMenu = [
   {
+    name: 'Overview',
+    link: { name: 'Overview' },
+    icon: 'heroicons:chart-pie'
+  },
+  {
     name: 'Staff Management',
-    links: [
-      { name: 'All Staff', link: { name: 'Layout' } },
-      { name: 'Add Staff Member', link: { name: 'Layout' } }
-    ]
+    link: { name: 'StaffManagement' },
+    icon: 'heroicons:user-group'
   },
   {
     name: 'Vehicle Management',
-    links: [
-      { name: 'All Vehicles', link: { name: 'Layout' } },
-      { name: 'Add Vehicle', link: { name: 'Layout' } }
-    ]
+    link: { name: 'VehicleManagement' },
+    icon: 'heroicons:truck'
   },
   {
     name: 'Supplier Management',
-    links: [
-      { name: 'All Suppliers', link: '#' },
-      { name: 'Add Supplier', link: '#' }
-    ]
+    link: { name: 'SupplierManagement' },
+    icon: 'heroicons:newspaper'
   }
 ]
 </script>
 
-<style scoped></style>
+<style scoped>
+.router-link-exact-active li {
+  @apply text-white;
+}
+</style>

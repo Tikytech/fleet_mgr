@@ -7,10 +7,14 @@
       </aside>
 
       <!-- content -->
-      <main class="ml-[250px] primary-bg min-h-screen">
+      <div class="ml-[250px] primary-bg min-h-screen">
         <TopNavigation />
         <TitleBar />
-      </main>
+
+        <main class="maximum-width py-5">
+          <router-view></router-view>
+        </main>
+      </div>
     </div>
   </div>
 </template>

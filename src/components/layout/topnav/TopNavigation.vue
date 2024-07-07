@@ -1,11 +1,13 @@
 <template>
-  <div class="bg-white maximum-width border-b sticky top-0">
-    <nav class="flex gap-5">
+  <div class="bg-white border-b sticky top-0">
+    <nav class="flex gap-5 maximum-width">
       <div class="py-4 flex justify-between items-center w-full">
         <!-- search and collapse icon -->
         <div class="flex items-center gap-4">
           <Icon icon="heroicons:bars-3-bottom-left" class="gray-text text-3xl" />
-          <SearchBar />
+          <div class="w-[250px]">
+            <SearchBar />
+          </div>
         </div>
 
         <!-- Icons -->
