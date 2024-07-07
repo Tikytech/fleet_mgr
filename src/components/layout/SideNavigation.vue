@@ -41,6 +41,11 @@ const sideMenu = [
     icon: 'heroicons:user-group'
   },
   {
+    name: 'Colleges',
+    link: { name: 'Colleges' },
+    icon: 'heroicons:building-library'
+  },
+  {
     name: 'Vehicle Management',
     link: { name: 'VehicleManagement' },
     icon: 'heroicons:truck'

@@ -21,6 +21,14 @@ export const dashboardRoutes = [
         }
       },
       {
+        path: 'colleges',
+        name: 'Colleges',
+        component: () => import('../views/dashboard/CollegesView.vue'),
+        meta: {
+          pageTitle: 'Colleges'
+        }
+      },
+      {
         path: 'vehicle-management',
         name: 'VehicleManagement',
         component: () => import('../views/dashboard/VehicleManagement.vue'),

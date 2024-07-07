@@ -13,7 +13,7 @@
           <Icon
             icon="heroicons:x-mark"
             class="text-3xl absolute right-3 top-3 cursor-pointer"
-            @click="$emit('close-modal')"
+            @click="$emit('close')"
           />
           <slot></slot>
         </div>
