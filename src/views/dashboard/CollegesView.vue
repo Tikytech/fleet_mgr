@@ -1,7 +1,24 @@
 <template>
   <div class="space-y-4">
-    <ModalComponent :show-modal="showAdd" @close="showAdd = false">
-      <AddCollegeForm @close="showAdd = false" />
+    <ModalComponent
+      :show-modal="showAdd || showEdit"
+      @close="
+        () => {
+          showAdd = false
+          showEdit = false
+        }
+      "
+    >
+      <AddCollegeForm @close="showAdd = false" v-if="showAdd" />
+      <EditCollegeForm
+        @close="
+          () => {
+            // $router.push({ name: 'Colleges' })
+            showEdit = false
+          }
+        "
+        v-if="showEdit"
+      />
     </ModalComponent>
 
     <!-- search and button -->
@@ -11,6 +28,8 @@
       <div class="grid grid-cols-3 2xl:grid-cols-4 gap-4" v-if="colleges?.length > 0">
         <template v-for="(college, index) in colleges" :key="college.id">
           <CollegeCard
+            @add="showAdd = true"
+            @edit="showEdit = true"
             :college="college"
             :colors="{
               color: colors[index % colors.length].hex,
@@ -47,13 +66,17 @@ import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import CollegeCard from '@/components/cards/CollegeCard.vue'
 import AddCollegeForm from '@/components/forms/AddCollegeForm.vue'
+import EditCollegeForm from '@/components/forms/EditCollegeForm.vue'
 import ModalComponent from '@/components/ui/ModalComponent.vue'
 import { ref, watch, onMounted } from 'vue'
 import { useCollegeStore } from '@/stores/college'
 import { Icon } from '@iconify/vue'
+import { useRoute } from 'vue-router'
 
 const showAdd = ref(false)
+const showEdit = ref(false)
 const collegeStore = useCollegeStore()
+const route = useRoute()
 const colleges = ref(collegeStore.colleges)
 
 watch(
@@ -61,6 +84,15 @@ watch(
   () => {
     console.log('seen')
     colleges.value = collegeStore.colleges
+  }
+)
+
+watch(
+  () => route.query.edit,
+  (value) => {
+    if (value) {
+      showEdit.value = true
+    }
   }
 )
 
@@ -83,6 +115,9 @@ const hovers = [
 onMounted(async () => {
   await collegeStore.getAllColleges()
   colleges.value = collegeStore.colleges
+  if (route.query.edit) {
+    showEdit.value = true
+  }
 })
 </script>
 

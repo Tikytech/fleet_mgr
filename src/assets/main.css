@@ -21,4 +21,8 @@
 
   .label {
   }
+
+  .overlay {
+    @apply fixed top-0 left-0 bottom-0 overflow-y-scroll right-0 z-40 bg-black/50;
+  }
 }

@@ -1,29 +1,23 @@
 <template>
   <div class="">
     <Transition name="overlay">
-      <div class="fixed top-0 left-0 bottom-0 right-0 z-40 bg-black/50" v-show="showModal"></div>
+      <div class="overlay" v-show="showModal"></div>
     </Transition>
 
-    <div
-      class="fixed top-0 bottom-0 right-0 left-0 z-50 flex items-center justify-center"
-      v-show="showModal"
-    >
-      <Transition name="content">
-        <div class="relative z-50 rounded-md overflow-hidden" v-show="showModal">
-          <Icon
-            icon="heroicons:x-mark"
-            class="text-3xl absolute right-3 top-3 cursor-pointer"
-            @click="$emit('close')"
-          />
-          <slot></slot>
-        </div>
-      </Transition>
+    <div class="fixed top-0 right-0 h-screen left-0 z-50 overflow-y-scroll" v-show="showModal">
+      <div class="flex items-center py-10 z-50 justify-center min-h-screen relative">
+        <Transition name="content">
+          <div class="relative z-50" v-show="showModal">
+            <slot></slot>
+          </div>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue'
+// import { Icon } from '@iconify/vue'
 // import { ref } from 'vue'
 
 // const showContent = ref(false)

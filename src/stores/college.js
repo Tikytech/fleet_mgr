@@ -7,6 +7,12 @@ export const useCollegeStore = defineStore('college', () => {
   const loading = ref(false)
   const isSuccessful = ref(false)
 
+  function findCollege(id) {
+    const col = colleges.value.find((college) => college.id == id)
+    // console.log(col)
+    return col
+  }
+
   async function getAllColleges() {
     try {
       loading.value = true
@@ -33,5 +39,19 @@ export const useCollegeStore = defineStore('college', () => {
     }
   }
 
-  return { colleges, loading, getAllColleges, addCollege, isSuccessful }
+  async function editCollege(collegeData, id) {
+    try {
+      isSuccessful.value = false
+      loading.value = true
+      const response = await api.put(`colleges/${id}`, collegeData)
+      console.log(response)
+      isSuccessful.value = true
+    } catch (error) {
+      console.log(error)
+      loading.value = false
+      isSuccessful.value = false
+    }
+  }
+
+  return { colleges, loading, getAllColleges, addCollege, isSuccessful, findCollege, editCollege }
 })
