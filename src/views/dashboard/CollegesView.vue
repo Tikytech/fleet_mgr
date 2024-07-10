@@ -5,20 +5,7 @@
     </ModalComponent>
 
     <!-- search and button -->
-    <div class="p-4 flex justify-between items-center bg-white rounded-md">
-      <div class="w-[350px]">
-        <SearchBar type="border" placeholder="Search for" />
-      </div>
-      <div class="flex gap-2 items-center">
-        <!-- <ButtonComponent text="Filter" icon="heroicons:adjustments-horizontal" type="info" /> -->
-        <ButtonComponent
-          text="Add College"
-          icon="heroicons:plus"
-          type="success"
-          @click="showAdd = true"
-        />
-      </div>
-    </div>
+    <SearchAndButtonBar button-text="Add College" @add="showAdd = true" />
 
     <div class="bg-white rounded-md p-4">
       <div class="grid grid-cols-3 2xl:grid-cols-4 gap-4" v-if="colleges?.length > 0">
@@ -56,7 +43,7 @@
 
 <script setup>
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
-import SearchBar from '@/components/ui/SearchBar.vue'
+import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import CollegeCard from '@/components/cards/CollegeCard.vue'
 import AddCollegeForm from '@/components/forms/AddCollegeForm.vue'

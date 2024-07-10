@@ -1,21 +1,5 @@
 <template>
   <div class="rounded-sm bg-white shadow-md">
-    <!-- search and button -->
-    <div class="p-4 flex justify-between items-center">
-      <div class="w-[350px]">
-        <SearchBar type="border" placeholder="Search for" />
-      </div>
-      <div class="flex gap-2 items-center">
-        <ButtonComponent text="Filter" icon="heroicons:adjustments-horizontal" type="info" />
-        <ButtonComponent
-          text="Add Staff"
-          icon="heroicons:plus"
-          type="success"
-          @click="$emit('add')"
-        />
-      </div>
-    </div>
-
     <!-- table -->
     <div class="" v-if="tableData?.length > 0">
       <!-- table -->
@@ -81,7 +65,6 @@
 </template>
 
 <script setup>
-import SearchBar from '@/components/ui/SearchBar.vue'
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
