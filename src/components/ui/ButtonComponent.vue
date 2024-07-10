@@ -1,6 +1,7 @@
 <template>
   <button
     :disable="loading"
+    :type="typeButton"
     class="min-w-[100px] justify-center rounded-md py-3 px-4 text-sm flex gap-2 items-center text-white font-semibold transition-colors"
     :class="[
       type === 'success'
@@ -23,14 +24,15 @@
 <script setup>
 // import { defineProps } from 'vue'
 import { Icon } from '@iconify/vue'
-const { icon, text, type, loading } = defineProps({
+const { icon, text, type, loading, typeButton } = defineProps({
   icon: String,
   text: String,
   type: {
     type: String,
     default: 'success'
   },
-  loading: Boolean
+  loading: Boolean,
+  typeButton: String
 })
 </script>
 
