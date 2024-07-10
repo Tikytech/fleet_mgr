@@ -2,7 +2,7 @@
   <div class="rounded-md w-[500px] bg-white">
     <h3 class="bg-slate-100 p-4 font-bold">Add College</h3>
 
-    <form @submit.prevent class="p-4 space-y-4">
+    <form @submit.prevent="submitForm" class="p-4 space-y-4">
       <!-- image -->
       <!-- <div class="image py-5">
         <div class="size-28 mx-auto rounded-full relative border-4">
@@ -27,13 +27,8 @@
       </div>
 
       <div class="flex justify-end mt-6 gap-2">
-        <ButtonComponent text="Close" type="border" @click="$emit('close')" />
-        <ButtonComponent
-          text="Add College"
-          type="success"
-          @click="submitForm"
-          :loading="collegeStore.loading"
-        />
+        <ButtonComponent text="Close" type="border" @click="$emit('close')" typeButton="button" />
+        <ButtonComponent text="Add College" type="success" :loading="collegeStore.loading" />
       </div>
     </form>
   </div>

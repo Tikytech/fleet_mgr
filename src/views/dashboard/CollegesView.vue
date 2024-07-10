@@ -11,7 +11,7 @@
       <div class="grid grid-cols-3 2xl:grid-cols-4 gap-4" v-if="colleges?.length > 0">
         <template v-for="(college, index) in colleges" :key="college.id">
           <CollegeCard
-            :college="{ name: 'College of Humanities' }"
+            :college="college"
             :colors="{
               color: colors[index % colors.length].hex,
               hover: hovers[index % hovers.length].hex
