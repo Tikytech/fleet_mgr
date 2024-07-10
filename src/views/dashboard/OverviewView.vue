@@ -1,8 +1,6 @@
 <template>
   <div class="">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eaque in tenetur error
-    reprehenderit odit a fugiat maiores possimus debitis quae adipisci magnam blanditiis dolores,
-    esse veniam nulla deserunt velit.
+    All Analytics on vehicle usage, staff management, colleges and suppliers will appear here
   </div>
 </template>
 
