@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-md w-[500px] bg-white">
+  <div class="rounded-md max-w-[500px] overflow-hidden mx-auto bg-white">
     <h3 class="bg-slate-100 p-4 font-bold">Add College</h3>
 
     <form @submit.prevent="submitForm" class="p-4 space-y-4">

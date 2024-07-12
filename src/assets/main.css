@@ -19,7 +19,8 @@
     @apply border-2 rounded-md px-3 py-2 w-full placeholder:text-sm text-sm;
   }
 
-  .label {
+  label {
+    @apply text-sm font-medium;
   }
 
   .overlay {

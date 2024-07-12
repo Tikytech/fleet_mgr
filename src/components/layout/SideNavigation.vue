@@ -36,24 +36,24 @@ const sideMenu = [
     icon: 'heroicons:chart-pie'
   },
   {
-    name: 'Staff Management',
+    name: 'Vehicles',
+    link: { name: 'VehicleManagement' },
+    icon: 'heroicons:truck'
+  },
+  {
+    name: 'Staff/Drivers',
     link: { name: 'StaffManagement' },
     icon: 'heroicons:user-group'
+  },
+  {
+    name: 'Suppliers',
+    link: { name: 'SupplierManagement' },
+    icon: 'heroicons:newspaper'
   },
   {
     name: 'Colleges',
     link: { name: 'Colleges' },
     icon: 'heroicons:building-library'
-  },
-  {
-    name: 'Vehicle Management',
-    link: { name: 'VehicleManagement' },
-    icon: 'heroicons:truck'
-  },
-  {
-    name: 'Supplier Management',
-    link: { name: 'SupplierManagement' },
-    icon: 'heroicons:newspaper'
   }
 ]
 </script>
