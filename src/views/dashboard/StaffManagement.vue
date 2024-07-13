@@ -6,12 +6,12 @@
 
     <SearchAndButtonBar button-text="Add Staff" :filter="true" @add="showAdd = true" />
 
-    <TableComponent @add="showAddModal" />
+    <StaffTable @add="showAddModal" />
   </div>
 </template>
 
 <script setup>
-import TableComponent from '@/components/ui/TableComponent.vue'
+import StaffTable from '@/components/tables/StaffTable.vue'
 import ModalComponent from '@/components/ui/ModalComponent.vue'
 import AddStaffForm from '@/components/forms/AddStaffForm.vue'
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'

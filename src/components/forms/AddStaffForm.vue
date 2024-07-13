@@ -42,15 +42,11 @@
       <!-- College -->
       <div class="">
         <label for="college">Choose Staff College</label>
-        <select
-          name="college"
-          class="input mt-1 text-sm"
-          id="college"
-          v-model="college.name"
-          required
-        >
-          <option value="Basic and Applied Sciences">Basic and Applied Sciences</option>
-          <option value="Humanities">Humanities</option>
+        <select name="college" class="input mt-1 text-sm" id="college" v-model="collegeId" required>
+          <option value="" disabled>Select college staff belongs to</option>
+          <template v-for="college in colleges" :key="college.id">
+            <option :value="college.id">{{ college.name }}</option>
+          </template>
         </select>
       </div>
 
@@ -94,19 +90,25 @@
 import { Icon } from '@iconify/vue'
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useStaffStore } from '@/stores/staff'
-import { ref } from 'vue'
+import { useCollegeStore } from '@/stores/college'
+import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(['close'])
 const staffStore = useStaffStore()
-const college = ref({ name: '' })
+const collegeStore = useCollegeStore()
+const collegeData = ref({})
+const collegeId = ref('')
+const colleges = ref([])
 const staffData = ref({
   name: '',
   staff_no: '',
-  college: college.value,
+  college: {},
   isDriver: null
 })
 
 async function submitForm() {
+  collegeData.value = collegeStore.colleges.find((college) => collegeId.value == college.id)
+  staffData.value.college = { id: collegeData.value.id, name: collegeData.value.name }
   console.log(staffData.value)
   await staffStore.addStaff(staffData.value)
   if (staffStore.isSuccessful) {
@@ -114,14 +116,19 @@ async function submitForm() {
     staffData.value = {
       name: '',
       staff_no: '',
-      college: college.value,
+      college: {},
       isDriver: null
     }
-    college.value = { name: '' }
+    collegeData.value = {}
     emit('close')
     console.log('emmiting')
   }
 }
+
+onMounted(async () => {
+  await collegeStore.getAllColleges()
+  colleges.value = collegeStore.colleges
+})
 </script>
 
 <style lang="scss" scoped></style>
