@@ -37,7 +37,7 @@ const sideMenu = [
   },
   {
     name: 'Vehicles',
-    link: { name: 'VehicleManagement' },
+    link: { name: 'VehiclesOverview' },
     icon: 'heroicons:truck'
   },
   {
@@ -59,7 +59,7 @@ const sideMenu = [
 </script>
 
 <style scoped>
-.router-link-exact-active li {
+.router-link-active li {
   @apply text-white;
 }
 </style>

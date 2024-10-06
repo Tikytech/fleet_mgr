@@ -1,11 +1,12 @@
 export const dashboardRoutes = [
   {
     path: '/',
+    redirect: { name: 'Overview' },
     name: 'Layout',
     component: () => import('../views/dashboard/LayoutView.vue'),
     children: [
       {
-        path: '',
+        path: 'overview',
         name: 'Overview',
         component: () => import('../views/dashboard/OverviewView.vue'),
         meta: {
@@ -17,7 +18,8 @@ export const dashboardRoutes = [
         name: 'StaffManagement',
         component: () => import('../views/dashboard/StaffManagement.vue'),
         meta: {
-          pageTitle: 'Staff Management'
+          pageTitle: 'Staff Management',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'staff' }]
         }
       },
       {
@@ -25,23 +27,47 @@ export const dashboardRoutes = [
         name: 'Colleges',
         component: () => import('../views/dashboard/CollegesView.vue'),
         meta: {
-          pageTitle: 'Colleges'
+          pageTitle: 'Colleges',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'colleges' }]
         }
       },
       {
-        path: 'vehicle-management',
+        path: 'vehicles',
         name: 'VehicleManagement',
-        component: () => import('../views/dashboard/VehicleManagement.vue'),
-        meta: {
-          pageTitle: 'Vehicle Management'
-        }
+        component: () => import('../views/dashboard/vehicle-management/VehicleManagement.vue'),
+        children: [
+          {
+            path: '',
+            name: 'VehiclesOverview',
+            component: () => import('../views/dashboard/vehicle-management/VehiclesOverview.vue'),
+            meta: {
+              pageTitle: 'Vehicle Management',
+              links: [{ name: 'dashboard', link: 'Overview' }, { name: 'vehicles' }]
+            }
+          },
+          {
+            path: 'vehicle-:id',
+            name: 'VehicleDetails',
+            component: () => import('../views/dashboard/vehicle-management/VehicleDetails.vue'),
+            meta: {
+              pageTitle: 'Vehicle Management',
+              links: [
+                { name: 'dashboard', link: 'Overview' },
+                { name: 'vehicles', link: 'VehiclesOverview' },
+                { name: 'vehicle details' }
+              ]
+            }
+          }
+        ]
       },
+
       {
         path: 'supplier-management',
         name: 'SupplierManagement',
         component: () => import('../views/dashboard/SupplierManagement.vue'),
         meta: {
-          pageTitle: 'Supplier Management'
+          pageTitle: 'Supplier Management',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'suppliers' }]
         }
       }
     ]

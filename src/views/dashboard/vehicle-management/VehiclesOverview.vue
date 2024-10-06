@@ -6,6 +6,7 @@
 
     <SearchAndButtonBar button-text="Add Vehicle" @add="showAdd = true" />
 
+    <DisplayVehicleCard />
     <div class="" v-if="vehicles?.length > 0">
       <template v-for="vehicle in vehicles" :key="vehicle?.id">
         <DisplayVehicleCard :vehicleData="vehicle" />

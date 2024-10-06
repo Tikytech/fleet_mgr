@@ -1,36 +1,31 @@
 <template>
-  <div class="p-4 bg-white rounded-md gap-5 flex text-gray-600">
+  <div class="p-4 bg-white rounded-md gap-5 max-w-[400px] text-gray-600">
     <!-- image -->
-    <div class="w-[33%]">
-      <img src="/images/vehicles/vehicle.jpg" alt="" class="w-full rounded-md" />
+    <div class="relative">
+      <img src="/images/vehicles/img-placeholder.jpg" alt="" class="w-full rounded-md" />
+
+      <div class="absolute top-0 right-0 text-sm">
+        <BadgeComponent :show-ping="true" type="success">Active</BadgeComponent>
+      </div>
     </div>
 
     <!-- details -->
-    <div class="w-[67%] px-4">
-      <div class="flex justify-between items-start">
-        <h3 class="text-3xl text-gray-600 font-bold">
-          {{ vehicleData.make }}
-          <span
-            class="rounded-full px-3 bg-cyan-400/30 text-cyan-800 text-sm py-1 ml-2 align-middle"
-            >Saloon</span
-          >
-        </h3>
-        <div
-          class="rounded-full px-3 bg-green-400/30 text-green-800 text-sm py-0.5 flex items-center gap-2"
-        >
-          <span>Active</span>
-
-          <span class="relative flex h-2 w-2">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500"
-            ></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
-          </span>
-        </div>
+    <div class="">
+      <div class="flex justify-start items-center text-xs font-bold gap-1 my-2">
+        <!-- {{ vehicleData?.make }} -->
+        <BadgeComponent>
+          <span>UG-V100</span>
+        </BadgeComponent>
+        <BadgeComponent>
+          <span>Toyota V3 ford 100</span>
+        </BadgeComponent>
+        <BadgeComponent>
+          <span>GV-0034-24</span>
+        </BadgeComponent>
       </div>
 
       <!-- icons -->
-      <div class="text-gray-400 flex gap-3 mt-2 text-sm">
+      <div class="text-gray-400 flex gap-2 justify-between text-sm">
         <div class="flex gap-1 items-center">
           <Icon icon="material-symbols:person" class="text-2xl" /> <span>5</span>
         </div>
@@ -46,19 +41,34 @@
         </div>
       </div>
 
-      <div class="text-sm mt-3 space-y-1 font-medium">
-        <p><span>Driver assigned:</span> <span class="text-gray-400 ml-2">Nelson Keku</span></p>
-        <p><span>College:</span> <span class="text-gray-400 ml-2">Enginerring</span></p>
-        <p><span>Purpose:</span> <span class="text-gray-400 ml-2">Getting Stationery</span></p>
+      <div class="text-sm mt-3 space-y-1">
         <p>
-          <span>Date and time assigned:</span>
-          <span class="text-gray-400 ml-2">25th Feb 2024 | 2:45pm</span>
+          <span class="">Driver Assigned:</span>
+          <span class="text-gray-400 ml-2">Nelson Keku</span>
+        </p>
+        <p>
+          <span class="">College:</span>
+          <span class="text-gray-400 ml-2">Engineering</span>
+        </p>
+        <p>
+          <span class="">Purpose:</span>
+          <span class="text-gray-400 ml-2">Getting Stationery</span>
+        </p>
+        <p>
+          <span>Last Maintenance:</span>
+          <span class="text-gray-400 ml-2">25th Feb 2024</span>
+        </p>
+        <p>
+          <span>Insurance Expiry:</span>
+          <span class="text-gray-400 ml-2">25th Feb 2024</span>
         </p>
       </div>
 
-      <div class="flex justify-end gap-2 mt-2">
+      <div class="flex justify-between gap-2 mt-4">
         <ButtonComponent text="Assign Vehicle" />
-        <ButtonComponent text="View Details" type="info" />
+        <router-link :to="{ name: 'VehicleDetails', params: { id: 'UG-V100' } }">
+          <ButtonComponent text="View Details" type="info" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -67,10 +77,13 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 import ButtonComponent from '../ui/ButtonComponent.vue'
+import BadgeComponent from '../ui/BadgeComponent.vue'
 
 const { vehicleData } = defineProps({
   vehicleData: Object
 })
+
+console.log(vehicleData)
 </script>
 
 <style lang="scss" scoped></style>
