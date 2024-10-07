@@ -60,7 +60,35 @@ export const dashboardRoutes = [
           }
         ]
       },
-
+      {
+        path: 'requests',
+        name: 'Requests',
+        component: () => import('../views/dashboard/requests/RequestsView.vue'),
+        children: [
+          {
+            path: '',
+            name: 'RequestList',
+            component: () => import('../views/dashboard/requests/RequestList.vue'),
+            meta: {
+              pageTitle: 'Requests',
+              links: [{ name: 'dashboard', link: 'Overview' }, { name: 'requests' }]
+            }
+          },
+          {
+            path: 'request-:id',
+            name: 'RequestDetails',
+            component: () => import('../views/dashboard/requests/RequestDetails.vue'),
+            meta: {
+              pageTitle: 'Requests',
+              links: [
+                { name: 'dashboard', link: 'Overview' },
+                { name: 'request', link: 'RequestList' },
+                { name: 'request details' }
+              ]
+            }
+          }
+        ]
+      },
       {
         path: 'supplier-management',
         name: 'SupplierManagement',

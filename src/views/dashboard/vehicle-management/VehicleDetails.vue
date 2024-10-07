@@ -46,12 +46,12 @@
               <!-- vehicle id -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Vehicle ID:</td>
-                <td className="text-gray-500">{staffDetails?.contact}</td>
+                <td className="text-gray-500">UG-V100</td>
               </tr>
               <!-- Vehicle model and make -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Vehicle model and make:</td>
-                <td className="text-gray-500">{staffDetails?.email}</td>
+                <td className="text-gray-500">Toyota V3 ford 100</td>
               </tr>
               <!-- Registration No. -->
               <tr>

@@ -10,7 +10,7 @@
             <input type="checkbox" name="" id="" class="accent-blue-900" />
           </th>
           <template v-for="head in tableHead" :key="head?.head">
-            <th class="text-left px-4 py-2">{{ head?.title }}</th>
+            <th class="text-left px-4 py-4">{{ head?.title }}</th>
           </template>
         </tr>
 

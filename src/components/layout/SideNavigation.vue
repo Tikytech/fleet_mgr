@@ -36,6 +36,11 @@ const sideMenu = [
     icon: 'heroicons:chart-pie'
   },
   {
+    name: 'Requests',
+    link: { name: 'RequestList' },
+    icon: 'heroicons:clipboard-document-list'
+  },
+  {
     name: 'Vehicles',
     link: { name: 'VehiclesOverview' },
     icon: 'heroicons:truck'
@@ -46,14 +51,14 @@ const sideMenu = [
     icon: 'heroicons:user-group'
   },
   {
-    name: 'Suppliers',
-    link: { name: 'SupplierManagement' },
-    icon: 'heroicons:newspaper'
-  },
-  {
     name: 'Colleges',
     link: { name: 'Colleges' },
     icon: 'heroicons:building-library'
+  },
+  {
+    name: 'Suppliers',
+    link: { name: 'SupplierManagement' },
+    icon: 'heroicons:newspaper'
   }
 ]
 </script>

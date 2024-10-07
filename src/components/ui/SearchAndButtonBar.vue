@@ -5,7 +5,7 @@
     </div>
     <div class="flex gap-2 items-center">
       <ButtonComponent
-        text="Filter"
+        text="Filters"
         icon="heroicons:adjustments-horizontal"
         type="info"
         v-if="filter"
