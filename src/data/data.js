@@ -34,9 +34,9 @@ export const vehicleFormData = [
   },
   {
     v_model: 'supplierId',
-    name: 'supplier Id',
-    input_type: 'text',
-    placeholder: 'Enter supplier Id'
+    name: 'supplier',
+    input_type: 'select',
+    placeholder: 'Please select a supplier'
   },
   {
     v_model: 'date_purchased',

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white border-b sticky top-0">
+  <div class="bg-white border-b sticky top-0 z-40">
     <nav class="flex gap-5 maximum-width">
       <div class="py-4 flex justify-between items-center w-full">
         <!-- search and collapse icon -->

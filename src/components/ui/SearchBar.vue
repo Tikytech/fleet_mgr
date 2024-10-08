@@ -1,6 +1,6 @@
 <template>
   <div
-    class="primary-bg rounded-md p-2 w-full flex items-center gap-2"
+    class="primary-bg rounded-md p-2 w-full flex items-center gap-2 focus-within:ring-1 ring-gray-400"
     :class="[type === 'border' ? 'bg-inherit border' : '']"
   >
     <Icon icon="material-symbols:search-rounded" class="text-xl text-gray-500" />

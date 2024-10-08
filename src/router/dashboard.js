@@ -33,6 +33,7 @@ export const dashboardRoutes = [
       },
       {
         path: 'vehicles',
+        redirect: { name: 'VehiclesOverview' },
         name: 'VehicleManagement',
         component: () => import('../views/dashboard/vehicle-management/VehicleManagement.vue'),
         children: [
@@ -63,6 +64,7 @@ export const dashboardRoutes = [
       {
         path: 'requests',
         name: 'Requests',
+        redirect: { name: 'RequestList' },
         component: () => import('../views/dashboard/requests/RequestsView.vue'),
         children: [
           {

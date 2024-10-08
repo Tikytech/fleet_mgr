@@ -4,16 +4,31 @@
       <AddVehicleForm @close="showAdd = false" />
     </ModalComponent>
 
-    <SearchAndButtonBar button-text="Add Vehicle" @add="showAdd = true" />
+    <!-- statistics -->
+    <div class="grid grid-cols-4 gap-5">
+      <template v-for="stat in overviewData" :key="stat.title">
+        <OverviewStatisticCard :stat="stat" />
+      </template>
+    </div>
 
-    <DisplayVehicleCard />
-    <div class="" v-if="vehicles?.length > 0">
+    <SearchAndButtonBar button-text="Add Vehicle" @add="showAdd = true" :filter="true" />
+
+    <p class="text-sm">Showing: {{ vehicles.length }} vehicles</p>
+
+    <!-- <DisplayVehicleCard /> -->
+    <div
+      class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"
+      v-if="vehicles?.length > 0"
+    >
       <template v-for="vehicle in vehicles" :key="vehicle?.id">
         <DisplayVehicleCard :vehicleData="vehicle" />
       </template>
     </div>
 
-    <div class="bg-white rounded-md flex justify-center py-10" v-else-if="vehicleStore.loading">
+    <div
+      class="bg-white rounded-md flex justify-center py-10"
+      v-else-if="vehicleStore.loading && vehicleStore.vehicles < 1"
+    >
       <div class="">
         <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
         <p>Fetching data...</p>
@@ -40,17 +55,57 @@ import AddVehicleForm from '@/components/forms/AddVehicleForm.vue'
 import DisplayVehicleCard from '@/components/cards/DisplayVehicleCard.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
+import OverviewStatisticCard from '@/components/cards/OverviewStatisticCard.vue'
 import { Icon } from '@iconify/vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 import { useVehicleStore } from '@/stores/vehicle'
 
 const vehicleStore = useVehicleStore()
 const showAdd = ref(false)
 const vehicles = ref(vehicleStore.vehicles)
 
+const overviewData = computed(() => {
+  return [
+    {
+      title: 'Total Vehicles',
+      // link: { name: 'VehicleManagement' },
+      // linkName: 'View Vehicle Details',
+      statistic: vehicles.value.length,
+      icon: 'heroicons:truck'
+    },
+    {
+      title: 'Available Vehicles',
+      // link: { name: 'StaffManagement' },
+      // linkName: 'View All Staff',
+      statistic: vehicles.value.length,
+      icon: 'material-symbols-light:electric-car-outline-rounded'
+    },
+    {
+      title: 'In Use',
+      // link: { name: 'SupplierManagement' },
+      // linkName: 'View Supplier Details',
+      statistic: 0,
+      icon: 'mdi:car-emergency'
+    },
+    {
+      title: 'In maintenance',
+      // link: { name: 'Colleges' },
+      // linkName: 'View Colleges',
+      statistic: 0,
+      icon: 'material-symbols-light:car-crash-outline'
+    }
+  ]
+})
 // function showAddModal() {
 //   showAdd.value = true
 // }
+
+watch(
+  () => vehicleStore.vehicles,
+  () => {
+    vehicles.value = vehicleStore.vehicles
+  }
+)
 
 onMounted(async () => {
   await vehicleStore.getAllVehicles()

@@ -23,12 +23,21 @@
 
         <!-- Form inputs -->
         <template v-for="data in vehicleFormData" :key="data.v_model">
+          <div class="" v-if="data.input_type === 'select'">
+            <label :for="data.v_model" class="capitalize">{{ data.name }}</label>
+            <select @change="updateVehicleData($event, data.v_model)" class="input">
+              <option disabled selected value="">{{ data.placeholder }}</option>
+              <template v-for="option in getSelectOptions(data.v_model)" :key="option">
+                <option :value="option.id">{{ option.name }}</option>
+              </template>
+            </select>
+          </div>
           <div class="">
             <label :for="data.v_model" class="capitalize">{{ data.name }}</label>
             <input
               required
               class="input mt-1"
-              type="text"
+              :type="data.input_type"
               :id="data.v_model"
               :placeholder="data.placeholder"
               @input="updateVehicleData($event, data.v_model)"
@@ -46,12 +55,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useVehicleStore } from '@/stores/vehicle'
+import { useSupplierStore } from '@/stores/supplier'
 import { vehicleFormData } from '@/data/data'
 
 const vehicleStore = useVehicleStore()
+const supplierStore = useSupplierStore()
 const emit = defineEmits(['close'])
 const vehicleData = ref({
   reg_no: '',
@@ -69,8 +80,15 @@ const vehicleData = ref({
   price_paid_cif: ''
 })
 
+function getSelectOptions(key) {
+  if (key === 'supplierId') {
+    return supplierStore.suppliers
+  }
+}
+
 function updateVehicleData(e, model) {
   vehicleData.value[model] = e.target.value
+  console.log(vehicleData.value[model])
 }
 
 async function submitForm() {
@@ -99,6 +117,12 @@ async function submitForm() {
     console.log('something went wrong teribli')
   }
 }
+
+onMounted(async () => {
+  if (supplierStore.suppliers.length < 1) {
+    await supplierStore.getAllSuppliers()
+  }
+})
 </script>
 
 <style scoped></style>

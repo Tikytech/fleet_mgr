@@ -2,7 +2,7 @@
   <div>
     <!-- back button -->
     <div class="mb-5 flex">
-      <BackComponent :link-object="{ name: 'VehiclesOverview' }" />
+      <BackComponent />
     </div>
 
     <!-- details -->

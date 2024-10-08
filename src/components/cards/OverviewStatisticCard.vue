@@ -10,9 +10,10 @@
       </span>
     </p>
     <div class="flex justify-between items-end">
-      <router-link :to="stat?.link" class="text-sm text-blue-700 underline">{{
+      <router-link v-if="stat?.linkName" :to="stat?.link" class="text-sm text-blue-700 underline">{{
         stat?.linkName
       }}</router-link>
+      <div class="" v-else></div>
       <div class="flex justify-between items-center bg-green-400 p-3 rounded">
         <Icon :icon="stat?.icon" class="text-2xl text-white" />
       </div>

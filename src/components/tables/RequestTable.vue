@@ -29,7 +29,9 @@
             <td class="text-left px-4 py-4">{{ data?.status }}</td>
             <td class="text-left px-4 py-4">
               <div class="flex gap-2">
-                <Icon icon="heroicons:eye" class="gray-text text-xl cursor-pointer" />
+                <router-link :to="{ name: 'RequestDetails', params: { id: data?.requestId } }">
+                  <Icon icon="heroicons:eye" class="gray-text text-xl cursor-pointer" />
+                </router-link>
                 <!-- <Icon icon="heroicons:trash" class="text-red-500 text-xl cursor-pointer" /> -->
               </div>
             </td>
