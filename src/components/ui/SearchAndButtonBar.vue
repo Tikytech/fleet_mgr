@@ -14,7 +14,8 @@
         :text="buttonText"
         icon="heroicons:plus"
         type="success"
-        @click="$emit('add')"
+        @buttonClick="$emit('add')"
+        :dropdown="true"
       />
     </div>
   </div>
