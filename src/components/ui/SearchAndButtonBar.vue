@@ -15,7 +15,14 @@
         icon="heroicons:plus"
         type="success"
         @buttonClick="$emit('add')"
-        :dropdown="true"
+        :dropdown="[
+          {
+            name: 'Import CSV',
+            emit: 'importCsv',
+            icon: 'material-symbols:download-2-outline-rounded'
+          },
+          { name: 'Add Vehicle', emit: 'buttonClick', icon: 'heroicons:plus' }
+        ]"
       />
     </div>
   </div>
