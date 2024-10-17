@@ -50,6 +50,7 @@ export const dashboardRoutes = [
             path: 'vehicle-:id',
             name: 'VehicleDetails',
             component: () => import('../views/dashboard/vehicle-management/VehicleDetails.vue'),
+            props: true,
             meta: {
               pageTitle: 'Vehicle Management',
               links: [

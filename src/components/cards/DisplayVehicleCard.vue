@@ -14,13 +14,13 @@
       <div class="flex justify-start items-center text-xs font-bold gap-1 my-2">
         <!-- {{ vehicleData?.make }} -->
         <BadgeComponent>
-          <span>UG-V100</span>
+          <span>{{ vehicleData.id }}</span>
         </BadgeComponent>
         <BadgeComponent>
-          <span>Toyota V3 ford 100</span>
+          <span>{{ vehicleData.make }} {{ vehicleData.model }}</span>
         </BadgeComponent>
         <BadgeComponent>
-          <span>GV-0034-24</span>
+          <span>{{ vehicleData.reg_no }}</span>
         </BadgeComponent>
       </div>
 
@@ -66,7 +66,7 @@
 
       <div class="flex justify-between gap-2 mt-4">
         <ButtonComponent text="Assign Vehicle" />
-        <router-link :to="{ name: 'VehicleDetails', params: { id: 'UG-V100' } }">
+        <router-link :to="{ name: 'VehicleDetails', params: { id: vehicleData.id } }">
           <ButtonComponent text="View Details" type="info" />
         </router-link>
       </div>

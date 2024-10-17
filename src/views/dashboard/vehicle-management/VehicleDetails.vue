@@ -1,5 +1,10 @@
 <template>
   <div>
+    <!-- popups and modals -->
+    <ModalComponent :show-modal="showEdit" @close="showEdit = false">
+      <EditVehicleForm @close="showEdit = false" />
+    </ModalComponent>
+
     <!-- back button -->
     <div class="mb-5 flex">
       <BackComponent />
@@ -18,9 +23,9 @@
           <!-- head -->
           <div class="flex items-center justify-between">
             <h3 class="font-semibold text-2xl">Vehicle Information</h3>
-            <div class="">
+            <!-- <div class="">
               <ButtonComponent text="Edit"></ButtonComponent>
-            </div>
+            </div> -->
           </div>
 
           <!-- icons -->
@@ -46,22 +51,24 @@
               <!-- vehicle id -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Vehicle ID:</td>
-                <td className="text-gray-500">UG-V100</td>
+                <td className="text-gray-500">{{ vehicleDetails.id }}</td>
               </tr>
               <!-- Vehicle model and make -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Vehicle model and make:</td>
-                <td className="text-gray-500">Toyota V3 ford 100</td>
+                <td className="text-gray-500">
+                  {{ vehicleDetails.make }} {{ vehicleDetails.model }}
+                </td>
               </tr>
               <!-- Registration No. -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Registration No.:</td>
-                <td className="text-gray-500">N/A</td>
+                <td className="text-gray-500">{{ vehicleDetails.reg_no }}</td>
               </tr>
               <!-- Year of manufacture -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Manufacture year:</td>
-                <td className="text-gray-500">N/A</td>
+                <td className="text-gray-500">{{ vehicleDetails.year }}</td>
               </tr>
               <!-- Status -->
               <tr>
@@ -72,6 +79,9 @@
                   </div>
                 </td>
               </tr>
+              <span class="text-blue-500 hover:underline cursor-pointer" @click="showEdit = true"
+                >More details</span
+              >
             </tbody>
           </table>
         </div>
@@ -89,12 +99,12 @@
               <!-- driver's name -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Driver's name:</td>
-                <td className="text-gray-500">{staffDetails?.contact}</td>
+                <td className="text-gray-500">Salifu</td>
               </tr>
               <!-- contact -->
               <tr>
                 <td className="py-2 pr-3 font-semibold">Driver's contact:</td>
-                <td className="text-gray-500">{staffDetails?.email}</td>
+                <td className="text-gray-500">driver@email.com</td>
               </tr>
               <!-- Licence -->
               <tr>
@@ -122,7 +132,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="">
+          <div class="w-fit mt-2">
             <ButtonComponent text="Unassign Driver" type="danger"></ButtonComponent>
           </div>
         </div>
@@ -147,14 +157,16 @@
               <tr>
                 <td className="py-2 pr-3 font-semibold">Service history:</td>
                 <td className="text-gray-500">
-                  <span class="underline text-blue-600">View service history</span>
+                  <span class="text-blue-500 hover:underline cursor-pointer"
+                    >View service history</span
+                  >
                 </td>
               </tr>
               <!-- Status -->
             </tbody>
           </table>
 
-          <div class="mt-3">
+          <div class="w-fit mt-4">
             <ButtonComponent text="Call for Maintenance"></ButtonComponent>
           </div>
         </div>
@@ -184,7 +196,7 @@
             </tbody>
           </table>
 
-          <div class="mt-3">
+          <div class="w-fit mt-4">
             <ButtonComponent text="Edit"></ButtonComponent>
           </div>
         </div>
@@ -208,6 +220,22 @@ import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue'
 import VehicleHistoryTable from '@/components/tables/VehicleHistoryTable.vue'
 import { Icon } from '@iconify/vue/dist/iconify.js'
+import { onMounted, ref } from 'vue'
+import { useVehicleStore } from '@/stores/vehicle'
+import EditVehicleForm from '@/components/forms/EditVehicleForm.vue'
+import ModalComponent from '@/components/ui/ModalComponent.vue'
+
+const { id } = defineProps({
+  id: String
+})
+const vehicleStore = useVehicleStore()
+const vehicleDetails = ref({})
+const showEdit = ref(false)
+
+onMounted(async () => {
+  await vehicleStore.getAllVehicles()
+  vehicleDetails.value = vehicleStore.vehicles.find((vehicle) => vehicle.id == id)
+})
 </script>
 
 <style scoped></style>

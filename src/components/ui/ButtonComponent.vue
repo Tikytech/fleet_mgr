@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="flex justify-center rounded-md text-white font-semibold transition-colors text-sm overflow-hidden"
+      class="flex justify-center rounded-md text-white font-semibold transition-colors text-sm"
       :class="[
         type === 'success'
           ? 'bg-green-500 '
@@ -10,7 +10,7 @@
             : type === 'info'
               ? 'bg-cyan-500 '
               : type === 'border'
-                ? 'bg-inherit border-2 !text-black hover:border-gray-400'
+                ? 'bg-inherit outline-1 !text-black hover:outline-gray-400'
                 : ''
       ]"
     >
@@ -18,7 +18,7 @@
         @click="$emit('buttonClick')"
         :disable="loading"
         :type="typeButton"
-        class="min-w-[100px] justify-center py-3 px-4 flex gap-2 items-center"
+        class="min-w-[100px] justify-center py-3 px-4 flex gap-2 items-center rounded-md"
         :class="[
           type === 'success'
             ? 'bg-green-500 hover:bg-green-600'
@@ -39,7 +39,7 @@
       <button
         @click="showDropdown = true"
         v-if="dropdown"
-        class="p-3 border-l"
+        class="p-3 border-l rounded-r-md"
         :class="[
           type === 'success'
             ? 'bg-green-500 hover:bg-green-600'
