@@ -11,7 +11,19 @@
       </template>
     </div>
 
-    <SearchAndButtonBar button-text="Add Vehicle" @add="showAdd = true" :filter="true" />
+    <SearchAndButtonBar
+      button-text="Add Vehicle"
+      @add="showAdd = true"
+      :filter="true"
+      :dropdown="[
+        {
+          name: 'Import CSV',
+          emit: 'importCsv',
+          icon: 'material-symbols:download-2-outline-rounded'
+        },
+        { name: 'Add Vehicle', emit: 'buttonClick', icon: 'heroicons:plus' }
+      ]"
+    />
 
     <p class="text-sm">Showing: {{ vehicles.length }} vehicles</p>
 

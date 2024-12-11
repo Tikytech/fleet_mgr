@@ -36,14 +36,14 @@ const sideMenu = [
     icon: 'heroicons:chart-pie'
   },
   {
-    name: 'Requests',
-    link: { name: 'RequestList' },
-    icon: 'heroicons:clipboard-document-list'
-  },
-  {
     name: 'Vehicles',
     link: { name: 'VehiclesOverview' },
     icon: 'heroicons:truck'
+  },
+  {
+    name: 'Requests',
+    link: { name: 'RequestList' },
+    icon: 'heroicons:clipboard-document-list'
   },
   {
     name: 'Staff/Drivers',

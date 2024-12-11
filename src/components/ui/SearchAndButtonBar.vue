@@ -15,14 +15,7 @@
         icon="heroicons:plus"
         type="success"
         @buttonClick="$emit('add')"
-        :dropdown="[
-          {
-            name: 'Import CSV',
-            emit: 'importCsv',
-            icon: 'material-symbols:download-2-outline-rounded'
-          },
-          { name: 'Add Vehicle', emit: 'buttonClick', icon: 'heroicons:plus' }
-        ]"
+        :dropdown="dropdown"
       />
     </div>
   </div>
@@ -34,7 +27,8 @@ import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 
 const { buttonText, filter } = defineProps({
   buttonText: String,
-  filter: Boolean
+  filter: Boolean,
+  dropdown: Object
 })
 </script>
 
