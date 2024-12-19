@@ -7,25 +7,25 @@
 
     <!-- back button -->
     <div class="mb-5 flex">
-      <BackComponent />
+      <BackComponent :link-object="{ name: 'VehiclesOverview' }" />
     </div>
 
     <!-- details -->
-    <div class="space-y-10">
+    <div class="space-y-8">
       <!-- vehicle information -->
-      <div class="flex gap-10">
+      <div class="flex gap-10 bg-white p-5 rounded-md">
         <!-- image -->
-        <div class="w-[40%]">
+        <div class="w-[50%] border">
           <img src="/images/vehicles/img-placeholder.jpg" alt="" class="w-full rounded-md" />
         </div>
 
-        <div class="w-[60%]">
+        <div class="w-[50%]">
           <!-- head -->
           <div class="flex items-center justify-between">
             <h3 class="font-semibold text-2xl">Vehicle Information</h3>
-            <!-- <div class="">
-              <ButtonComponent text="Edit"></ButtonComponent>
-            </div> -->
+            <div class="cursor-pointer active:scale-90" title="Edit vehicle details" @click="showEdit = true">
+              <Icon icon="heroicons:pencil" class="text-2xl" />
+            </div>
           </div>
 
           <!-- icons -->
@@ -50,163 +50,70 @@
             <tbody>
               <!-- vehicle id -->
               <tr>
-                <td className="py-2 pr-3 font-semibold">Vehicle ID:</td>
+                <td className="py-1.5 pr-3 font-semibold">Vehicle ID:</td>
                 <td className="text-gray-500">{{ vehicleDetails.id }}</td>
               </tr>
               <!-- Vehicle model and make -->
               <tr>
-                <td className="py-2 pr-3 font-semibold">Vehicle model and make:</td>
+                <td className="py-1.5 pr-3 font-semibold">Vehicle model and make:</td>
                 <td className="text-gray-500">
                   {{ vehicleDetails.make }} {{ vehicleDetails.model }}
                 </td>
               </tr>
               <!-- Registration No. -->
               <tr>
-                <td className="py-2 pr-3 font-semibold">Registration No.:</td>
+                <td className="py-1.5 pr-3 font-semibold">Registration No:</td>
                 <td className="text-gray-500">{{ vehicleDetails.reg_no }}</td>
               </tr>
               <!-- Year of manufacture -->
               <tr>
-                <td className="py-2 pr-3 font-semibold">Manufacture year:</td>
+                <td className="py-1.5 pr-3 font-semibold">Manufacture year:</td>
                 <td className="text-gray-500">{{ vehicleDetails.year }}</td>
+              </tr>
+              <!-- Chassis -->
+              <tr>
+                <td className="py-1.5 pr-3 font-semibold">Chassis No:</td>
+                <td className="text-gray-500">{{ vehicleDetails.chassis_no }}</td>
+              </tr>
+              <!-- Engine -->
+              <tr>
+                <td className="py-1.5 pr-3 font-semibold">Engine No:</td>
+                <td className="text-gray-500">{{ vehicleDetails.engine_no }}</td>
+              </tr>
+              <!-- College -->
+              <tr>
+                <td className="py-1.5 pr-3 font-semibold">College:</td>
+                <td className="text-gray-500">N/A</td>
               </tr>
               <!-- Status -->
               <tr>
-                <td className="py-2 pr-3 font-semibold">Status:</td>
+                <td className="py-1.5 pr-3 font-semibold">Status:</td>
                 <td className="text-gray-500">
                   <div class="w-fit">
                     <BadgeComponent type="warning">In Maintenance</BadgeComponent>
                   </div>
                 </td>
               </tr>
-              <span class="text-blue-500 hover:underline cursor-pointer" @click="showEdit = true"
-                >More details</span
-              >
+
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <!-- driver and others -->
-      <div
-        class="grid grid-cols-3 divide-x justify-between divide-gray-200 bg-white rounded-md p-3"
-      >
-        <!-- drivers -->
-        <div class="p-2">
-          <h3 class="font-semibold text-xl">Driver Information</h3>
-          <table className="text-[15px]">
-            <tbody>
-              <!-- driver's name -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Driver's name:</td>
-                <td className="text-gray-500">Salifu</td>
-              </tr>
-              <!-- contact -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Driver's contact:</td>
-                <td className="text-gray-500">driver@email.com</td>
-              </tr>
-              <!-- Licence -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Licence No.:</td>
-                <td className="text-gray-500">N/A</td>
-              </tr>
-              <!-- Licence expiration -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Licence expiration:</td>
-                <td className="text-gray-500">25th April, 2024</td>
-              </tr>
-              <!-- Date Assigned -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Date Assigned:</td>
-                <td className="text-gray-500">25th April, 2024</td>
-              </tr>
-              <!-- Status -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Status:</td>
-                <td className="text-gray-500">
-                  <div class="w-fit">
-                    <BadgeComponent>Free</BadgeComponent>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="w-fit mt-2">
-            <ButtonComponent text="Unassign Driver" type="danger"></ButtonComponent>
-          </div>
-        </div>
-
-        <!-- maintenance details -->
-        <div class="p-2">
-          <h3 class="font-semibold text-xl">Maintenance Information</h3>
-
-          <table className="text-[15px]">
-            <tbody>
-              <!-- driver's name -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Last maintenance date:</td>
-                <td className="text-gray-500">25th April, 2024</td>
-              </tr>
-              <!-- contact -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Next maintenance:</td>
-                <td className="text-gray-500">25th April, 2024</td>
-              </tr>
-              <!-- Date Assigned -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Service history:</td>
-                <td className="text-gray-500">
-                  <span class="text-blue-500 hover:underline cursor-pointer"
-                    >View service history</span
-                  >
-                </td>
-              </tr>
-              <!-- Status -->
-            </tbody>
-          </table>
-
-          <div class="w-fit mt-4">
-            <ButtonComponent text="Call for Maintenance"></ButtonComponent>
-          </div>
-        </div>
-
-        <!-- Insurance details -->
-        <div class="p-2">
-          <h3 class="font-semibold text-xl">Insurance Information</h3>
-
-          <table className="text-[15px]">
-            <tbody>
-              <!-- driver's name -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Insurance provider:</td>
-                <td className="text-gray-500">Star Assurance</td>
-              </tr>
-              <!-- contact -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Policy number:</td>
-                <td className="text-gray-500">sdfe2345</td>
-              </tr>
-              <!-- Date Assigned -->
-              <tr>
-                <td className="py-2 pr-3 font-semibold">Expiration date:</td>
-                <td className="text-gray-500">25th April, 2024</td>
-              </tr>
-              <!-- Status -->
-            </tbody>
-          </table>
-
-          <div class="w-fit mt-4">
-            <ButtonComponent text="Edit"></ButtonComponent>
-          </div>
         </div>
       </div>
 
       <!-- history -->
-      <div class="">
-        <h3 class="font-semibold text-2xl mb-2">Vehicle History</h3>
+      <div class="bg-white rounded-md p-5">
+        <div class="mb-5">
+          <h3 class="font-semibold text-2xl mb-1">Vehicle History</h3>
+          <p class="text-sm text-gray-500">Checkout all the history of this vehicle</p>
+        </div>
 
-        <VehicleHistoryTable />
+        <div class="">
+          <NavigationTabs :tabs="tabLinks" />
+
+          <div class="py-5">
+            <router-view></router-view>
+          </div>
+        </div>
 
         <div class=""></div>
       </div>
@@ -216,14 +123,14 @@
 
 <script setup>
 import BackComponent from '@/components/ui/BackComponent.vue'
-import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue'
-import VehicleHistoryTable from '@/components/tables/VehicleHistoryTable.vue'
+// import VehicleHistoryTable from '@/components/tables/VehicleHistoryTable.vue'
 import { Icon } from '@iconify/vue/dist/iconify.js'
 import { onMounted, ref } from 'vue'
 import { useVehicleStore } from '@/stores/vehicle'
 import EditVehicleForm from '@/components/forms/EditVehicleForm.vue'
 import ModalComponent from '@/components/ui/ModalComponent.vue'
+import NavigationTabs from '@/components/ui/NavigationTabs.vue'
 
 const { id } = defineProps({
   id: String
@@ -231,6 +138,14 @@ const { id } = defineProps({
 const vehicleStore = useVehicleStore()
 const vehicleDetails = ref({})
 const showEdit = ref(false)
+
+const tabLinks = [
+  { tab: 'Requests', link: 'RequestHistory' },
+  { tab: 'Maintenance', link: 'MaintenanceHistory' },
+  { tab: 'Tyres', link: 'TyreHistory' },
+  { tab: 'Oil Change', link: 'OilHistory' },
+  { tab: 'Performance', link: 'PerformanceHistory' },
+]
 
 onMounted(async () => {
   await vehicleStore.getAllVehicles()

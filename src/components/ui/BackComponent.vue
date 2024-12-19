@@ -1,8 +1,6 @@
 <template>
-  <div
-    @click="goBack"
-    class="text-sm px-3 py-1 cursor-pointer rounded-md hover:bg-gray-300 transition-colors flex items-center gap-2"
-  >
+  <div @click="goBack"
+    class="text-sm px-3 py-1 cursor-pointer rounded-md hover:bg-gray-300 transition-colors flex items-center gap-2">
     <Icon icon="heroicons:arrow-left" /> <span>Back</span>
   </div>
 </template>
@@ -12,7 +10,7 @@ import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 
 const { linkObject } = defineProps({
-  linkObject: String
+  linkObject: Object
 })
 
 const router = useRouter()

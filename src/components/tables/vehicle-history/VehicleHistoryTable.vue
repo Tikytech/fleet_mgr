@@ -6,9 +6,6 @@
       <table class="w-full text-sm">
         <!-- thead -->
         <tr class="text-sm font-semibold px-4 py-2 bg-slate-100 border-b">
-          <th class="pl-4 w-2 text-left">
-            <input type="checkbox" name="" id="" class="accent-blue-900" />
-          </th>
           <template v-for="head in tableHead" :key="head?.head">
             <th class="text-left px-4 py-4">{{ head?.title }}</th>
           </template>
@@ -17,9 +14,6 @@
         <!-- table data -->
         <template v-for="data in tableData" :key="data?.id">
           <tr class="border-b">
-            <td class="pl-4 w-2 text-left">
-              <input type="checkbox" name="" id="" class="accent-blue-900" />
-            </td>
             <td class="text-left px-4 py-4 capitalize">{{ data?.tripId }}</td>
             <td class="text-left px-4 py-4">{{ data?.date }}</td>
             <td class="text-left px-4 py-4 capitalize">{{ data?.driver }}</td>
