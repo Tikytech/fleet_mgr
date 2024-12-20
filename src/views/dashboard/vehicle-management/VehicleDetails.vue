@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- popups and modals -->
-    <ModalComponent :show-modal="showEdit" @close="showEdit = false">
+    <ModalComponent :show-modal="showEdit" @close="showEdit = false" title="Vehicle details">
       <EditVehicleForm @close="showEdit = false" />
     </ModalComponent>
 

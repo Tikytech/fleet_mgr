@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <ModalComponent :show-modal="showAdd" @close="showAdd = false">
+    <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Add supplier">
       <AddSupplierForm @close="showAdd = false" />
     </ModalComponent>
 

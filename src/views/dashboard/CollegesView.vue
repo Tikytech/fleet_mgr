@@ -1,24 +1,16 @@
 <template>
   <div class="space-y-4">
-    <ModalComponent
-      :show-modal="showAdd || showEdit"
-      @close="
-        () => {
-          showAdd = false
-          showEdit = false
-        }
-      "
-    >
+    <ModalComponent :show-modal="showAdd || showEdit" @close="() => {
+      showAdd = false
+      showEdit = false
+    }
+      " :title="showAdd && 'Add College' || showEdit && 'Edit College Details'">
       <AddCollegeForm @close="showAdd = false" v-if="showAdd" />
-      <EditCollegeForm
-        @close="
-          () => {
-            // $router.push({ name: 'Colleges' })
-            showEdit = false
-          }
-        "
-        v-if="showEdit"
-      />
+      <EditCollegeForm @close="() => {
+        // $router.push({ name: 'Colleges' })
+        showEdit = false
+      }
+        " v-if="showEdit" />
     </ModalComponent>
 
     <!-- search and button -->
@@ -39,26 +31,21 @@
             }"
           />
         </template>
-      </div>
+</div>
 
-      <div class="flex justify-center py-10" v-else-if="collegeStore.loading">
-        <div class="">
-          <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
-          <p>Fetching data...</p>
-        </div>
-      </div>
+<div class="flex justify-center py-10" v-else-if="collegeStore.loading">
+  <div class="">
+    <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
+    <p>Fetching data...</p>
+  </div>
+</div>
 
-      <div class="flex justify-center py-10" v-else>
-        <NoResults>
-          <ButtonComponent
-            text="Add College"
-            icon="heroicons:plus"
-            type="success"
-            @click="showAdd = true"
-          />
-        </NoResults>
-      </div>
-    </div> -->
+<div class="flex justify-center py-10" v-else>
+  <NoResults>
+    <ButtonComponent text="Add College" icon="heroicons:plus" type="success" @click="showAdd = true" />
+  </NoResults>
+</div>
+</div> -->
   </div>
 </template>
 

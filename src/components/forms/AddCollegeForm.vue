@@ -1,19 +1,12 @@
 <template>
-  <div class="rounded-md max-w-[500px] overflow-hidden mx-auto bg-white">
-    <h3 class="bg-slate-100 p-4 font-bold">Add College</h3>
+  <div class="">
 
     <form @submit.prevent="submitForm" class="p-4 space-y-4">
       <!-- Name -->
       <div class="">
         <label for="name" class="">College Name</label>
-        <input
-          required
-          class="input mt-1"
-          type="text"
-          id="name"
-          placeholder="Enter the name of the college"
-          v-model="collegeData.name"
-        />
+        <input required class="input mt-1" type="text" id="name" placeholder="Enter the name of the college"
+          v-model="collegeData.name" />
       </div>
 
       <div class="flex justify-end mt-6 gap-2">

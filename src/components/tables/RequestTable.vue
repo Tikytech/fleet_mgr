@@ -26,7 +26,11 @@
             <td class="text-left px-4 py-4">{{ data?.returnDate }}</td>
             <td class="text-left px-4 py-4">{{ data?.passengers }}</td>
             <td class="text-left px-4 py-4">{{ data?.recurring }}</td>
-            <td class="text-left px-4 py-4">{{ data?.status }}</td>
+            <td class="text-left px-4 py-4">
+              <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
+                {{ data?.status }}
+              </BadgeComponent>
+            </td>
             <td class="text-left px-4 py-4">
               <div class="flex gap-2">
                 <router-link :to="{ name: 'RequestDetails', params: { id: data?.requestId } }">
@@ -58,12 +62,7 @@
 
     <div class="flex justify-center py-10" v-else>
       <NoResults>
-        <ButtonComponent
-          text="Add Supplier"
-          icon="heroicons:plus"
-          type="success"
-          @click="$emit('add')"
-        />
+        <ButtonComponent text="Add Supplier" icon="heroicons:plus" type="success" @click="$emit('add')" />
       </NoResults>
     </div>
   </div>
@@ -73,6 +72,7 @@
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
+import BadgeComponent from '../ui/BadgeComponent.vue';
 //   import { useSupplierStore } from '@/stores/supplier'
 //   import { onMounted, ref, watch } from 'vue'
 
@@ -86,6 +86,19 @@ import { Icon } from '@iconify/vue'
 //       tableData.value = supplierStore.suppliers
 //     }
 //   )
+
+function getStatus(status) {
+  switch (status.toLowerCase()) {
+    case 'approved':
+      return 'success';
+    case 'pending':
+      return 'warning';
+    case 'rejected':
+      return 'danger';
+    default:
+      return '';
+  }
+}
 
 const tableHead = [
   { title: 'Request ID' },

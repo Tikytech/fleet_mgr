@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <ModalComponent :show-modal="showAdd" @close="showAdd = false">
+    <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Add Vehicle" width="1000px">
       <AddVehicleForm @close="showAdd = false" />
     </ModalComponent>
 
@@ -11,36 +11,26 @@
       </template>
     </div>
 
-    <SearchAndButtonBar
-      button-text="Add Vehicle"
-      @add="showAdd = true"
-      :filter="true"
-      :dropdown="[
-        {
-          name: 'Import CSV',
-          emit: 'importCsv',
-          icon: 'material-symbols:download-2-outline-rounded'
-        },
-        { name: 'Add Vehicle', emit: 'buttonClick', icon: 'heroicons:plus' }
-      ]"
-    />
+    <SearchAndButtonBar button-text="Add Vehicle" @add="showAdd = true" :filter="true" :dropdown="[
+      {
+        name: 'Import CSV',
+        emit: 'importCsv',
+        icon: 'material-symbols:download-2-outline-rounded'
+      },
+      { name: 'Add Vehicle', emit: 'buttonClick', icon: 'heroicons:plus' }
+    ]" />
 
     <p class="text-sm">Showing: {{ vehicles.length }} vehicles</p>
 
     <!-- <DisplayVehicleCard /> -->
-    <div
-      class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"
-      v-if="vehicles?.length > 0"
-    >
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4" v-if="vehicles?.length > 0">
       <template v-for="vehicle in vehicles" :key="vehicle?.id">
         <DisplayVehicleCard :vehicleData="vehicle" />
       </template>
     </div>
 
-    <div
-      class="bg-white rounded-md flex justify-center py-10"
-      v-else-if="vehicleStore.loading && vehicleStore.vehicles < 1"
-    >
+    <div class="bg-white rounded-md flex justify-center py-10"
+      v-else-if="vehicleStore.loading && vehicleStore.vehicles < 1">
       <div class="">
         <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
         <p>Fetching data...</p>
@@ -49,12 +39,7 @@
 
     <div class="bg-white rounded-md p-4 flex justify-center py-10" v-else>
       <NoResults>
-        <ButtonComponent
-          text="Add Vehicle"
-          icon="heroicons:plus"
-          type="success"
-          @click="showAdd = true"
-        />
+        <ButtonComponent text="Add Vehicle" icon="heroicons:plus" type="success" @click="showAdd = true" />
       </NoResults>
     </div>
   </div>

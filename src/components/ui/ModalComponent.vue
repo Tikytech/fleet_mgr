@@ -8,7 +8,16 @@
       <div class="flex items-center py-10 z-50 justify-center min-h-screen relative">
         <Transition name="content">
           <div class="relative z-50 w-full maximum-width" v-show="showModal">
-            <slot></slot>
+            <div class="rounded-md mx-auto overflow-hidden bg-white" :class="`max-w-[${width}]`">
+
+              <!-- grey part containing title and close button -->
+              <div class="flex justify-between bg-slate-100 p-4 ">
+                <h3 class="font-bold capitalize">{{ title }}</h3>
+                <Icon icon="heroicons:x-circle" class="text-2xl cursor-pointer" @click="$emit('close')" />
+              </div>
+
+              <slot></slot>
+            </div>
           </div>
         </Transition>
       </div>
@@ -17,12 +26,23 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue';
+
 // import { Icon } from '@iconify/vue'
 // import { ref } from 'vue'
 
 // const showContent = ref(false)
-const { showModal } = defineProps({
-  showModal: Boolean
+const { showModal, title, width } = defineProps({
+  showModal: Boolean,
+  title: {
+    required: true,
+    type: String,
+    default: "Modal title"
+  },
+  width: {
+    type: String,
+    default: '500px'
+  }
 })
 </script>
 

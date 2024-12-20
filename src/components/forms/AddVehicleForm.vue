@@ -1,7 +1,5 @@
 <template>
-  <div class="rounded-md max-w-[1000px] mx-auto bg-white overflow-hidden">
-    <h3 class="bg-slate-100 p-4 font-bold">Add Vehicle</h3>
-
+  <div class="">
     <form action="" class="p-4 space-y-4" @submit.prevent="submitForm">
       <div class="grid grid-cols-3 gap-5 mb-6">
         <!-- Upload Vehicle Image -->
@@ -12,10 +10,7 @@
           </div>
 
           <div class="flex justify-center items-center p-4 pt-14 rounded-sm">
-            <button
-              type="button"
-              class="text-xs p-2 px-3 rounded border border-dashed border-gray-400"
-            >
+            <button type="button" class="text-xs p-2 px-3 rounded border border-dashed border-gray-400">
               Add Image
             </button>
           </div>
@@ -34,14 +29,8 @@
           </div>
           <div class="">
             <label :for="data.v_model" class="capitalize">{{ data.name }}</label>
-            <input
-              required
-              class="input mt-1"
-              :type="data.input_type"
-              :id="data.v_model"
-              :placeholder="data.placeholder"
-              @input="updateVehicleData($event, data.v_model)"
-            />
+            <input required class="input mt-1" :type="data.input_type" :id="data.v_model"
+              :placeholder="data.placeholder" @input="updateVehicleData($event, data.v_model)" />
           </div>
         </template>
       </div>
