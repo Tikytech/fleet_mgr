@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
 
-    <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Request a vehicle">
+    <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Request a vehicle" width="500px">
       <RequestVehicleForm @close="showAdd = false" />
     </ModalComponent>
 

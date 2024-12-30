@@ -25,11 +25,32 @@ export const dashboardRoutes = [
       {
         path: 'colleges',
         name: 'Colleges',
-        component: () => import('../views/dashboard/CollegesView.vue'),
-        meta: {
-          pageTitle: 'Colleges',
-          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'colleges' }]
-        }
+        redirect: {name: 'CollegeList'},
+        component: () => import('../views/dashboard/colleges/CollegesView.vue'),
+        children: [
+          {
+            path: '',
+            name: 'CollegeList',
+            component: () => import('../views/dashboard/colleges/CollegeList.vue'),
+            meta: {
+              pageTitle: 'Colleges',
+              links: [{ name: 'dashboard', link: 'Overview' }, { name: 'colleges' }]
+            }
+          },
+          {
+            path: 'college-:id',
+            name: 'CollegeDetails',
+            component: () => import('../views/dashboard/colleges/CollegeDetails.vue'),
+            meta: {
+              pageTitle: 'Colleges',
+              links: [
+                { name: 'dashboard', link: 'Overview' },
+                { name: 'college', link: 'CollegeList' },
+                { name: 'college details' }
+              ]
+            }
+          }
+        ]
       },
       {
         path: 'vehicles',

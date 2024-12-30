@@ -22,8 +22,9 @@
             </td>
             <td class="text-left px-4 py-4 capitalize">{{ data?.name }}</td>
             <td class="text-left px-4 py-4">{{ data?.staff_no }}</td>
-            <td class="text-left px-4 py-4 capitalize">{{ data?.collegeId ?? 'N/A' }}</td>
-            <td class="text-left px-4 py-4">{{ data?.isDriver ? 'Yes' : 'No' }}</td>
+            <td class="text-left px-4 py-4 capitalize">{{ data?.college.name ?? 'N/A' }}</td>
+            <td class="text-left px-4 py-4">{{ data?.email }}</td>
+            <td class="text-left px-4 py-4">{{ data?.contact }}</td>
             <td class="text-left px-4 py-4">
               <div class="flex gap-2">
                 <Icon icon="heroicons:pencil" class="gray-text text-xl cursor-pointer" />
@@ -53,12 +54,7 @@
 
     <div class="flex justify-center py-10" v-else>
       <NoResults>
-        <ButtonComponent
-          text="Add Staff"
-          icon="heroicons:plus"
-          type="success"
-          @click="$emit('add')"
-        />
+        <ButtonComponent text="Add Staff" icon="heroicons:plus" type="success" @click="$emit('add')" />
       </NoResults>
     </div>
   </div>
@@ -86,7 +82,8 @@ const tableHead = [
   { title: 'Name' },
   { title: 'Staff Id' },
   { title: 'College' },
-  { title: 'Driver' },
+  { title: 'Email' },
+  { title: 'Contact' },
   { title: 'Action' }
 ]
 

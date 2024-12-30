@@ -1,52 +1,28 @@
 <template>
   <div class="relative">
-    <div class="flex justify-center rounded-md text-white font-semibold transition-colors text-sm w-fit" :class="[
-      type === 'success'
-        ? 'bg-green-500 '
-        : type === 'danger'
-          ? 'bg-red-500  '
-          : type === 'info'
-            ? 'bg-cyan-500 '
-            : type === 'border'
-              ? 'bg-inherit outline-1 !text-black hover:outline-gray-400'
-              : ''
-    ]">
-      <button @click="$emit('buttonClick')" :disable="loading" :type="typeButton"
-        class="min-w-[100px] justify-center py-3 px-4 flex gap-2 items-center transition-colors rounded-md" :class="[
-          type === 'success'
-            ? 'bg-green-500 hover:bg-green-600'
-            : type === 'danger'
-              ? 'bg-red-500  hover:bg-red-600'
-              : type === 'info'
-                ? 'bg-cyan-500  hover:bg-cyan-600'
-                : type === 'border'
-                  ? 'bg-inherit border-2 !text-black hover:border-gray-400'
-                  : ''
-        ]">
-        <Icon :icon="icon" v-if="icon" class="text-lg"></Icon>
+    <div class="flex justify-center rounded-md text-white font-semibold transition-colors text-sm w-fit"
+      :class="buttonContainerClass">
+      <!-- Main Button -->
+      <button @click="$emit('buttonClick')" :disabled="loading" :type="typeButton"
+        class="min-w-[100px] justify-center py-3 px-4 flex gap-2 items-center transition-colors rounded-md"
+        :class="buttonClass">
+        <Icon :icon="icon" v-if="icon" class="text-lg" />
         <Icon icon="line-md:loading-loop" class="text-xl mx-auto" v-if="loading" />
-        <span class="" v-else>{{ text }} </span>
+        <span v-else>{{ text }}</span>
       </button>
-      <!-- dropdown btn -->
-      <button @click="showDropdown = true" v-if="dropdown" class="p-3 border-l rounded-r-md" :class="[
-        type === 'success'
-          ? 'bg-green-500 hover:bg-green-600'
-          : type === 'danger'
-            ? 'bg-red-500  hover:bg-red-600'
-            : type === 'info'
-              ? 'bg-cyan-500  hover:bg-cyan-600'
-              : type === 'border'
-                ? 'bg-inherit border-2 !text-black hover:border-gray-400'
-                : ''
-      ]">
+
+      <!-- Dropdown Button -->
+      <button v-if="dropdown" @click="toggleDropdown" class="p-3 border-l border-l-gray-300 rounded-r-md"
+        :class="buttonClass">
         <Icon icon="material-symbols:keyboard-arrow-down" class="text-xl" />
       </button>
     </div>
-    <!-- dropdown -->
-    <!-- overlay -->
-    <div class="fixed top-0 bottom-0 left-0 right-0 bg-transparent z-40" @click="showDropdown = false"
-      v-if="showDropdown"></div>
-    <!-- dropdown content -->
+
+    <!-- Overlay -->
+    <div class="fixed top-0 bottom-0 left-0 right-0 bg-transparent z-40" v-if="showDropdown"
+      @click="showDropdown = false"></div>
+
+    <!-- Dropdown Content -->
     <div class="border absolute bg-white rounded-md divide-y min-w-full top-[100%] right-0 text-sm shadow z-40"
       v-if="showDropdown">
       <template v-for="content in dropdown" :key="content.name">
@@ -63,9 +39,9 @@
 </template>
 
 <script setup>
-// import { defineProps } from 'vue'
 import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
 const { icon, text, type, loading, typeButton, dropdown } = defineProps({
   icon: String,
   text: String,
@@ -75,10 +51,35 @@ const { icon, text, type, loading, typeButton, dropdown } = defineProps({
   },
   loading: Boolean,
   typeButton: String,
-  dropdown: Object
+  dropdown: Array
 })
 
 const showDropdown = ref(false)
+
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value
+}
+
+// Classes computed dynamically to reduce repetition
+const buttonContainerClass = computed(() => {
+  const classes = {
+    success: 'bg-green-500',
+    danger: 'bg-red-500',
+    info: 'bg-cyan-500',
+    border: 'bg-inherit outline-1 !text-black hover:outline-gray-400',
+  }
+  return classes[type] || ''
+})
+
+const buttonClass = computed(() => {
+  const classes = {
+    success: 'bg-green-500 hover:bg-green-600 border-2 border-green-500 hover:border-green-600',
+    danger: 'bg-red-500 hover:bg-red-600 border-2 border-red-500 hover:border-red-600',
+    info: 'bg-cyan-500 hover:bg-cyan-600 border-2 border-cyan-500 hover:border-cyan-600',
+    border: 'bg-inherit border-2 !text-black hover:border-gray-400',
+  }
+  return classes[type] || ''
+})
 </script>
 
 <style lang="scss" scoped></style>

@@ -30,7 +30,9 @@
             </td>
             <td class="text-left px-4 py-4">
               <div class="flex gap-2">
-                <Icon icon="heroicons:eye" class="gray-text text-xl cursor-pointer" />
+                <router-link :to="{ name: 'CollegeDetails', params: { id: data?.id } }">
+                  <Icon icon="heroicons:eye" class="gray-text text-xl cursor-pointer" />
+                </router-link>
                 <router-link :to="{ name: 'Colleges', query: { edit: data?.id } }">
                   <Icon icon="heroicons:pencil" class="gray-text text-xl cursor-pointer" />
                 </router-link>
@@ -60,12 +62,7 @@
 
     <div class="flex justify-center py-10" v-else>
       <NoResults>
-        <ButtonComponent
-          text="Add College"
-          icon="heroicons:plus"
-          type="success"
-          @click="$emit('add')"
-        />
+        <ButtonComponent text="Add College" icon="heroicons:plus" type="success" @click="$emit('add')" />
       </NoResults>
     </div>
   </div>

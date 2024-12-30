@@ -6,14 +6,14 @@
             <div class="">
                 <label for="purpose" class="">Request purpose</label>
                 <input required class="input mt-1" type="text" id="purpose" placeholder="State reason for request"
-                    v-model="supplierData.name" />
+                    v-model="requestData.purpose" />
             </div>
 
             <!-- Detailed Description -->
             <div class="">
                 <label for="contact_person">Detailed reason</label>
                 <textarea class="input mt-1" type="text" id="detailed" placeholder="Detailed reason for request"
-                    rows="4" v-model="supplierData.contact_person"></textarea>
+                    rows="4" v-model="requestData.detailed_reason"></textarea>
             </div>
 
             <!-- Trip date and time -->
@@ -24,13 +24,13 @@
                     <!-- Trip date -->
                     <div class="">
                         <input required class="input mt-1" type="date" id="trip_date"
-                            placeholder="Enter Contact Person's Phone Number" v-model="supplierData.trip_date" />
+                            placeholder="Enter Contact Person's Phone Number" v-model="requestData.trip_date" />
                     </div>
 
                     <!-- Trip time -->
                     <div class="">
                         <input required class="input mt-1" type="time" id="time" placeholder="Enter Time"
-                            v-model="supplierData.time" />
+                            v-model="requestData.trip_time" />
                     </div>
                 </div>
             </div>
@@ -43,13 +43,13 @@
                     <!-- Return date -->
                     <div class="">
                         <input required class="input mt-1" type="date" id="trip_date"
-                            placeholder="Enter Contact Person's Phone Number" v-model="supplierData.trip_date" />
+                            placeholder="Enter Contact Person's Phone Number" v-model="requestData.return_date" />
                     </div>
 
-                    <!-- Retirm time -->
+                    <!-- Returm time -->
                     <div class="">
                         <input required class="input mt-1" type="time" id="time" placeholder="Enter Time"
-                            v-model="supplierData.time" />
+                            v-model="requestData.return_time" />
                     </div>
                 </div>
             </div>
@@ -58,12 +58,12 @@
             <div class="">
                 <label for="passengers" class="">Number of passengers</label>
                 <input required class="input mt-1" type="number" id="passengers" placeholder="Number of passengers"
-                    v-model="supplierData.passengers" />
+                    v-model="requestData.no_of_passengers" />
             </div>
 
             <div class="flex justify-end mt-6 gap-2">
                 <ButtonComponent text="Close" type="border" @click="$emit('close')" type-button="button" />
-                <ButtonComponent text="Send request" type="success" :loading="supplierStore.loading" />
+                <ButtonComponent text="Send request" type="success" :loading="requestStore.loading" />
             </div>
         </form>
     </div>
@@ -72,28 +72,34 @@
 <script setup>
 // import { Icon } from '@iconify/vue'
 import ButtonComponent from '../ui/ButtonComponent.vue'
-import { useSupplierStore } from '@/stores/supplier'
+import { useRequestStore } from '@/stores/requests'
 import { ref } from 'vue'
 
 const emit = defineEmits(['close'])
-const supplierStore = useSupplierStore()
-const supplierData = ref({
-    name: '',
-    contact_person: '',
-    contact_phone: '',
-    address: ''
+const requestStore = useRequestStore()
+const requestData = ref({
+    purpose: '',
+    detailed_reason: '',
+    trip_date: '',
+    trip_time: '',
+    return_date: '',
+    return_time: '',
+    no_of_passengers: '',
 })
 
 async function submitForm() {
-    console.log(supplierData.value)
-    await supplierStore.addSupplier(supplierData.value)
-    if (supplierStore.isSuccessful) {
-        await supplierStore.getAllSuppliers()
-        supplierData.value = {
-            name: '',
-            contact_person: '',
-            contact_phone: '',
-            address: ''
+    console.log(requestData.value)
+    await requestStore.requestVehicle(requestData.value)
+    if (requestStore.isSuccessful) {
+        await requestStore.getAllRequests()
+        requestData.value = {
+            purpose: '',
+            detailed_reason: '',
+            trip_date: '',
+            trip_time: '',
+            return_date: '',
+            return_time: '',
+            no_of_passengers: '',
         }
         emit('close')
         console.log('emmiting')

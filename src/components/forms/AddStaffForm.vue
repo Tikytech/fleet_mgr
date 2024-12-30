@@ -12,21 +12,21 @@
       <!-- Name -->
       <div class="">
         <label for="name" class="">Name</label>
-        <input required class="input mt-1" type="text" id="name" placeholder="Enter Staff Name"
+        <input required class="input mt-1" type="text" id="name" placeholder="Enter staff name"
           v-model="staffData.name" />
       </div>
 
       <!-- staff id -->
       <div class="">
         <label for="staff_id">Staff Id</label>
-        <input required class="input mt-1" type="text" id="staff_id" placeholder="Enter Staff Id"
+        <input required class="input mt-1" type="text" id="staff_id" placeholder="Enter staff ID"
           v-model="staffData.staff_no" />
       </div>
 
       <!-- College -->
       <div class="">
         <label for="college">Choose Staff College</label>
-        <select name="college" class="input mt-1 text-sm" id="college" v-model="collegeId" required>
+        <select name="college" class="input mt-1 text-sm" id="college" v-model="staffData.collegeId" required>
           <option value="" disabled>Select college staff belongs to</option>
           <template v-for="college in colleges" :key="college.id">
             <option :value="college.id">{{ college.name }}</option>
@@ -34,18 +34,18 @@
         </select>
       </div>
 
+      <!-- email -->
       <div class="">
-        <p>Is Staff a Driver?</p>
-        <div>
-          <span class="mr-3">
-            <input type="radio" name="driver" id="yes" :value="true" v-model="staffData.isDriver" required />
-            <label for="yes" class="text-sm ml-1">Yes</label>
-          </span>
-          <span>
-            <input type="radio" name="driver" id="no" :value="false" v-model="staffData.isDriver" required />
-            <label for="no" class="text-sm ml-1">No</label>
-          </span>
-        </div>
+        <label for="email">Staff email</label>
+        <input required class="input mt-1" type="email" id="email" placeholder="Enter staff email"
+          v-model="staffData.email" />
+      </div>
+
+      <!-- Phone number -->
+      <div class="">
+        <label for="staff_id">Staff phone number</label>
+        <input required class="input mt-1" type="number" id="staff_id" placeholder="Enter staff phone number"
+          v-model="staffData.contact" />
       </div>
 
       <div class="flex justify-end mt-6 gap-2">
@@ -66,30 +66,27 @@ import { onMounted, ref } from 'vue'
 const emit = defineEmits(['close'])
 const staffStore = useStaffStore()
 const collegeStore = useCollegeStore()
-const collegeData = ref({})
-const collegeId = ref('')
 const colleges = ref([])
 const staffData = ref({
   name: '',
   staff_no: '',
-  college: {},
-  isDriver: null
+  collegeId: '',
+  email: '',
+  contact: '',
 })
 
 async function submitForm() {
-  collegeData.value = collegeStore.colleges.find((college) => collegeId.value == college.id)
-  staffData.value.college = { id: collegeData.value.id, name: collegeData.value.name }
   console.log(staffData.value)
-  await staffStore.addStaff(staffData.value)
+  await staffStore.addStaff({ ...staffData.value, collegeId: Number(staffData.value.collegeId), contact: '233' + staffData.value.contact })
   if (staffStore.isSuccessful) {
     await staffStore.getAllStaff()
     staffData.value = {
       name: '',
       staff_no: '',
-      college: {},
-      isDriver: null
+      college: '',
+      email: '',
+      contact: '',
     }
-    collegeData.value = {}
     emit('close')
     console.log('emmiting')
   }

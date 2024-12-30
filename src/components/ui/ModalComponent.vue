@@ -8,7 +8,7 @@
       <div class="flex items-center py-10 z-50 justify-center min-h-screen relative">
         <Transition name="content">
           <div class="relative z-50 w-full maximum-width" v-show="showModal">
-            <div class="rounded-md mx-auto overflow-hidden bg-white" :class="`max-w-[${width}]`">
+            <div class="rounded-md mx-auto overflow-hidden bg-white" :style="{ maxWidth: width }">
 
               <!-- grey part containing title and close button -->
               <div class="flex justify-between bg-slate-100 p-4 ">

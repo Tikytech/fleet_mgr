@@ -1,10 +1,22 @@
 <template>
   <div>
+    <!-- prompts and modals -->
+    <!-- reject request -->
+    <ModalComponent :show-modal="showReject" @close="showReject = false" title="Reject request">
+      <RejectVehicleRequestForm @close="showReject = false" />
+    </ModalComponent>
+
+    <!-- Approve request -->
+    <ModalComponent :show-modal="showApprove" @close="showApprove = false" title="Approve request" width="900px">
+      <ApproveVehicleRequest @close="showApprove = false" />
+    </ModalComponent>
+
+
     <div class="flex justify-between">
       <h3 class="font-bold text-2xl mb-10">Vehicle Request - Trip to Aqua Safari</h3>
       <div class="flex gap-2">
-        <ButtonComponent text="Approve Request" />
-        <ButtonComponent text="Reject Request" type="danger" />
+        <ButtonComponent text="Approve Request" @click="showApprove = true" />
+        <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
       </div>
     </div>
 
@@ -113,6 +125,14 @@
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue'
 import { Icon } from '@iconify/vue'
+import ModalComponent from '@/components/ui/ModalComponent.vue';
+import { ref } from 'vue';
+import RejectVehicleRequestForm from '@/components/forms/RejectVehicleRequestForm.vue';
+import ApproveVehicleRequest from '@/components/custom/requests/ApproveVehicleRequest.vue';
+
+const showReject = ref(false)
+const showApprove = ref(false)
+
 </script>
 
 <style scoped>
