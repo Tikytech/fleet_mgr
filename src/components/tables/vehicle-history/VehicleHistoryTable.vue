@@ -17,7 +17,7 @@
             <td class="text-left px-4 py-4 capitalize">{{ data?.tripId }}</td>
             <td class="text-left px-4 py-4">{{ data?.date }}</td>
             <td class="text-left px-4 py-4 capitalize">{{ data?.driver }}</td>
-            <td class="text-left px-4 py-4">{{ data?.department }}</td>
+            <td class="text-left px-4 py-4">{{ data?.college }}</td>
             <td class="text-left px-4 py-4">{{ data?.purpose }}</td>
             <td class="text-left px-4 py-4">{{ data?.passengers }}</td>
             <td class="text-left px-4 py-4">
@@ -62,7 +62,7 @@ const tableHead = [
   { title: 'Trip ID' },
   { title: 'Date' },
   { title: 'Driver' },
-  { title: 'Department' },
+  { title: 'College' },
   { title: 'Purpose' },
   { title: 'Passengers' },
   { title: 'Actions' }
@@ -73,7 +73,7 @@ const tableData = [
     tripId: '001',
     date: '2024-09-20',
     driver: 'John Doe',
-    department: 'Computer Science Department',
+    college: 'Computer Science College',
     purpose: 'Pickup students for morning class',
     passengers: 18
   },
@@ -81,7 +81,7 @@ const tableData = [
     tripId: '002',
     date: '2024-09-21',
     driver: 'Jane Smith',
-    department: 'Biology Department',
+    college: 'Biology College',
     purpose: 'Drop off students after afternoon lab session',
     passengers: 15
   },
@@ -89,7 +89,7 @@ const tableData = [
     tripId: '003',
     date: '2024-09-22',
     driver: 'Mark Johnson',
-    department: 'Sports Department',
+    college: 'Sports College',
     purpose: 'Special trip for inter-college sports event',
     passengers: 20
   },
@@ -97,7 +97,7 @@ const tableData = [
     tripId: '004',
     date: '2024-09-23',
     driver: 'John Doe',
-    department: 'History Department',
+    college: 'History College',
     purpose: 'Field trip to historical museum',
     passengers: 22
   }
