@@ -11,6 +11,10 @@
       <ApproveVehicleRequest @close="showApprove = false" />
     </ModalComponent>
 
+    <!-- back button -->
+    <div class="mb-5 flex">
+      <BackComponent :link-object="{ name: 'VehiclesOverview' }" />
+    </div>
 
     <div class="flex justify-between">
       <h3 class="font-bold text-2xl mb-10">Vehicle Request - Trip to Aqua Safari</h3>
@@ -21,7 +25,7 @@
     </div>
 
 
-    <div class="space-y-5">
+    <div class="space-y-8">
       <!-- request details -->
       <div class="bg-white p-5 rounded-md w-full">
         <!-- head -->
@@ -129,6 +133,7 @@ import ModalComponent from '@/components/ui/ModalComponent.vue';
 import { ref } from 'vue';
 import RejectVehicleRequestForm from '@/components/forms/RejectVehicleRequestForm.vue';
 import ApproveVehicleRequest from '@/components/custom/requests/ApproveVehicleRequest.vue';
+import BackComponent from '@/components/ui/BackComponent.vue';
 
 const showReject = ref(false)
 const showApprove = ref(false)
