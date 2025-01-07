@@ -25,7 +25,6 @@
             <td class="text-left px-4 py-4 capitalize">{{ data?.tripDate }}</td>
             <td class="text-left px-4 py-4">{{ data?.returnDate }}</td>
             <td class="text-left px-4 py-4">{{ data?.passengers }}</td>
-            <td class="text-left px-4 py-4">{{ data?.recurring }}</td>
             <td class="text-left px-4 py-4">
               <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
                 {{ data?.status }}
@@ -106,7 +105,6 @@ const tableHead = [
   { title: 'Trip Date' },
   { title: 'Return Date' },
   { title: 'Passengers' },
-  { title: 'Recurring' },
   { title: 'Status' },
   { title: 'Action' }
 ]
@@ -118,7 +116,7 @@ const tableData = [
     tripDate: '2024-09-25',
     returnDate: '2024-09-25',
     passengers: 18,
-    recurring: 'Weekly',
+
     status: 'Approved'
   },
   {
@@ -127,7 +125,7 @@ const tableData = [
     tripDate: '2024-09-28',
     returnDate: '2024-09-28',
     passengers: 15,
-    recurring: 'No',
+
     status: 'Pending'
   },
   {
@@ -136,7 +134,7 @@ const tableData = [
     tripDate: '2024-09-27',
     returnDate: '2024-09-27',
     passengers: 20,
-    recurring: 'Monthly',
+
     status: 'Rejected'
   },
   {
@@ -145,7 +143,6 @@ const tableData = [
     tripDate: '2024-09-30',
     returnDate: '2024-09-30',
     passengers: 22,
-    recurring: 'No',
     status: 'Approved'
   }
 ]

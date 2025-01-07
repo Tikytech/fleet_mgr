@@ -1,6 +1,6 @@
 export const dashboardRoutes = [
   {
-    path: '/',
+    path: '/admin',
     redirect: { name: 'Overview' },
     name: 'Layout',
     component: () => import('../views/dashboard/LayoutView.vue'),

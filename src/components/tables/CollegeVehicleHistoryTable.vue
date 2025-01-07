@@ -63,6 +63,7 @@ import BadgeComponent from '../ui/BadgeComponent.vue';
 //     }
 //   )
 
+
 const tableHead = [
     { title: 'Trip ID' },
     { title: 'Date' },
