@@ -13,16 +13,16 @@
     <!-- details -->
     <div class="space-y-8">
       <!-- vehicle information -->
-      <div class="flex gap-10 bg-white p-5 rounded-md">
+      <div class="flex flex-col md:flex-row gap-4 lg:gap-10 bg-white p-5 rounded-md">
         <!-- image -->
-        <div class="w-[50%] border">
+        <div class="md:w-[50%] border">
           <img src="/images/vehicles/img-placeholder.jpg" alt="" class="w-full rounded-md" />
         </div>
 
-        <div class="w-[50%]">
+        <div class="md:w-[50%]">
           <!-- head -->
           <div class="flex items-center justify-between">
-            <h3 class="font-semibold text-2xl">Vehicle Information</h3>
+            <h3 class="font-semibold text-xl sm:text-2xl">Vehicle Information</h3>
             <div class="cursor-pointer active:scale-90" title="Edit vehicle details" @click="showEdit = true">
               <Icon icon="heroicons:pencil" class="text-2xl" />
             </div>
@@ -46,8 +46,8 @@
           </div>
 
           <!-- details -->
-          <table className="text-[15px]">
-            <tbody>
+          <div className="text-[15px]">
+            <div>
               <!-- vehicle id -->
               <tr>
                 <td className="py-1.5 pr-3 font-semibold">Vehicle ID:</td>
@@ -95,15 +95,15 @@
                 </td>
               </tr>
 
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- history -->
       <div class="bg-white rounded-md p-5">
         <div class="mb-5">
-          <h3 class="font-semibold text-2xl mb-1">Vehicle History</h3>
+          <h3 class="font-semibold text-xl sm:text-2xl mb-1">Vehicle History</h3>
           <p class="text-sm text-gray-500">Checkout all the history of this vehicle</p>
         </div>
 

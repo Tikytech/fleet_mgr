@@ -6,7 +6,8 @@
         </div>
 
         <!-- selected Vehicle -->
-        <div class="bg-slate-200 p-2 px-4 text-sm flex justify-between gap-2 items-center" v-if="showAssignDriver">
+        <div class="bg-slate-200 p-3 px-4 text-sm flex flex-wrap justify-between gap-2 items-center"
+            v-if="showAssignDriver">
             <div class="">
                 <p class="text-[15px] font-semibold mb-2">Vehicle selected details</p>
                 <p class=""><span>Name:</span> <span>{{ selectedVehicle.vehicle }}</span></p>

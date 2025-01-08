@@ -74,7 +74,7 @@ export const dashboardRoutes = [
             component: () => import('../views/dashboard/vehicle-management/VehicleDetails.vue'),
             props: true,
             meta: {
-              pageTitle: 'Vehicle Management',
+              pageTitle: 'Vehicle Details',
               links: [
                 { name: 'dashboard', link: 'Overview' },
                 { name: 'vehicles', link: 'VehiclesOverview' },
@@ -121,7 +121,7 @@ export const dashboardRoutes = [
             name: 'RequestDetails',
             component: () => import('../views/dashboard/requests/RequestDetails.vue'),
             meta: {
-              pageTitle: 'Requests',
+              pageTitle: 'Request Details',
               links: [
                 { name: 'dashboard', link: 'Overview' },
                 { name: 'request', link: 'RequestList' },

@@ -11,7 +11,7 @@
                         <template v-for="head in tableHead" :key="head?.head">
                             <th class="text-left px-4 py-4">{{ head?.title }}</th>
                         </template>
-                        <th class="text-left px-4 py-4" v-if="actions">Action</th>
+                        <th class="text-left px-4 py-4" v-if="actions">Actions</th>
                     </tr>
 
                     <!-- tbody -->

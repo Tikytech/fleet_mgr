@@ -3,40 +3,42 @@
         <!-- table -->
         <div class="" v-if="tableData?.length > 0">
             <!-- table -->
-            <table class="w-full text-sm">
-                <!-- thead -->
-                <tr class="text-sm font-semibold px-4 py-2 bg-slate-100 border-b">
-                    <!-- <th class="pl-4 w-2 text-left">
+            <div class="overflow-x-auto">
+                <table class="text-sm min-w-[800px] w-full">
+                    <!-- thead -->
+                    <tr class="text-sm font-semibold px-4 py-2 bg-slate-100 border-b">
+                        <!-- <th class="pl-4 w-2 text-left">
               <input type="checkbox" name="" id="" class="accent-blue-900" />
             </th> -->
-                    <template v-for="head in tableHead" :key="head?.head">
-                        <th class="text-left px-4 py-4">{{ head?.title }}</th>
-                    </template>
-                </tr>
+                        <template v-for="head in tableHead" :key="head?.head">
+                            <th class="text-left px-4 py-4">{{ head?.title }}</th>
+                        </template>
+                    </tr>
 
-                <!-- table data -->
-                <template v-for="data in tableData" :key="data?.id">
-                    <tr class="border-b">
-                        <!-- <td class="pl-4 w-2 text-left">
+                    <!-- table data -->
+                    <template v-for="data in tableData" :key="data?.id">
+                        <tr class="border-b">
+                            <!-- <td class="pl-4 w-2 text-left">
                 <input type="checkbox" name="" id="" class="accent-blue-900" />
               </td> -->
-                        <td class="text-left px-4 py-4 capitalize">{{ data?.driver }}</td>
-                        <td class="text-left px-4 py-4">{{ data?.phoneNo }}</td>
-                        <td class="text-left px-4 py-4">
-                            <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
-                                {{ data?.status }}
-                            </BadgeComponent>
-                        </td>
-                        <td class="text-left px-4 py-4">
-                            <button @click="$emit('select', data)"
-                                class="text-xs font-semibold bg-green-500 hover:bg-green-600 rounded px-3 py-1 text-white"
-                                :class="{ '!bg-cyan-500 !hover:bg-cyan-600  ': selectedDriver?.id === data?.id }">
-                                {{ selectedDriver?.id === data?.id ? 'Assigned' : 'Assign Driver' }}
-                            </button>
-                        </td>
-                    </tr>
-                </template>
-            </table>
+                            <td class="text-left px-4 py-4 capitalize">{{ data?.driver }}</td>
+                            <td class="text-left px-4 py-4">{{ data?.phoneNo }}</td>
+                            <td class="text-left px-4 py-4">
+                                <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
+                                    {{ data?.status }}
+                                </BadgeComponent>
+                            </td>
+                            <td class="text-left px-4 py-4">
+                                <button @click="$emit('select', data)"
+                                    class="text-xs font-semibold bg-green-500 hover:bg-green-600 rounded px-3 py-1 text-white"
+                                    :class="{ '!bg-cyan-500 !hover:bg-cyan-600  ': selectedDriver?.id === data?.id }">
+                                    {{ selectedDriver?.id === data?.id ? 'Assigned' : 'Assign Driver' }}
+                                </button>
+                            </td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
 
             <!-- Pagination -->
             <div class="flex justify-end p-4 text-sm">

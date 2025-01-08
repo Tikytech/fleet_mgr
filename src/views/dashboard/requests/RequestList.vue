@@ -9,7 +9,6 @@
 
     <!-- <RequestTable /> -->
 
-    <br>
 
     <TableComponent :get-status="getStatus" :table-data="tableData" :table-head="tableHead" :actions="actions"
       :badge="{ column: 'status' }" @add="showAdd = true" />

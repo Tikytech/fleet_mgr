@@ -4,7 +4,7 @@
 
 @layer components {
   .maximum-width {
-    @apply max-w-[1600px] mx-auto px-7;
+    @apply max-w-[1600px] mx-auto md:px-7 px-4;
   }
 
   .primary-bg {
@@ -27,9 +27,7 @@
     @apply fixed top-0 left-0 bottom-0 overflow-y-scroll right-0 z-40 bg-black/50;
   }
 
-  table {
-    @apply min-w-[900px] w-full;
-  }
+  
 }
 
 @layer utilities {

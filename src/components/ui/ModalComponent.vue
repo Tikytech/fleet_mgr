@@ -4,8 +4,8 @@
       <div class="overlay" v-show="showModal"></div>
     </Transition>
 
-    <div class="fixed top-0 right-0 h-screen left-0 z-50 overflow-y-scroll" v-show="showModal">
-      <div class="flex items-center py-10 z-50 justify-center min-h-screen relative">
+    <div class="fixed top-0 right-0 h-dvh left-0 z-50 overflow-y-scroll" v-show="showModal">
+      <div class="flex items-center py-10 z-50 justify-center min-h-dvh relative">
         <Transition name="content">
           <div class="relative z-50 w-full maximum-width" v-show="showModal">
             <div class="rounded-md mx-auto overflow-hidden bg-white" :style="{ maxWidth: width }">

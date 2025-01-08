@@ -13,11 +13,11 @@
 
     <!-- back button -->
     <div class="mb-5 flex">
-      <BackComponent :link-object="{ name: 'VehiclesOverview' }" />
+      <BackComponent :link-object="{ name: 'RequestList' }" />
     </div>
 
-    <div class="flex justify-between">
-      <h3 class="font-bold text-2xl mb-10">Vehicle Request - Trip to Aqua Safari</h3>
+    <div class="flex justify-between gap-2 flex-wrap mb-10">
+      <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - Trip to Aqua Safari</h3>
       <div class="flex gap-2">
         <ButtonComponent text="Approve Request" @click="showApprove = true" />
         <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
@@ -36,8 +36,8 @@
           </div>
         </div>
 
-        <table className="text-[15px]">
-          <tbody>
+        <div className="text-[15px]">
+          <div>
             <!-- college -->
             <tr>
               <td className="py-2 pr-3 font-semibold">College:</td>
@@ -81,16 +81,16 @@
                 </div>
               </td>
             </tr>
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
 
       <!-- contact person -->
       <div class="bg-white p-5 rounded-md">
-        <h3 class="text-lg font-medium border-b border-gray-400 pb-2">Contact person</h3>
+        <h3 class="text-lg font-semibold border-b  pb-2">Contact person</h3>
 
-        <table className="text-[15px]">
-          <tbody>
+        <div className="text-[15px]">
+          <div>
             <!-- contact person-->
             <tr>
               <td className="py-2 pr-3 font-semibold">Contact person name:</td>
@@ -106,8 +106,8 @@
               <td className="py-2 pr-3 font-semibold">Contact person email:</td>
               <td className="text-gray-500">staff@st.ug.edu.gh</td>
             </tr>
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
       <!-- recurring request -->
       <!-- <div class="">
@@ -142,10 +142,10 @@ const showApprove = ref(false)
 
 <style scoped>
 td:first-child {
-  width: 200px;
+  max-width: 200px;
 }
 
 td:last-child {
-  width: 600px;
+  max-width: 600px;
 }
 </style>

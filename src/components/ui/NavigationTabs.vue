@@ -1,9 +1,12 @@
 <template>
-    <div class="navigation-tabs flex border-b border-gray-300">
-        <div v-for="tab in tabs" :key="tab" @click="() => { $emit('active-tab', tab.tab) }">
-            <router-link class="block tab px-4 py-2 cursor-pointer font-semibold" :to="{ name: tab.link }">
-                {{ tab.tab }}
-            </router-link>
+    <div class="overflow-x-auto">
+        <div class="navigation-tabs flex border-b border-gray-300">
+            <div v-for="tab in tabs" :key="tab" @click="() => { $emit('active-tab', tab.tab) }">
+                <router-link class="block tab px-4 py-2 text-nowrap cursor-pointer font-semibold"
+                    :to="{ name: tab.link }">
+                    {{ tab.tab }}
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
