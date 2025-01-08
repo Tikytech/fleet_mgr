@@ -30,8 +30,8 @@ const router = createRouter({
       component: () => import('../views/auth/OTPView.vue')
     },
     {
-      path: '/requests',
-      alias: '/',
+      path: '/',
+      alias: '/requests',
       meta: {
         requiresClientAuth: true
       },
