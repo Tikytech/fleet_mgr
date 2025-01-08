@@ -16,36 +16,11 @@
         <!-- search and button -->
         <SearchAndButtonBar button-text="Add College" @add="showAdd = true" :filter="true" />
 
-        <CollegeTable @add="showAdd = true" />
+        <!-- <CollegeTable @add="showAdd = true" /> -->
 
-        <!-- <div class="bg-white rounded-md p-4">
-        <div class="grid grid-cols-3 2xl:grid-cols-4 gap-4" v-if="colleges?.length > 0">
-          <template v-for="(college, index) in colleges" :key="college.id">
-            <CollegeCard
-              @add="showAdd = true"
-              @edit="showEdit = true"
-              :college="college"
-              :colors="{
-                color: colors[index % colors.length].hex,
-                hover: hovers[index % hovers.length].hex
-              }"
-            />
-          </template>
-</div>
+        <TableComponent :table-data="tableData" :table-head="tableHead" :loading="collegeStore.loading"
+            :actions="actions" @add="showAdd = true" />
 
-<div class="flex justify-center py-10" v-else-if="collegeStore.loading">
-    <div class="">
-        <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
-        <p>Fetching data...</p>
-    </div>
-</div>
-
-<div class="flex justify-center py-10" v-else>
-    <NoResults>
-        <ButtonComponent text="Add College" icon="heroicons:plus" type="success" @click="showAdd = true" />
-    </NoResults>
-</div>
-</div> -->
     </div>
 </template>
 
@@ -57,11 +32,12 @@ import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'
 import AddCollegeForm from '@/components/forms/AddCollegeForm.vue'
 import EditCollegeForm from '@/components/forms/EditCollegeForm.vue'
 import ModalComponent from '@/components/ui/ModalComponent.vue'
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import { useCollegeStore } from '@/stores/college'
 // import { Icon } from '@iconify/vue'
 import { useRoute } from 'vue-router'
-import CollegeTable from '@/components/tables/CollegeTable.vue'
+// import CollegeTable from '@/components/tables/CollegeTable.vue'
+import TableComponent from '@/components/tables/TableComponent.vue'
 
 const showAdd = ref(false)
 const showEdit = ref(false)
@@ -86,21 +62,77 @@ watch(
     }
 )
 
-// const colors = [
-//   { name: 'Green', hex: '#006400' },
-//   { name: 'Black', hex: '#000000' },
-//   // { name: 'Purple', hex: '#800080' },
-//   { name: 'Yellow', hex: '#9B870C' },
-//   { name: 'Blue', hex: '#00008B' }
-// ]
+const tableData = computed(() => {
+    return colleges.value.map((item, index) => {
+        return {
+            collegeId: item?.id,
+            collegeName: item?.name,
+            location: collegeData[index % 4]?.location,
+            contactPerson: collegeData[index % 4]?.contactPerson,
+            contactNumber: collegeData[index % 4]?.contactNumber,
+            noOfVehicles: collegeData[index % 4]?.numberOfVehiclesAssigned,
+        }
+    })
+})
 
-// const hovers = [
-//   { name: 'Green', hex: '#008000' },
-//   { name: 'Black', hex: '#1C1C1C' },
-//   // { name: 'Purple', hex: '#8000bb' },
-//   { name: 'Yellow', hex: '#eab308' },
-//   { name: 'Blue', hex: '#0000FF' }
-// ]
+const tableHead = [
+    { title: 'College ID' },
+    { title: 'College Name' },
+    { title: 'Location' },
+    { title: 'Contact Person' },
+    { title: 'Contact Number' },
+    { title: 'No of Vehicles Assigned' },
+]
+
+const actions = {
+    view: {
+        link: 'CollegeDetails',
+        param: 'collegeId',
+    },
+    edit: {
+        link: 'CollegeList',
+        param: 'collegeId'
+    }
+}
+
+const collegeData = [
+    {
+        collegeId: '001',
+        collegeName: 'Computer Science',
+        location: 'Main Campus',
+        contactPerson: 'Alice Johnson',
+        contactNumber: '123-456-7890',
+        email: 'alice.johnson@university.edu',
+        numberOfVehiclesAssigned: 5
+    },
+    {
+        collegeId: '002',
+        collegeName: 'Biology Department',
+        location: 'Science Building',
+        contactPerson: 'Bob Smith',
+        contactNumber: '234-567-8901',
+        email: 'bob.smith@university.edu',
+        numberOfVehiclesAssigned: 3
+    },
+    {
+        collegeId: '003',
+        collegeName: 'Sports Department',
+        location: 'Athletic Center',
+        contactPerson: 'Charlie Brown',
+        contactNumber: '345-678-9012',
+        email: 'charlie.brown@university.edu',
+        numberOfVehiclesAssigned: 4
+    },
+    {
+        collegeId: '004',
+        collegeName: 'History Department',
+        location: 'Humanities Building',
+        contactPerson: 'Diana Prince',
+        contactNumber: '456-789-0123',
+        email: 'diana.prince@university.edu',
+        numberOfVehiclesAssigned: 2
+    }
+]
 
 onMounted(async () => {
     await collegeStore.getAllColleges()

@@ -1,5 +1,5 @@
 <template>
-  <div class="hover:bg-blue-100 size-10 flex justify-center items-center rounded-full relative">
+  <div class="hover:bg-blue-100 size-8 md:size-10 flex justify-center items-center rounded-full relative">
     <Icon icon="heroicons:sun" class="text-2xl" />
   </div>
 </template>

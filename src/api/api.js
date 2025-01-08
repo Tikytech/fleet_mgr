@@ -23,7 +23,7 @@ api.interceptors.request.use(
   async (config) => {
     const authStore = useAuthStore()
     const token = authStore.getToken()
-    console.log(token)
+    // console.log(token)
     if (token) {
       config.headers.Authorization = token;
     }

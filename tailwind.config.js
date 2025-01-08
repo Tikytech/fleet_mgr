@@ -6,5 +6,9 @@ export default {
       colors: {}
     }
   },
-  plugins: []
+  plugins: [],
+  safelist: [
+    'lg:ml-0',
+    'lg:ml-[250px]',
+  ],
 }

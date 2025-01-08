@@ -26,4 +26,20 @@
   .overlay {
     @apply fixed top-0 left-0 bottom-0 overflow-y-scroll right-0 z-40 bg-black/50;
   }
+
+  table {
+    @apply min-w-[900px] w-full;
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }

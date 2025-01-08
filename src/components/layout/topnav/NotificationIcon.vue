@@ -1,5 +1,5 @@
 <template>
-  <div class="hover:bg-blue-100 p-1 size-10 flex justify-center items-center rounded-full relative">
+  <div class="hover:bg-blue-100 p-1 size-8 md:size-10 flex justify-center items-center rounded-full relative">
     <Icon icon="heroicons:bell" class="text-2xl" />
 
     <!-- badge -->

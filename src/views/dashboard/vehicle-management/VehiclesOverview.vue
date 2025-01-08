@@ -5,7 +5,7 @@
     </ModalComponent>
 
     <!-- statistics -->
-    <div class="grid grid-cols-4 gap-5">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
       <template v-for="stat in overviewData" :key="stat.title">
         <OverviewStatisticCard :stat="stat" />
       </template>
@@ -23,7 +23,7 @@
     <p class="text-sm">Showing: {{ vehicles.length }} vehicles</p>
 
     <!-- <DisplayVehicleCard /> -->
-    <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4" v-if="vehicles?.length > 0">
+    <div class="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4" v-if="vehicles?.length > 0">
       <template v-for="vehicle in vehicles" :key="vehicle?.id">
         <DisplayVehicleCard :vehicleData="vehicle" />
       </template>

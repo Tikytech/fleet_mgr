@@ -1,5 +1,6 @@
 <template>
-  <div class="hover:outline-slate-300 outline outline-2 outline-transparent bg-white rounded-md max-w-[400px]">
+  <div
+    class="hover:outline-slate-300 outline outline-2 outline-transparent bg-white rounded-md max-w-[500px] overflow-x-auto">
     <router-link :to="{ name: 'VehicleDetails', params: { id: vehicleData.id } }">
       <div class="p-4  gap-5  text-gray-600 pb-6 h-full">
         <!-- image -->
@@ -27,19 +28,21 @@
           </div>
 
           <!-- icons -->
-          <div class="text-gray-400 flex gap-2 justify-between text-sm">
-            <div class="flex gap-1 items-center">
-              <Icon icon="material-symbols:person" class="text-2xl" /> <span>5</span>
-            </div>
-            <div class="flex gap-1 items-center">
-              <Icon icon="material-symbols:settings" class="text-2xl" /> <span>Automatic</span>
-            </div>
-            <div class="flex gap-1 items-center">
-              <Icon icon="ant-design:dashboard-twotone" class="text-2xl" />
-              <span>Mileage / 13000km</span>
-            </div>
-            <div class="flex gap-1 items-center">
-              <Icon icon="mdi:snowflake" class="text-2xl" /> <span>A/C</span>
+          <div class="overflow-x-auto no-scrollbar">
+            <div class="text-gray-400 flex gap-2 justify-between text-sm ">
+              <div class="flex gap-1 items-center">
+                <Icon icon="material-symbols:person" class="text-2xl" /> <span>5</span>
+              </div>
+              <div class="flex gap-1 items-center">
+                <Icon icon="material-symbols:settings" class="text-2xl" /> <span>Automatic</span>
+              </div>
+              <div class="flex gap-1 items-center">
+                <Icon icon="ant-design:dashboard-twotone" class="text-2xl" />
+                <span class=" text-nowrap">Mileage / 13000km</span>
+              </div>
+              <div class="flex gap-1 items-center">
+                <Icon icon="mdi:snowflake" class="text-2xl" /> <span>A/C</span>
+              </div>
             </div>
           </div>
 

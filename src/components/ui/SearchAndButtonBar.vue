@@ -3,7 +3,7 @@
     <div class="sm:w-[350px]">
       <SearchBar type="border" placeholder="Search for" />
     </div>
-    <div class="flex flex-wrap gap-2 items-center self-end">
+    <div class="flex flex-wrap sm:flex-nowrap gap-2 items-center self-end">
       <ButtonComponent text="Filters" icon="heroicons:adjustments-horizontal" type="info" v-if="filter" />
       <ButtonComponent :text="buttonText" icon="heroicons:plus" type="success" @buttonClick="$emit('add')"
         :dropdown="dropdown" v-if="buttonText" />

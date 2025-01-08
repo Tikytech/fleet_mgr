@@ -20,7 +20,7 @@
             <td class="text-left pl-2 py-4 capitalize">
               <div class="">
                 <p class="gray-text font-medium mb-1">{{ data?.college }}</p>
-                <p class="">{{ data?.request }}</p>
+                <p class=" line-clamp-2">{{ data?.request }}</p>
               </div>
             </td>
           </tr>

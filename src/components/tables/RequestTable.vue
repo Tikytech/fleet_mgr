@@ -3,44 +3,46 @@
     <!-- table -->
     <div class="" v-if="tableData?.length > 0">
       <!-- table -->
-      <table class="w-full text-sm">
-        <!-- thead -->
-        <tr class="text-sm font-semibold px-4 py-2 bg-slate-100 border-b">
-          <!-- <th class="pl-4 w-2 text-left">
+      <div class="overflow-x-auto">
+        <table class="text-sm">
+          <!-- thead -->
+          <tr class="text-sm font-semibold px-4 py-2 bg-slate-100 border-b">
+            <!-- <th class="pl-4 w-2 text-left">
             <input type="checkbox" name="" id="" class="accent-blue-900" />
           </th> -->
-          <template v-for="head in tableHead" :key="head?.head">
-            <th class="text-left px-4 py-4">{{ head?.title }}</th>
-          </template>
-        </tr>
+            <template v-for="head in tableHead" :key="head?.head">
+              <th class="text-left px-4 py-4">{{ head?.title }}</th>
+            </template>
+          </tr>
 
-        <!-- table data -->
-        <template v-for="data in tableData" :key="data?.id">
-          <tr class="border-b">
-            <!-- <td class="pl-4 w-2 text-left">
+          <!-- table data -->
+          <template v-for="data in tableData" :key="data?.id">
+            <tr class="border-b">
+              <!-- <td class="pl-4 w-2 text-left">
               <input type="checkbox" name="" id="" class="accent-blue-900" />
             </td> -->
-            <td class="text-left px-4 py-4 capitalize">{{ data?.requestId }}</td>
-            <td class="text-left px-4 py-4">{{ data?.college }}</td>
-            <td class="text-left px-4 py-4 capitalize">{{ data?.tripDate }}</td>
-            <td class="text-left px-4 py-4">{{ data?.returnDate }}</td>
-            <td class="text-left px-4 py-4">{{ data?.passengers }}</td>
-            <td class="text-left px-4 py-4">
-              <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
-                {{ data?.status }}
-              </BadgeComponent>
-            </td>
-            <td class="text-left px-4 py-4">
-              <div class="flex gap-2">
-                <router-link :to="{ name: 'RequestDetails', params: { id: data?.requestId } }">
-                  <Icon icon="heroicons:eye" class="gray-text text-xl cursor-pointer" />
-                </router-link>
-                <!-- <Icon icon="heroicons:trash" class="text-red-500 text-xl cursor-pointer" /> -->
-              </div>
-            </td>
-          </tr>
-        </template>
-      </table>
+              <td class="text-left px-4 py-4 capitalize">{{ data?.requestId }}</td>
+              <td class="text-left px-4 py-4">{{ data?.college }}</td>
+              <td class="text-left px-4 py-4 capitalize">{{ data?.tripDate }}</td>
+              <td class="text-left px-4 py-4">{{ data?.returnDate }}</td>
+              <td class="text-left px-4 py-4">{{ data?.passengers }}</td>
+              <td class="text-left px-4 py-4">
+                <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
+                  {{ data?.status }}
+                </BadgeComponent>
+              </td>
+              <td class="text-left px-4 py-4">
+                <div class="flex gap-2">
+                  <router-link :to="{ name: 'RequestDetails', params: { id: data?.requestId } }">
+                    <Icon icon="heroicons:eye" class="gray-text text-xl cursor-pointer" />
+                  </router-link>
+                  <!-- <Icon icon="heroicons:trash" class="text-red-500 text-xl cursor-pointer" /> -->
+                </div>
+              </td>
+            </tr>
+          </template>
+        </table>
+      </div>
 
       <!-- Pagination -->
       <div class="flex justify-end p-4 text-sm">
@@ -116,7 +118,6 @@ const tableData = [
     tripDate: '2024-09-25',
     returnDate: '2024-09-25',
     passengers: 18,
-
     status: 'Approved'
   },
   {

@@ -5,9 +5,9 @@
       <Icon icon="heroicons:ellipsis-vertical" class="text-xl gray-text" />
     </div>
 
-    <div class="tabl w-full">
+    <div class="tabl w-full overflow-x-auto">
       <!-- table -->
-      <table class="w-full text-sm">
+      <table class="w-full text-sm min-w-[700px]">
         <!-- thead -->
         <tr class="text-sm font-semibold gray-text px-4 py-2 bg-slate-100 border-b">
           <template v-for="head in tableHead" :key="head?.head">
@@ -28,28 +28,20 @@
             <td class="text-left px-4 py-4">{{ data?.date_assigned }}</td>
             <td class="text-left px-4 py-4 capitalize">{{ data?.type }}</td>
             <td class="text-left px-4 py-4">
-              <div
-                class="text-[10px] bg-green-400/30 text-green-700 w-fit p-0.5 px-2 font-semibold rounded"
-                v-if="data?.status === 'Active'"
-              >
+              <div class="text-[10px] bg-green-400/30 text-green-700 w-fit p-0.5 px-2 font-semibold rounded"
+                v-if="data?.status === 'Active'">
                 {{ data?.status }}
               </div>
-              <div
-                class="text-[10px] bg-red-400/30 text-red-700 w-fit p-0.5 px-2 font-semibold rounded"
-                v-else-if="data?.status === 'Inactive'"
-              >
+              <div class="text-[10px] bg-red-400/30 text-red-700 w-fit p-0.5 px-2 font-semibold rounded"
+                v-else-if="data?.status === 'Inactive'">
                 {{ data?.status }}
               </div>
-              <div
-                class="text-[10px] bg-blue-400/30 text-blue-700 w-fit p-0.5 px-2 font-semibold rounded"
-                v-else-if="data?.status === 'Free'"
-              >
+              <div class="text-[10px] bg-blue-400/30 text-blue-700 w-fit p-0.5 px-2 font-semibold rounded"
+                v-else-if="data?.status === 'Free'">
                 {{ data?.status }}
               </div>
-              <div
-                class="text-[10px] bg-yellow-400/30 text-yellow-700 w-fit p-0.5 px-2 font-semibold rounded"
-                v-else-if="data?.status === 'In Maintenance'"
-              >
+              <div class="text-[10px] bg-yellow-400/30 text-yellow-700 w-fit p-0.5 px-2 font-semibold rounded"
+                v-else-if="data?.status === 'In Maintenance'">
                 In Maint.
               </div>
             </td>

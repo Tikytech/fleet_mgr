@@ -1,16 +1,16 @@
 <template>
-  <div class="space-y-5">
-    <div class="grid grid-cols-4 gap-5">
+  <div class="space-y-3 md:space-y-5">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
       <template v-for="stat in overviewData" :key="stat.title">
         <OverviewStatisticCard :stat="stat" :loading="statisticStore.loading" />
       </template>
     </div>
 
-    <div class="grid grid-cols-5 gap-5">
-      <div class="col-span-3">
+    <div class="md:grid md:grid-cols-5 gap-3 md:gap-5">
+      <div class="md:col-span-3 mb-3 md:mb-0">
         <VehicleStatusTable />
       </div>
-      <div class="col-span-2">
+      <div class="md:col-span-2">
         <VehicleRequestTable />
       </div>
     </div>
