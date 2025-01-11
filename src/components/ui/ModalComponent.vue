@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <Transition name="overlay">
-      <div class="overlay" v-show="showModal"></div>
+      <div class="overlay bg-black/50" v-show="showModal"></div>
     </Transition>
 
     <div class="fixed top-0 right-0 h-dvh left-0 z-50 overflow-y-scroll" v-show="showModal">
