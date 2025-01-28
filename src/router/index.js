@@ -38,6 +38,11 @@ const router = createRouter({
       name: 'StaffRequests',
       component: () => import('../views/staff-requests/StaffRequests.vue')
     },
+    {
+      path: '/admin/login',
+      name: 'AdminLogin',
+      component: () => import('../views/auth/AdminLogin.vue')
+    },
     ...dashboardRoutes
   ]
 })

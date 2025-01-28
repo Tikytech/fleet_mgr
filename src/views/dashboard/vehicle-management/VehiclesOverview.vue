@@ -17,7 +17,7 @@
         emit: 'importCsv',
         icon: 'material-symbols:download-2-outline-rounded'
       },
-      { name: 'Add Vehicle', emit: 'buttonClick', icon: 'heroicons:plus' }
+      { name: 'Add Vehicle', emit: 'add', icon: 'heroicons:plus' }
     ]" />
 
     <p class="text-sm">Showing: {{ vehicles.length }} vehicles</p>

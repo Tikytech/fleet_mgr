@@ -3,7 +3,7 @@
     <div class="flex justify-center rounded-md text-white font-semibold transition-colors text-sm w-fit"
       :class="buttonContainerClass">
       <!-- Main Button -->
-      <button @click="$emit('buttonClick')" :disabled="loading" :type="typeButton"
+      <button @click="$emit('add')" :disabled="loading" :type="typeButton"
         class="min-w-[100px] justify-center py-2 px-4 flex gap-2 items-center transition-colors rounded-md"
         :class="buttonClass">
         <Icon :icon="icon" v-if="icon" class="text-lg shrink-0" />
@@ -19,8 +19,8 @@
     </div>
 
     <!-- Dropdown -->
-    <DropdownComponent :show-dropdown="showDropdown" @close="showDropdown = false" :dropdown-content="dropdown"
-      @add="$emit('add')" />
+    <DropdownComponent :show-dropdown="showDropdown" :dropdown-content="dropdown" @close="showDropdown = false"
+      v-if="showDropdown" @add="$emit('add')" />
   </div>
 </template>
 

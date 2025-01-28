@@ -24,7 +24,7 @@
       </div>
 
       <!-- user profile -->
-      <div class="w-fit shrink-0 flex items-center" v-if="!client">
+      <div class="w-fit shrink-0 flex items-center relative" v-if="!client">
         <UserProfile />
       </div>
     </nav>

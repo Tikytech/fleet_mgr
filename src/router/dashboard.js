@@ -139,7 +139,29 @@ export const dashboardRoutes = [
           pageTitle: 'Supplier Management',
           links: [{ name: 'dashboard', link: 'Overview' }, { name: 'suppliers' }]
         }
-      }
+      },
+      {
+        path: 'account-settings',
+        name: 'AccountSettings',
+        redirect: { name: 'AccountProfile' },
+        component: () => import('../views/dashboard/account-settings/AccountSettings.vue'),
+        meta: {
+          pageTitle: 'Account Settings',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'account settings' }]
+        },
+        children: [
+          {
+            path: 'profile',
+            name: 'AccountProfile',
+            component: () => import('../views/dashboard/account-settings/AccountProfile.vue'),
+          },
+          {
+            path: 'user-management',
+            name: 'UserManagement',
+            component: () => import('../views/dashboard/account-settings/UserManagement.vue'),
+          }
+        ]
+      },
     ]
   }
 ]
