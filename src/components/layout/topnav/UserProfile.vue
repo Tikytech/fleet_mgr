@@ -1,13 +1,14 @@
 <template>
   <div class="h-full cursor-pointer w-fit shrink-0 flex items-center" @click="showDropdown = true">
-    <div class="primary-bg py-4 px-3 h-full hidden md:block">
-      <div class="flex items-center gap-3">
-        <div class="rounded-full size-8 overflow-hidden">
-          <img src="/images/users/avatar-1.jpg" class="w-full size-full" />
+    <div class="primary-bg py-4 px-2 h-full hidden md:block">
+      <div class="flex items-center gap-1">
+        <div class="rounded-full size-10 overflow-hidden">
+          <img src="/images/default-avatar.png" class="w-full size-full" />
         </div>
 
-        <div class="space-y-">
-          <p class="font-semibold text-sm">{{user?.email}}lksjdflsk jldfkjs dfs</p>
+        <div class="space-y- ">
+          <p class="font-semibold w-[100px] line-clamp-1 text-sm" :title="user?.email">{{ user?.email }}lksjdflsk
+            jldfkjs dfs</p>
           <p class="gray-text text-xs">Admin</p>
         </div>
       </div>
@@ -20,23 +21,14 @@
   </div>
 
   <!-- dropdown -->
-  <DropdownComponent
-    :show-dropdown="showDropdown"
-    :dropdown-content="dropdown"
-    @close="showDropdown = false"
-    v-if="showDropdown"
-    @settings="navigateToSettings"
-    @logout="showPrompt = true"
-  />
+  <DropdownComponent :show-dropdown="showDropdown" :dropdown-content="dropdown" @close="showDropdown = false"
+    v-if="showDropdown" @settings="navigateToSettings" @logout="showPrompt = true" />
 
   <!-- prompts and modals -->
   <!-- logout prompt -->
   <ModalComponent :show-modal="showPrompt" @close="showPrompt = false" title="Logout" width="400px">
-    <PromptCard
-      @close="showPrompt = false"
-      @button-click="adminLogout"
-      text="Are you sure you want to logout?"
-  /></ModalComponent>
+    <PromptCard @close="showPrompt = false" @button-click="adminLogout" text="Are you sure you want to logout?" />
+  </ModalComponent>
 </template>
 
 <script setup>
