@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 
 // 
 function getUserFromLocalStorage() {
-  const user = localStorage.getItem('user')
+  const user = localStorage.getItem('adminUser')
   return user ? JSON.parse(user) : null
 }
 
