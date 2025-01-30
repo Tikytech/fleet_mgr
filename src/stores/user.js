@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', () => {
   const loading = ref(false)
   const isSuccessful = ref(false)
 
-  async function getAllUser() {
+  async function getAllUsers() {
     try {
       loading.value = true
       users.value = (await api.get('users')).data
@@ -33,5 +33,5 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  return { users, loading, getAllUser, addUser, isSuccessful }
+  return { users, loading, getAllUsers, addUser, isSuccessful }
 })

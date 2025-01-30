@@ -24,9 +24,11 @@ import AddUserForm from '@/components/forms/AddUserForm.vue';
 import TableComponent from '@/components/tables/TableComponent.vue';
 import ModalComponent from '@/components/ui/ModalComponent.vue';
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useUserStore } from '@/stores/user'
 
 const showAdd = ref(false)
+const { getAllUsers } = useUserStore()
 
 const tableHead = [
     { title: 'Name' },
@@ -79,7 +81,6 @@ const tableData = [
     }
 ]
 
-
 const actions = {
     edit: {
         link: 'UserManagement',
@@ -100,6 +101,9 @@ function getStatus(status) {
     }
 }
 
+onMounted(() => {
+    getAllUsers()
+})
 
 </script>
 
