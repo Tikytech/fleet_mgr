@@ -2,6 +2,7 @@
     <div class="flex items-center justify-center min-h-screen bg-gray-100 maximum-width">
         <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
             <h1 class="text-2xl font-bold text-center">Login</h1>
+            <p v-if="errMessage" class="p-2 text-center bg-red-400/50">{{ errMessage }}</p>
             <form @submit.prevent="handleLogin" class="space-y-6">
                 <!-- email -->
                 <div class="space-y-2">
@@ -41,12 +42,24 @@ const password = ref('')
 const showPassword = ref(false)
 const authStore = useAuthStore()
 const router = useRouter()
+const errMessage = ref('')
 
 const handleLogin = async () => {
     // Handle login logic here
+    errMessage.value = ''
     console.log('Email:', email.value)
     console.log('Password:', password.value)
-
+    const status = await authStore.adminLogin({ email: email.value, password: password.value })
+    if (status) {
+        await authStore.getAdminUser()
+        router.push({ name: 'Overview' })
+    }
+    else if (authStore.error) {
+        errMessage.value = authStore.error
+    }
+    else {
+        errMessage.value = 'Something went wrong. Please try again.'
+    }
 }
 
 const togglePasswordVisibility = () => {

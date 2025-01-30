@@ -1,7 +1,8 @@
 <template>
     <div class="p-4">
-
-
+        <div>
+            {{ text }}
+        </div>
         <!-- buttons -->
         <div class="flex justify-end mt-6 gap-2">
             <ButtonComponent text="Yes" type="danger" :loading="loading" @click="$emit('button-click')"
@@ -13,8 +14,9 @@
 
 <script setup>
 import ButtonComponent from '../ui/ButtonComponent.vue';
-const { loading } = defineProps({
-    loading: Boolean
+const { loading, text } = defineProps({
+    loading: Boolean,
+    text: String
 })
 </script>
 

@@ -10,7 +10,7 @@
 
             <!-- buttons -->
             <div class="flex justify-end mt-6 gap-2">
-                <ButtonComponent text="Reject request" type="danger" :loading="loading" @click="$emit('button-click')"
+                <ButtonComponent text="Reject request" type="danger" :loading="false" @click="$emit('button-click')"
                     type-button="button" />
                 <ButtonComponent text="Cancel" type="border" @click="$emit('close')" type-button="button" />
             </div>

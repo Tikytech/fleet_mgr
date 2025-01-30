@@ -3,14 +3,21 @@ import { defineStore } from 'pinia'
 import { api } from '@/api/api'
 import { useRouter } from 'vue-router'
 
+// 
+function getUserFromLocalStorage() {
+  const user = localStorage.getItem('user')
+  return user ? JSON.parse(user) : null
+}
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref(null)
-    const token = ref(null)
+    const user = ref(getUserFromLocalStorage())
+    const token = ref(null) //client token
+    const adminToken = ref(null) //admin token
     const error = ref(null)
     const loading = ref(false)
     const router = useRouter()
 
+    // client login
   async function login(credentials) {
     try {
       loading.value = true
@@ -28,6 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  // client login with otp
   async function loginWithOTP(otp) {
     try {
       const email = localStorage.getItem('OTPmail')
@@ -51,10 +59,40 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function adminLogin(credentials) {
+    try {
+      loading.value = true
+      const response = await api.post('/admin/auth/login', credentials)
+      console.log(response)
+      adminToken.value = response.data.token
+      localStorage.setItem('adminToken', adminToken.value)
+      error.value = null
+      return response.data.status
+    } catch (err) {
+      error.value = err.response.data.message
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function getAdminUser() {
+    try {
+      loading.value = true
+      const response = await api.get('/user')
+      user.value = response.data
+      console.log(user.value)
+      localStorage.setItem('adminUser', JSON.stringify(user.value))
+      loading.value = false
+    } catch (err) {
+      error.value = err.response.data.message
+      loading.value = false
+    }
+  }
+
+  // logout client functionality
   async function logout() {
     try {
     //   await api.post('/logout')
-      user.value = null
       token.value = null
       localStorage.removeItem('token')
       router.push({name: "Login"})
@@ -64,8 +102,20 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function getToken() {
-    return localStorage.getItem('token')
+  async function adminLogout() {
+    try {
+      user.value = null
+      adminToken.value = null
+      localStorage.removeItem('adminToken')
+      localStorage.removeItem('adminUser')
+      router.push({name: "AdminLogin"})
+      error.value = null
+    } catch (err) {
+      error.value = err.response.data.message
+    }}
+
+  function getToken(tokenType) {
+    return localStorage.getItem(tokenType)
   }
 
   return {
@@ -76,6 +126,10 @@ export const useAuthStore = defineStore('auth', () => {
     logout,
     loading,
     getToken,
-    loginWithOTP
+    loginWithOTP,
+    adminLogin,
+    adminToken,
+    getAdminUser,
+    adminLogout,
   }
 })

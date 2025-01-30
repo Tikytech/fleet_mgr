@@ -47,13 +47,17 @@ const router = createRouter({
   ]
 })
 
-
+// authenticate routes
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  const token = authStore.getToken();
+  const token = authStore.getToken('token');
+  const adminToken = authStore.getToken('adminToken');
   if (to.meta.requiresClientAuth && !token) {
     next('/login');
-  } else {
+  } else if (to.meta.requiresAdminAuth && !adminToken) {
+    next('/admin/login');
+  } 
+  else {
     next();
   }
 });

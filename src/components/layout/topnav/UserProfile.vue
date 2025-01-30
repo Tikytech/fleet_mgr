@@ -7,7 +7,7 @@
         </div>
 
         <div class="space-y-">
-          <p class="font-semibold text-sm">Anna Adame</p>
+          <p class="font-semibold text-sm">{{user.email}}lksjdflsk jldfkjs dfs</p>
           <p class="gray-text text-xs">Admin</p>
         </div>
       </div>
@@ -17,19 +17,39 @@
         <img src="/images/users/avatar-1.jpg" class="w-full size-full" />
       </div>
     </div>
-
   </div>
+
   <!-- dropdown -->
-  <DropdownComponent :show-dropdown="showDropdown" :dropdown-content="dropdown" @close="showDropdown = false"
-    v-if="showDropdown" @settings="navigateToSettings" />
+  <DropdownComponent
+    :show-dropdown="showDropdown"
+    :dropdown-content="dropdown"
+    @close="showDropdown = false"
+    v-if="showDropdown"
+    @settings="navigateToSettings"
+    @logout="showPrompt = true"
+  />
+
+  <!-- prompts and modals -->
+  <!-- logout prompt -->
+  <ModalComponent :show-modal="showPrompt" @close="showPrompt = false" title="Logout" width="400px">
+    <PromptCard
+      @close="showPrompt = false"
+      @button-click="adminLogout"
+      text="Are you sure you want to logout?"
+  /></ModalComponent>
 </template>
 
 <script setup>
-import DropdownComponent from '@/components/ui/DropdownComponent.vue';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import DropdownComponent from '@/components/ui/DropdownComponent.vue'
+import ModalComponent from '@/components/ui/ModalComponent.vue'
+import PromptCard from '@/components/cards/PromptCard.vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/authentication'
 const showDropdown = ref(false)
 const router = useRouter()
+const showPrompt = ref(false)
+const { adminLogout, user } = useAuthStore()
 
 function navigateToSettings() {
   router.push({ name: 'AccountSettings' })

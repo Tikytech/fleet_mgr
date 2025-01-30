@@ -9,21 +9,21 @@ export const api = axios.create({
   headers: {
     'Access-Control-Allow-Origin': baseURL
   }
+})
 
-  //   baseURL: '/api',
-  //   timeout: 50000,
-  //   headers: {
-  //     // 'Access-Control-Allow-Origin': 'http://localhost:5173',
-  //     'Access-Control-Allow-Origin': baseURL
-  //   }
+export const clientApi = axios.create({
+  baseURL,
+  timeout: 50000,
+  headers: {
+    'Access-Control-Allow-Origin': baseURL
+  }
 })
 
 // Add a request interceptor
 api.interceptors.request.use(
   async (config) => {
     const authStore = useAuthStore()
-    const token = authStore.getToken()
-    // console.log(token)
+    const token = authStore.getToken('adminToken');
     if (token) {
       config.headers.Authorization = token;
     }
@@ -47,28 +47,49 @@ api.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401) {
       if (typeof window !== "undefined") {
-        // localStorage.removeItem("accessToken");
+        const authStore = useAuthStore()
+        authStore.adminLogout()
+      }
+    }
+    console.log("Api response error");
+    return Promise.reject(error);
+  },
+);
+
+// CLIENT API 
+// Add a request interceptor
+clientApi.interceptors.request.use(
+  async (config) => {
+    const authStore = useAuthStore()
+    const token = authStore.getToken('token')
+    if (token) {
+      config.headers.Authorization = token;
+    }
+    console.log("Api request intercepted");
+    return config;
+  },
+  (error) => {
+    // Do something with request error
+    return Promise.reject(error);
+  },
+);
+
+// Add a response interceptor
+clientApi.interceptors.response.use(
+  (response) => {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    console.log("Client Api response intercepted");
+    return response;
+  },
+  async (error) => {
+    if (error.response?.status === 401) {
+      if (typeof window !== "undefined") {
         const authStore = useAuthStore()
         authStore.logout()
       }
     }
-
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    // const originalRequest = error.config
-    // if (error.response?.status === 401 && !originalRequest._retry) {
-    //   originalRequest._retry = true
-
-    //   try {
-    //     const response = await api.get('/v1/auth/refresh-token')
-    //     useAuthStore.setState({accessToken: response.data.accessToken})
-    //     return api(originalRequest)
-    //   } catch (err){
-    //     console.log(err)
-    //     // logout()
-    //   }
-    // }
-    console.log("Api response error");
+    console.log("Client Api response error");
     return Promise.reject(error);
   },
 );
