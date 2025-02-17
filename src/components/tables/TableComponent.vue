@@ -8,10 +8,10 @@
                 <table class="text-sm min-w-[900px] w-full">
                     <!-- thead -->
                     <tr class="text-sm font-semibold px-4 py-2 bg-slate-100 border-b">
-                        <template v-for="head in tableHead" :key="head?.head">
-                            <th class="text-left px-4 py-4">{{ head?.title }}</th>
+                        <template v-for="(head, index) in tableHead" :key="head?.head">
+                            <th class="text-left px-2 py-4" :class="{ '!pl-4': index === 0 }">{{ head?.title }}</th>
                         </template>
-                        <th class="text-left px-4 py-4" v-if="actions">Actions</th>
+                        <th class="text-left px-2 py-4" v-if="actions">Actions</th>
                     </tr>
 
                     <!-- tbody -->
@@ -19,18 +19,20 @@
                         <tr class="border-b">
                             <template v-for="(item, index) in Object.keys(data)" :key="index">
                                 <template v-if="!exclude?.includes(item)">
-                                    <td class="text-left px-4 py-4" v-if="item === badge?.column">
+                                    <td class="text-left px-2 py-4" :class="{ '!pl-4': index === 0 }"
+                                        v-if="item === badge?.column">
                                         <BadgeComponent class="w-fit text-xs font-semibold"
                                             :type="getStatus(data[item])">
                                             {{ data[item] }}
                                         </BadgeComponent>
                                     </td>
-                                    <td v-else class="text-left px-4 py-4">{{ data[item] }}</td>
+                                    <td v-else class="text-left px-2 py-4" :class="{ '!pl-4': index === 0 }">{{
+                                        data[item] }}</td>
                                 </template>
                             </template>
 
                             <!-- actions -->
-                            <td class="text-left px-4 py-4" v-if="actions">
+                            <td class="text-left px-2 py-4" v-if="actions">
                                 <div class="flex gap-2">
                                     <router-link v-if="actions.view"
                                         :to="{ name: actions.view.link, params: { id: data[actions.view.param] } }">

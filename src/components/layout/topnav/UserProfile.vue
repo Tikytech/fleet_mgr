@@ -7,8 +7,7 @@
         </div>
 
         <div class="space-y- ">
-          <p class="font-semibold w-[100px] line-clamp-1 text-sm" :title="user?.email">{{ user?.email }}lksjdflsk
-            jldfkjs dfs</p>
+          <p class="font-semibold w-[100px] line-clamp-1 text-sm" :title="user?.email">{{ user?.email }}</p>
           <p class="gray-text text-xs">Admin</p>
         </div>
       </div>

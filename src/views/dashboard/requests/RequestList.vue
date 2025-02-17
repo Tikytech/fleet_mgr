@@ -11,19 +11,21 @@
 
 
     <TableComponent :get-status="getStatus" :table-data="tableData" :table-head="tableHead" :actions="actions"
-      :badge="{ column: 'status' }" @add="showAdd = true" />
+      :badge="{ column: 'status' }" @add="showAdd = true" :loading="requestStore.loading" />
   </div>
 </template>
 
 <script setup>
 import RequestVehicleForm from '@/components/forms/RequestVehicleForm.vue';
-// import RequestTable from '@/components/tables/RequestTable.vue'
 import TableComponent from '@/components/tables/TableComponent.vue';
 import ModalComponent from '@/components/ui/ModalComponent.vue';
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'
-import { ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
+import { useRequestStore } from '@/stores/requests';
+import dayjs from 'dayjs';
 
 const showAdd = ref(false)
+const requestStore = useRequestStore()
 
 const actions = {
   view: {
@@ -32,12 +34,29 @@ const actions = {
   }
 }
 
+const tableData = computed(() => {
+  return requestStore.requests.map(item => {
+    return {
+      requestId: item?.id || "N/A",
+      college: item?.staff?.college?.name || "N/A",
+      staff: item?.staff?.name || "N/A",
+      tripDate: dayjs(item?.trip_date).format("MMM DD, YYYY") || "N/A",
+      return_date: dayjs(item?.return_date).format("MMM DD, YYYY") || "N/A",
+      passengers: item?.no_of_passengers || "N/A",
+      purpose: item?.purpose || "N/A",
+      status: item?.status || "N/A",
+    }
+  })
+})
+
 const tableHead = [
-  { title: 'Request ID' },
+  { title: ' ID' },
   { title: 'College' },
+  { title: 'Staff' },
   { title: 'Trip Date' },
   { title: 'Return Date' },
   { title: 'Passengers' },
+  { title: 'Purpose' },
   { title: 'Status' },
 ]
 
@@ -54,42 +73,46 @@ function getStatus(status) {
   }
 }
 
-const tableData = [
-  {
-    requestId: '001',
-    college: 'Computer Science',
-    tripDate: '2024-09-25',
-    returnDate: '2024-09-25',
-    passengers: 18,
-    status: 'Approved'
-  },
-  {
-    requestId: '002',
-    college: 'Biology Department',
-    tripDate: '2024-09-28',
-    returnDate: '2024-09-28',
-    passengers: 15,
+onMounted(async () => {
+  await requestStore.getAllRequests()
+})
 
-    status: 'Pending'
-  },
-  {
-    requestId: '003',
-    college: 'Sports Department',
-    tripDate: '2024-09-27',
-    returnDate: '2024-09-27',
-    passengers: 20,
+// const tableData = [
+//   {
+//     requestId: '001',
+//     college: 'Computer Science',
+//     tripDate: '2024-09-25',
+//     returnDate: '2024-09-25',
+//     passengers: 18,
+//     status: 'Approved'
+//   },
+//   {
+//     requestId: '002',
+//     college: 'Biology Department',
+//     tripDate: '2024-09-28',
+//     returnDate: '2024-09-28',
+//     passengers: 15,
 
-    status: 'Rejected'
-  },
-  {
-    requestId: '004',
-    college: 'History Department',
-    tripDate: '2024-09-30',
-    returnDate: '2024-09-30',
-    passengers: 22,
-    status: 'Approved'
-  }
-]
+//     status: 'Pending'
+//   },
+//   {
+//     requestId: '003',
+//     college: 'Sports Department',
+//     tripDate: '2024-09-27',
+//     returnDate: '2024-09-27',
+//     passengers: 20,
+
+//     status: 'Rejected'
+//   },
+//   {
+//     requestId: '004',
+//     college: 'History Department',
+//     tripDate: '2024-09-30',
+//     returnDate: '2024-09-30',
+//     passengers: 22,
+//     status: 'Approved'
+//   }
+// ]
 
 </script>
 

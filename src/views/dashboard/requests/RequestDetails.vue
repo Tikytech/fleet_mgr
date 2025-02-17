@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="" v-if="requestStore.loading"></div>
+  <div v-else>
     <!-- prompts and modals -->
     <!-- reject request -->
     <ModalComponent :show-modal="showReject" @close="showReject = false" title="Reject request">
@@ -17,7 +18,7 @@
     </div>
 
     <div class="flex justify-between gap-2 flex-wrap mb-10">
-      <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - Trip to Aqua Safari</h3>
+      <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - {{ request?.purpose }}</h3>
       <div class="flex gap-2">
         <ButtonComponent text="Approve Request" @click="showApprove = true" />
         <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
@@ -41,43 +42,42 @@
             <!-- college -->
             <tr>
               <td className="py-2 pr-3 font-semibold">College:</td>
-              <td className="text-gray-500">Computer science departments</td>
+              <td className="text-gray-500">{{ request?.staff?.college?.name }}</td>
             </tr>
             <!-- purpose -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Request purpose:</td>
               <td className="text-gray-500">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam mollitia enim,
-                nobis fugiat corporis dolorum quaerat, ratione quas soluta, aperiam officiis
-                consequuntur quo quam dolor provident eaque expedita qui velit.
+                {{ request?.purpose }}
               </td>
             </tr>
             <!-- date -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Trip date:</td>
-              <td className="text-gray-500">25th April, 2024</td>
+              <td className="text-gray-500">{{ dayjs(request?.return_date).format("MMM DD, YYYY") }}</td>
             </tr>
             <!-- date -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Return date:</td>
-              <td className="text-gray-500">25th April, 2024</td>
+              <td className="text-gray-500">{{ dayjs(request?.return_date).format("MMM DD, YYYY") }}</td>
             </tr>
             <!-- Year of manufacture -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Passengers:</td>
-              <td className="text-gray-500">N/A</td>
+              <td className="text-gray-500">{{ request?.no_of_passengers }}</td>
             </tr>
             <!-- Status -->
             <tr>
-              <td className="py-2 pr-3 font-semibold">Recurring request:</td>
-              <td className="text-gray-500">No</td>
+              <td className="py-2 pr-3 font-semibold">Date requested:</td>
+              <td className="text-gray-500">{{ dayjs(request?.createdAt).format("MMM DD, YYYY") }} ({{
+                dayjs(request?.createdAt).fromNow() }})</td>
             </tr>
             <!-- Status -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Request status:</td>
               <td className="text-gray-500">
                 <div class="w-fit">
-                  <BadgeComponent type="warning">Pending</BadgeComponent>
+                  <BadgeComponent type="warning">{{ request?.status }}</BadgeComponent>
                 </div>
               </td>
             </tr>
@@ -94,17 +94,17 @@
             <!-- contact person-->
             <tr>
               <td className="py-2 pr-3 font-semibold">Contact person name:</td>
-              <td className="text-gray-500">Float Tremendous</td>
+              <td className="text-gray-500">{{ request?.staff?.name }}</td>
             </tr>
             <!-- Contact person number -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Contact person number:</td>
-              <td className="text-gray-500">1234567890</td>
+              <td className="text-gray-500">{{ request?.staff?.contact }}</td>
             </tr>
             <!-- Contact person email -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Contact person email:</td>
-              <td className="text-gray-500">staff@st.ug.edu.gh</td>
+              <td className="text-gray-500">{{ request?.staff?.email }}</td>
             </tr>
           </div>
         </div>
@@ -130,13 +130,28 @@ import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue'
 import { Icon } from '@iconify/vue'
 import ModalComponent from '@/components/ui/ModalComponent.vue';
-import { ref } from 'vue';
 import RejectVehicleRequestForm from '@/components/forms/RejectVehicleRequestForm.vue';
 import ApproveVehicleRequest from '@/components/custom/requests/ApproveVehicleRequest.vue';
 import BackComponent from '@/components/ui/BackComponent.vue';
+import dayjs from 'dayjs';
+import relativeTime from "dayjs/plugin/relativeTime"
+import { ref, onMounted } from 'vue';
+import { useRequestStore } from '@/stores/requests'
+import { useRoute } from 'vue-router';
+
+dayjs.extend(relativeTime)
 
 const showReject = ref(false)
 const showApprove = ref(false)
+const request = ref({})
+const requestStore = useRequestStore()
+const route = useRoute()
+
+onMounted(async () => {
+  request.value = await requestStore.getRequestById(route.params.id)
+  console.log(route.params.id)
+  console.log(request.value)
+})
 
 </script>
 

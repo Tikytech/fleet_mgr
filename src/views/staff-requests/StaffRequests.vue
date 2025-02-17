@@ -8,14 +8,15 @@
             <div class="space-y-4">
 
                 <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Request a vehicle" width="500px">
-                    <RequestVehicleForm @close="showAdd = false" />
+                    <RequestVehicleForm @close="showAdd = false" :is-client="true" />
                 </ModalComponent>
 
                 <SearchAndButtonBar button-text="Request a vehicle" :filter="true" @add="showAdd = true" />
 
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
                 <TableComponent :table-data="tableData" :table-head="tableHead" @add="showAdd = true"
-                    :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getStatus" />
+                    :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getStatus"
+                    :actions="actions" />
             </div>
         </main>
     </div>
@@ -56,6 +57,13 @@ const tableHead = [
     { title: 'Passengers' },
     { title: 'Status' },
 ]
+
+const actions = {
+    view: {
+        link: 'RequestDetails',
+        param: 'requestId',
+    }
+}
 
 function getStatus(status) {
     switch (status.toLowerCase()) {

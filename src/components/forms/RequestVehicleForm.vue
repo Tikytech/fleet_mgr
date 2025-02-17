@@ -16,9 +16,9 @@
                     rows="4" v-model="requestData.detailed_reason"></textarea>
             </div>
 
-            <!-- Trip date and time -->
+            <!-- Trip dates -->
             <div class="">
-                <label>Select trip date and time</label>
+                <label>Select trip date and return date</label>
                 <div class="grid grid-cols-2 gap-4">
 
                     <!-- Trip date -->
@@ -27,32 +27,33 @@
                             placeholder="Enter Contact Person's Phone Number" v-model="requestData.trip_date" />
                     </div>
 
-                    <!-- Trip time -->
+                    <!-- Return date -->
+                    <div class="">
+                        <input required class="input mt-1" type="date" id="return_date"
+                            placeholder="Enter Contact Person's Phone Number" v-model="requestData.return_date" />
+                    </div>
+
+
+                    <!-- Trip time
                     <div class="">
                         <input required class="input mt-1" type="time" id="time" placeholder="Enter Time"
                             v-model="requestData.trip_time" />
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <!-- Return date and time -->
-            <div class="">
+            <!-- <div class="">
                 <label>Select return date and time</label>
                 <div class="grid grid-cols-2 gap-4">
 
-                    <!-- Return date -->
-                    <div class="">
-                        <input required class="input mt-1" type="date" id="trip_date"
-                            placeholder="Enter Contact Person's Phone Number" v-model="requestData.return_date" />
-                    </div>
-
-                    <!-- Returm time -->
+                    Returm time
                     <div class="">
                         <input required class="input mt-1" type="time" id="time" placeholder="Enter Time"
                             v-model="requestData.return_time" />
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Number of passengers -->
             <div class="">
@@ -76,29 +77,31 @@ import { useRequestStore } from '@/stores/requests'
 import { ref } from 'vue'
 
 const emit = defineEmits(['close'])
+const { isClient } = defineProps({
+    isClient: {
+        type: Boolean,
+        default: false,
+    }
+})
 const requestStore = useRequestStore()
 const requestData = ref({
     purpose: '',
     detailed_reason: '',
     trip_date: '',
-    trip_time: '',
     return_date: '',
-    return_time: '',
     no_of_passengers: '',
 })
 
 async function submitForm() {
     console.log(requestData.value)
-    await requestStore.requestVehicle(requestData.value)
+    isClient ? requestStore.clientRequestVehicle(requestData.value) : await requestStore.requestVehicle(requestData.value)
     if (requestStore.isSuccessful) {
         await requestStore.getAllRequests()
         requestData.value = {
             purpose: '',
             detailed_reason: '',
             trip_date: '',
-            trip_time: '',
             return_date: '',
-            return_time: '',
             no_of_passengers: '',
         }
         emit('close')
