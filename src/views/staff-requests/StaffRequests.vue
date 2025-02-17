@@ -79,7 +79,7 @@ function getStatus(status) {
 }
 
 onMounted(async () => {
-    await requestStore.getAllRequests()
+    await requestStore.getAllClientRequests()
 })
 
 </script>
