@@ -53,8 +53,10 @@ router.beforeEach((to, from, next) => {
   const token = authStore.getToken('token');
   const adminToken = authStore.getToken('adminToken');
   if (to.meta.requiresClientAuth && !token) {
+    console.log('clieeeeenttttt')
     next('/login');
   } else if (to.meta.requiresAdminAuth && !adminToken) {
+    console.log('admiiiiiiiinnnn')
     next('/admin/login');
   } 
   else {
