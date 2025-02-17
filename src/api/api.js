@@ -27,7 +27,7 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
     }
-    console.log("Api request intercepted");
+    console.log("Api request intercepted for admin");
     return config;
   },
   (error) => {
@@ -41,7 +41,7 @@ api.interceptors.response.use(
   (response) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("Api response intercepted");
+    console.log("Api response intercepted for admin");
     return response;
   },
   async (error) => {
@@ -51,7 +51,7 @@ api.interceptors.response.use(
         authStore.adminLogout()
       }
     }
-    console.log("Api response error");
+    console.log("Api response error for admin");
     return Promise.reject(error);
   },
 );
@@ -65,7 +65,7 @@ clientApi.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
     }
-    console.log("Api request intercepted");
+    console.log("Api request intercepted for client");
     return config;
   },
   (error) => {
@@ -79,7 +79,7 @@ clientApi.interceptors.response.use(
   (response) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("Client Api response intercepted");
+    console.log("Client Api response intercepted for client");
     return response;
   },
   async (error) => {
