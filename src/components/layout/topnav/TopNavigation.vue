@@ -24,7 +24,11 @@
       </div>
 
       <!-- user profile -->
-      <div class="w-fit shrink-0 flex items-center relative" v-if="!client">
+      <div class="w-fit shrink-0 flex items-center relative cursor-pointer" v-if="client" title="logout">
+        <Icon icon="heroicons:arrow-left-start-on-rectangle" class="text-2xl text-red-500"
+          @click="useAuthStore().clientLogout" />
+      </div>
+      <div class="w-fit shrink-0 flex items-center relative" v-else>
         <UserProfile />
       </div>
     </nav>
@@ -51,6 +55,7 @@ import ThemeIcon from '@/components/layout/topnav/ThemeIcon.vue'
 import UserProfile from '@/components/layout/topnav/UserProfile.vue'
 import { useNavbarStore } from '@/stores/navbar'
 import SideNavigation from '../SideNavigation.vue'
+import { useAuthStore } from '@/stores/authentication'
 
 const navbarStore = useNavbarStore()
 

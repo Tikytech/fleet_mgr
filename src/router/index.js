@@ -29,6 +29,7 @@ const router = createRouter({
       name: 'OTP',
       component: () => import('../views/auth/OTPView.vue')
     },
+    // staff request and dtails
     {
       path: '/',
       alias: '/requests',
@@ -36,12 +37,30 @@ const router = createRouter({
         requiresClientAuth: true
       },
       name: 'StaffRequests',
-      component: () => import('../views/staff-requests/StaffRequests.vue')
+      component: () => import('../views/staff-requests/StaffRequests.vue'),
+      redirect: { name: 'StaffRequestList' },
+      children: [
+        {
+          path: '',
+          name: 'StaffRequestList',
+          component: () => import('../views/staff-requests/StaffRequestList.vue')
+        },
+        {
+          path: 'request-:id',
+          name: 'StaffRequestDetails',
+          component: () => import('../views/staff-requests/StaffRequestDetails.vue')
+        }
+      ]
     },
     {
       path: '/admin/login',
       name: 'AdminLogin',
       component: () => import('../views/auth/AdminLogin.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/NotFound.vue')
     },
     ...dashboardRoutes
   ]
@@ -50,18 +69,17 @@ const router = createRouter({
 // authenticate routes
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  const token = authStore.getToken('token');
-  const adminToken = authStore.getToken('adminToken');
-  if (to.meta.requiresClientAuth && !token) {
+  const clientToken = authStore.getToken('clientToken')
+  const adminToken = authStore.getToken('adminToken')
+  if (to.meta.requiresClientAuth && !clientToken) {
     console.log('clieeeeenttttt')
-    next('/login');
+    next('/login')
   } else if (to.meta.requiresAdminAuth && !adminToken) {
     console.log('admiiiiiiiinnnn')
-    next('/admin/login');
-  } 
-  else {
-    next();
+    next('/admin/login')
+  } else {
+    next()
   }
-});
+})
 
 export default router
