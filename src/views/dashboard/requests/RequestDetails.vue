@@ -54,7 +54,7 @@
             <!-- date -->
             <tr>
               <td className="py-2 pr-3 font-semibold">Trip date:</td>
-              <td className="text-gray-500">{{ dayjs(request?.return_date).format("MMM DD, YYYY") }}</td>
+              <td className="text-gray-500">{{ dayjs(request?.trip_date).format("MMM DD, YYYY") }}</td>
             </tr>
             <!-- date -->
             <tr>

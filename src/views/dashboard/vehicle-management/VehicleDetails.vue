@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="" v-if="vehicleStore.loading">Please wait...</div>
+  <main v-else>
     <!-- popups and modals -->
-    <ModalComponent :show-modal="showEdit" @close="showEdit = false" title="Vehicle details" width="500px">
-      <EditVehicleForm @close="showEdit = false" />
+    <ModalComponent :show-modal="showEdit" @close="showEdit = false" title="Vehicle details" width="800px">
+      <EditVehicleForm @close="showEdit = false" :vehicle="vehicleDetails" v-if="showEdit" />
     </ModalComponent>
 
     <!-- back button -->
@@ -118,7 +119,7 @@
         <div class=""></div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>

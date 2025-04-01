@@ -5,7 +5,7 @@
             <!-- Request purpose -->
             <div class="">
                 <label for="purpose" class="">Request purpose</label>
-                <input required class="input mt-1" type="text" id="purpose" placeholder="State reason for request"
+                <input required class="input mt-1" type="text" id="purpose" placeholder="Keep it brief and concise"
                     v-model="requestData.purpose" />
             </div>
 
@@ -23,13 +23,13 @@
 
                     <!-- Trip date -->
                     <div class="">
-                        <input required class="input mt-1" type="date" id="trip_date"
+                        <input required class="input mt-1" type="date" id="trip_date" :min="today"
                             placeholder="Enter Contact Person's Phone Number" v-model="requestData.trip_date" />
                     </div>
 
                     <!-- Return date -->
                     <div class="">
-                        <input required class="input mt-1" type="date" id="return_date"
+                        <input required class="input mt-1" type="date" id="return_date" :min="today"
                             placeholder="Enter Contact Person's Phone Number" v-model="requestData.return_date" />
                     </div>
 
@@ -74,7 +74,9 @@
 // import { Icon } from '@iconify/vue'
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useRequestStore } from '@/stores/requests'
+import { useToastStore } from '@/stores/toast'
 import { ref } from 'vue'
+import dayjs from 'dayjs'
 
 const emit = defineEmits(['close'])
 const { isClient } = defineProps({
@@ -84,6 +86,8 @@ const { isClient } = defineProps({
     }
 })
 const requestStore = useRequestStore()
+const toast = useToastStore()
+const today = ref(new Date().toISOString().split("T")[0])
 const requestData = ref({
     purpose: '',
     detailed_reason: '',
@@ -94,9 +98,19 @@ const requestData = ref({
 
 async function submitForm() {
     console.log(requestData.value)
-    isClient ? requestStore.clientRequestVehicle(requestData.value) : await requestStore.requestVehicle(requestData.value)
+
+    // validate dates
+    const returnDate = dayjs(requestData.value.return_date);
+    const tripDate = dayjs(requestData.value.trip_date);
+
+    if (returnDate.isBefore(tripDate)) {
+        toast.addToastMessage("danger", "Date Error", "Return date should not be before trip date!")
+        return
+    }
+
+    isClient ? await requestStore.clientRequestVehicle(requestData.value) : await requestStore.requestVehicle(requestData.value)
     if (requestStore.isSuccessful) {
-        await requestStore.getAllRequests()
+        isClient ? await requestStore.getAllClientRequests() : await requestStore.getAllRequests()
         requestData.value = {
             purpose: '',
             detailed_reason: '',

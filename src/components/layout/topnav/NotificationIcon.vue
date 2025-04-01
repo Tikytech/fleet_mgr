@@ -3,9 +3,9 @@
     <Icon icon="heroicons:bell" class="text-2xl" />
 
     <!-- badge -->
-    <div class="absolute bg-red-500 text-white text-[12px] py- px-1.5 rounded-full -top-1 right-0">
+    <!-- <div class="absolute bg-red-500 text-white text-[12px] py- px-1.5 rounded-full -top-1 right-0">
       3
-    </div>
+    </div> -->
   </div>
 </template>
 

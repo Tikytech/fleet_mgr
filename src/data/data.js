@@ -41,7 +41,7 @@ export const vehicleFormData = [
   {
     v_model: 'date_purchased',
     name: 'date purchased',
-    input_type: 'text',
+    input_type: 'date',
     placeholder: 'Enter date purchased'
   },
   {

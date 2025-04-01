@@ -6,10 +6,10 @@
                 <div class="">
                     <h2 class="font-bold text-xl">{{ clientUser?.college?.name }}</h2>
                     <p class="text-gray-500 text-sm"><span class="">Staff:</span> <span class="">{{ clientUser?.name
-                            }}</span>
+                    }}</span>
                     </p>
                     <p class="text-gray-500 text-sm"><span class="">Email:</span> <span class="">{{ clientUser?.email
-                            }}</span>
+                    }}</span>
                     </p>
                     <p class="text-gray-500 text-sm"><span class="">Contact:</span> <span class="">{{
                         clientUser?.contact
@@ -51,7 +51,7 @@ const tableData = computed(() => {
     return requestStore.requests.map(item => {
         return {
             requestId: item?.id || "N/A",
-            college: item?.college || "N/A",
+            college: item?.purpose || "N/A",
             tripDate: dayjs(item?.trip_date).format("MMM DD, YYYY") || "N/A",
             return_date: dayjs(item?.return_date).format("MMM DD, YYYY") || "N/A",
             passengers: item?.no_of_passengers || "N/A",
@@ -62,7 +62,7 @@ const tableData = computed(() => {
 
 const tableHead = [
     { title: 'Request ID' },
-    { title: 'College' },
+    { title: 'Purpose' },
     { title: 'Trip Date' },
     { title: 'Return Date' },
     { title: 'Passengers' },

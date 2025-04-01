@@ -9,7 +9,9 @@
 
     <!-- logo -->
     <div class="">
-      <h1 class="text-cyan-500 font-bold text-4xl text-center my-4">FLEET</h1>
+      <!-- logo -->
+      <div class="w-16 mx-auto"><img src="/images/ug-logo.png" alt="ug-logo" class="w-full"></div>
+      <h3 class="uppercase font-bold text-center text-xs">Ug vehicle manager</h3>
     </div>
 
     <!-- title -->

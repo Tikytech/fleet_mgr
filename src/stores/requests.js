@@ -2,11 +2,13 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { api } from '@/api/api'
 import { clientApi } from '@/api/api'
+import { useToastStore } from './toast'
 
 export const useRequestStore = defineStore('request', () => {
   const requests = ref([])
   const loading = ref(false)
   const isSuccessful = ref(false)
+  const toast = useToastStore()
 
   // Get data
   async function getAllRequests() {
@@ -59,6 +61,7 @@ export const useRequestStore = defineStore('request', () => {
       console.log(error)
       loading.value = false
       isSuccessful.value = false
+      toast.addToastMessage('danger', 'Request Failed', error.response?.data?.message)
     }
   }
 

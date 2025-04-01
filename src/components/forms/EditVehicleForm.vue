@@ -31,7 +31,8 @@
           <div class="">
             <label :for="data.v_model" class="capitalize">{{ data.name }}</label>
             <input required class="input mt-1" :type="data.input_type" :id="data.v_model"
-              :placeholder="data.placeholder" @input="updateVehicleData($event, data.v_model)" />
+              :placeholder="data.placeholder" @input="updateVehicleData($event, data.v_model)"
+              v-model="vehicleData[data.v_model]" />
           </div>
         </template>
       </div>
@@ -53,22 +54,16 @@ import { vehicleFormData } from '@/data/data'
 
 const vehicleStore = useVehicleStore()
 const supplierStore = useSupplierStore()
-const emit = defineEmits(['close'])
-const vehicleData = ref({
-  reg_no: '',
-  engine_no: '',
-  chassis_no: '',
-  make: '',
-  year: '',
-  model: '',
-  permissible_gross_weight: '',
-  net_weight: '',
-  supplierId: null,
-  date_purchased: '',
-  price_paid_fob: '',
-  price_paid_freight: '',
-  price_paid_cif: ''
+
+const { vehicle } = defineProps({
+  vehicle: {
+    type: Object,
+    required: true
+  }
 })
+
+const emit = defineEmits(['close'])
+const vehicleData = ref(vehicle)
 
 function getSelectOptions(key) {
   if (key === 'supplierId') {
@@ -85,7 +80,7 @@ async function submitForm() {
   console.log(vehicleData.value)
   await vehicleStore.addVehicle(vehicleData.value)
   if (vehicleStore.isSuccessful) {
-    await vehicleStore.getAllVehicles()
+    // await vehicleStore.getAllVehicles()
     vehicleData.value = {
       reg_no: '',
       engine_no: '',
@@ -109,6 +104,8 @@ async function submitForm() {
 }
 
 onMounted(async () => {
+  console.log('something')
+  console.log(vehicle, vehicleData.value)
   if (supplierStore.suppliers.length < 1) {
     await supplierStore.getAllSuppliers()
   }
