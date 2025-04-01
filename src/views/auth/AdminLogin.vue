@@ -1,5 +1,5 @@
 <template>
-    <main class="bg-[url('/images/legon2.jpg')] bg-cover bg-no-repeat bg-bottom relative">
+    <main class="bg-[url('/images/legon3.jpg.webp')] bg-cover bg-no-repeat bg-bottom relative">
         <div class="overlay bg-white/30 inset-0 absolute"></div>
         <div class="flex items-center justify-center min-h-screen relative z-50">
             <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
