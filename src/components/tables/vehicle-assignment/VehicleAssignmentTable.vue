@@ -21,8 +21,9 @@
                             <!-- <td class="pl-4 w-2 text-left">
                 <input type="checkbox" name="" id="" class="accent-blue-900" />
               </td> -->
-                            <td class="text-left px-4 py-4 capitalize">{{ data?.driver }}</td>
-                            <td class="text-left px-4 py-4">{{ data?.phoneNo }}</td>
+                            <td class="text-left px-4 py-4 capitalize">{{ data?.vehicle }}</td>
+                            <td class="text-left px-4 py-4">{{ data?.capacity }}</td>
+                            <td class="text-left px-4 py-4 capitalize">{{ data?.regNo }}</td>
                             <td class="text-left px-4 py-4">
                                 <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data?.status)">
                                     {{ data?.status }}
@@ -31,8 +32,8 @@
                             <td class="text-left px-4 py-4">
                                 <button @click="$emit('select', data)"
                                     class="text-xs font-semibold bg-green-500 hover:bg-green-600 rounded px-3 py-1 text-white"
-                                    :class="{ '!bg-cyan-500 !hover:bg-cyan-600  ': selectedDriver?.id === data?.id }">
-                                    {{ selectedDriver?.id === data?.id ? 'Assigned' : 'Assign Driver' }}
+                                    :class="{ '!bg-cyan-500 !hover:bg-cyan-600  ': selectedVehicles?.some(item => item.id === data?.id) }">
+                                    {{selectedVehicles?.some(item => item.id === data?.id) ? 'Selected' : 'Select'}}
                                 </button>
                             </td>
                         </tr>
@@ -71,27 +72,30 @@ import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue';
 
-const { selectedDriver } = defineProps({
-    selectedDriver: {
-        type: Object,
+const { selectedVehicles } = defineProps({
+    selectedVehicles: {
+        type: Array,
         required: true
     }
 })
 
 function getStatus(status) {
     switch (status.toLowerCase()) {
-        case 'free':
+        case 'active':
             return 'success';
-        case 'busy':
+        case 'in maint.':
             return 'warning';
+        case 'inactive':
+            return 'danger';
         default:
             return '';
     }
 }
 
 const tableHead = [
-    { title: 'Driver' },
-    { title: 'Phone no.' },
+    { title: 'Vehicle' },
+    { title: 'Capacity' },
+    { title: 'Reg. No.' },
     { title: 'Status' },
     { title: 'Action' }
 ]
@@ -99,36 +103,54 @@ const tableHead = [
 const tableData = [
     {
         id: 1,
-        driver: 'John Doe',
-        phoneNo: '123-456-7890',
-        status: 'Busy',
+        vehicle: 'Toyota Corolla',
+        capacity: 5,
+        regNo: 'ABC-1234',
+        status: 'Active',
     },
     {
         id: 2,
-        driver: 'Jane Smith',
-        phoneNo: '234-567-8901',
-        status: 'Free',
+        vehicle: 'Honda Civic',
+        capacity: 4,
+        regNo: 'DEF-5678',
+        status: 'In Maint.',
     },
     {
         id: 3,
-        driver: 'Robert Johnson',
-        phoneNo: '345-678-9012',
+        vehicle: 'Ford Explorer',
+        capacity: 7,
+        regNo: 'GHI-9012',
         status: 'Free',
     },
     {
         id: 4,
-        driver: 'Emily Davis',
-        phoneNo: '456-789-0123',
-        status: 'Busy',
+        vehicle: 'Chevrolet Impala',
+        capacity: 5,
+        regNo: 'JKL-3456',
+        status: 'Inactive',
     },
     {
         id: 5,
-        driver: 'Michael Brown',
-        phoneNo: '567-890-1234',
+        vehicle: 'Nissan Altima',
+        capacity: 5,
+        regNo: 'MNO-7890',
+        status: 'Active',
+    },
+    {
+        id: 6,
+        vehicle: 'Hyundai Elantra',
+        capacity: 4,
+        regNo: 'PQR-1123',
         status: 'Free',
     },
+    {
+        id: 7,
+        vehicle: 'Subaru Outback',
+        capacity: 6,
+        regNo: 'STU-4456',
+        status: 'In Maint.',
+    },
 ];
-
 
 
 //   onMounted(async () => {

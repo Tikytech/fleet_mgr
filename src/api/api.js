@@ -6,7 +6,7 @@ const baseURL = 'https://fm.wavebeep.com/v1/'
 // admin api
 export const api = axios.create({
   baseURL,
-  timeout: 50000,
+  // timeout: 50000,
   headers: {
     'Access-Control-Allow-Origin': baseURL
   }
@@ -15,7 +15,7 @@ export const api = axios.create({
 // client api
 export const clientApi = axios.create({
   baseURL,
-  timeout: 50000,
+  // timeout: 50000,
   headers: {
     'Access-Control-Allow-Origin': baseURL
   }

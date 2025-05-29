@@ -2,12 +2,12 @@
   <div class="">
     <form @submit.prevent="submitForm" class="p-4 space-y-4">
       <!-- image -->
-      <div class="image py-5">
+      <!-- <div class="image py-5">
         <div class="size-28 mx-auto rounded-full relative border-4">
           <Icon icon="material-symbols:add-photo-alternate-sharp"
             class="text-2xl absolute bottom-1 right-2 border rounded-full" />
         </div>
-      </div>
+      </div> -->
 
       <!-- Name -->
       <div class="">
@@ -30,6 +30,17 @@
           <option value="" disabled>Select college staff belongs to</option>
           <template v-for="college in colleges" :key="college.id">
             <option :value="college.id">{{ college.name }}</option>
+          </template>
+        </select>
+      </div>
+
+      <!-- Department -->
+      <div class="">
+        <label for="department">Choose Staff Department</label>
+        <select name="department" class="input mt-1 text-sm" id="department" v-model="staffData.departmentId" required>
+          <option value="" disabled>Select department staff belongs to</option>
+          <template v-for="department in departments" :key="department.id">
+            <option :value="department.id">{{ department.name }}</option>
           </template>
         </select>
       </div>
@@ -57,7 +68,7 @@
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue'
+// import { Icon } from '@iconify/vue'
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useStaffStore } from '@/stores/staff'
 import { useCollegeStore } from '@/stores/college'
@@ -96,6 +107,8 @@ onMounted(async () => {
   await collegeStore.getAllColleges()
   colleges.value = collegeStore.colleges
 })
+
+
 </script>
 
 <style lang="scss" scoped></style>

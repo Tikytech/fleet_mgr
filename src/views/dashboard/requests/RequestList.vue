@@ -5,7 +5,7 @@
       <RequestVehicleForm @close="showAdd = false" />
     </ModalComponent>
 
-    <SearchAndButtonBar button-text="Request a vehicle" :filter="true" @add="showAdd = true" />
+    <SearchAndButtonBar :filter="true" @add="showAdd = true" />
 
     <!-- <RequestTable /> -->
 

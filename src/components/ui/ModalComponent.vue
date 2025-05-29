@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <Transition name="overlay">
-      <div class="overlay bg-black/50" v-show="showModal"></div>
+      <div class="overlay" :class="[overlay ? 'bg-black/50' : 'bg-black/40']" v-show="showModal"></div>
     </Transition>
 
     <div class="fixed top-0 right-0 h-dvh left-0 z-50 overflow-y-scroll" v-show="showModal">
@@ -32,7 +32,7 @@ import { Icon } from '@iconify/vue';
 // import { ref } from 'vue'
 
 // const showContent = ref(false)
-const { showModal, title, width } = defineProps({
+const { showModal, title, width, overlay } = defineProps({
   showModal: Boolean,
   title: {
     required: true,
@@ -42,6 +42,10 @@ const { showModal, title, width } = defineProps({
   width: {
     type: String,
     default: '500px'
+  },
+  overlay: {
+    type: Boolean,
+    default: true,
   }
 })
 </script>

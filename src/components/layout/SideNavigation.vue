@@ -54,8 +54,13 @@ const sideMenu = [
     icon: 'heroicons:truck'
   },
   {
-    name: 'Requests',
+    name: 'Departmental Requests',
     link: { name: 'RequestList' },
+    icon: 'heroicons:clipboard-document-list'
+  },
+  {
+    name: 'Vehicle Requests',
+    link: { name: 'VehicleRequestList' },
     icon: 'heroicons:clipboard-document-list'
   },
   {

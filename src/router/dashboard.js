@@ -3,7 +3,7 @@ export const dashboardRoutes = [
     path: '/admin',
     redirect: { name: 'Overview' },
     name: 'Layout',
-    meta: {requiresAdminAuth: true},
+    meta: { requiresAdminAuth: true },
     component: () => import('../views/dashboard/LayoutView.vue'),
     children: [
       {
@@ -26,7 +26,7 @@ export const dashboardRoutes = [
       {
         path: 'colleges',
         name: 'Colleges',
-        redirect: {name: 'CollegeList'},
+        redirect: { name: 'CollegeList' },
         component: () => import('../views/dashboard/colleges/CollegesView.vue'),
         children: [
           {
@@ -84,24 +84,44 @@ export const dashboardRoutes = [
             },
             children: [
               {
-                path: '', name: 'RequestHistory', component: () => import('../views/dashboard/vehicle-management/vehicle-history/RequestHistory.vue')
+                path: '',
+                name: 'RequestHistory',
+                component: () =>
+                  import('../views/dashboard/vehicle-management/vehicle-history/RequestHistory.vue')
               },
               {
-                path: 'maintenance-history', name: 'MaintenanceHistory', component: () => import('../views/dashboard/vehicle-management/vehicle-history/MaintenanceHistory.vue')
+                path: 'maintenance-history',
+                name: 'MaintenanceHistory',
+                component: () =>
+                  import(
+                    '../views/dashboard/vehicle-management/vehicle-history/MaintenanceHistory.vue'
+                  )
               },
               {
-                path: 'tyre-history', name: 'TyreHistory', component: () => import('../views/dashboard/vehicle-management/vehicle-history/TyreHistory.vue')
+                path: 'tyre-history',
+                name: 'TyreHistory',
+                component: () =>
+                  import('../views/dashboard/vehicle-management/vehicle-history/TyreHistory.vue')
               },
               {
-                path: 'oil-history', name: 'OilHistory', component: () => import('../views/dashboard/vehicle-management/vehicle-history/OilHistory.vue')
+                path: 'oil-history',
+                name: 'OilHistory',
+                component: () =>
+                  import('../views/dashboard/vehicle-management/vehicle-history/OilHistory.vue')
               },
               {
-                path: 'performance-history', name: 'PerformanceHistory', component: () => import('../views/dashboard/vehicle-management/vehicle-history/PerformanceHistory.vue')
-              },
+                path: 'performance-history',
+                name: 'PerformanceHistory',
+                component: () =>
+                  import(
+                    '../views/dashboard/vehicle-management/vehicle-history/PerformanceHistory.vue'
+                  )
+              }
             ]
           }
         ]
       },
+      // Department head requests
       {
         path: 'requests',
         name: 'Requests',
@@ -132,6 +152,38 @@ export const dashboardRoutes = [
           }
         ]
       },
+      // vehicle manager's requests
+      {
+        path: 'vehicle-requests',
+        name: 'VehicleRequests',
+        redirect: { name: 'VehicleRequestList' },
+        component: () => import('../views/dashboard/vehicle-requests/VehicleRequestsView.vue'),
+        children: [
+          {
+            path: '',
+            name: 'VehicleRequestList',
+            component: () => import('../views/dashboard/vehicle-requests/VehicleRequestList.vue'),
+            meta: {
+              pageTitle: 'Requests',
+              links: [{ name: 'dashboard', link: 'Overview' }, { name: 'requests' }]
+            }
+          },
+          {
+            path: 'vehicle-request-:id',
+            name: 'VehicleRequestDetails',
+            component: () =>
+              import('../views/dashboard/vehicle-requests/VehicleRequestDetails.vue'),
+            meta: {
+              pageTitle: 'Request Details',
+              links: [
+                { name: 'dashboard', link: 'Overview' },
+                { name: 'request', link: 'VehicleRequestList' },
+                { name: 'request details' }
+              ]
+            }
+          }
+        ]
+      },
       {
         path: 'supplier-management',
         name: 'SupplierManagement',
@@ -154,15 +206,15 @@ export const dashboardRoutes = [
           {
             path: 'profile',
             name: 'AccountProfile',
-            component: () => import('../views/dashboard/account-settings/AccountProfile.vue'),
+            component: () => import('../views/dashboard/account-settings/AccountProfile.vue')
           },
           {
             path: 'user-management',
             name: 'UserManagement',
-            component: () => import('../views/dashboard/account-settings/UserManagement.vue'),
+            component: () => import('../views/dashboard/account-settings/UserManagement.vue')
           }
         ]
-      },
+      }
     ]
   }
 ]
