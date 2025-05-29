@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed max-w-xs  top-5 z-50 inset-0 m-auto ">
+    <div class="fixed max-w-xs  top-5 z-[100] inset-0 m-auto ">
 
 
         <!-- Toast Success -->

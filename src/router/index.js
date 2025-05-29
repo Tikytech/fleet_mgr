@@ -74,6 +74,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresClientAuth && !clientToken) {
     console.log('clieeeeenttttt')
     next('/login')
+    // next()
   } else if (to.meta.requiresAdminAuth && !adminToken) {
     console.log('admiiiiiiiinnnn')
     next('/admin/login')

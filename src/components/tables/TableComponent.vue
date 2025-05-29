@@ -110,11 +110,6 @@ const { loading, tableData, tableHead, actions, noResults, badge, getStatus } = 
     },
     badge: {
         type: Object,
-        // default: () => {
-        //     return {
-        //         column: 'status' //object property name to have badge
-        //     }
-        // }
     },
     getStatus: {
         type: Function,
@@ -123,7 +118,7 @@ const { loading, tableData, tableHead, actions, noResults, badge, getStatus } = 
         }
     },
     exclude: {
-        type: Array,
+        type: Array, //array of string of tableData key property you want to exclude
     }
 })
 

@@ -24,22 +24,40 @@
                         {{ request?.purpose }}
                     </td>
                 </tr>
+                <!-- Type -->
+                <tr>
+                    <td className="py-2 pr-3 font-semibold">Request type:</td>
+                    <td className="text-gray-500">
+                        <Icon icon="heroicons:check-badge-16-solid"
+                            class="text-green-500 inline relative bottom-0.5 text-lg"
+                            v-if="request?.type === 'official'" />
+                        {{
+                            request?.type.charAt(0).toUpperCase() + request?.type.slice(1) }}
+                    </td>
+                </tr>
                 <!-- date -->
                 <tr>
                     <td className="py-2 pr-3 font-semibold">Trip date:</td>
-                    <td className="text-gray-500">{{ dayjs(request?.trip_date).format("MMM DD, YYYY") }}</td>
+                    <td className="text-gray-500">{{ dayjs(request?.trip_date).format('MMM DD, YYYY [at] hh:mmA') }}
+                    </td>
                 </tr>
                 <!-- date -->
                 <tr>
                     <td className="py-2 pr-3 font-semibold">Return date:</td>
-                    <td className="text-gray-500">{{ dayjs(request?.return_date).format("MMM DD, YYYY") }}</td>
+                    <td className="text-gray-500">{{ dayjs(request?.return_date).format('MMM DD, YYYY [at] hh:mmA') }}
+                    </td>
                 </tr>
-                <!-- Year of manufacture -->
+                <!-- Passengers -->
                 <tr>
                     <td className="py-2 pr-3 font-semibold">Passengers:</td>
                     <td className="text-gray-500">{{ request?.no_of_passengers }}</td>
                 </tr>
-                <!-- Status -->
+                <!-- Vehicle type -->
+                <tr v-if="request?.vehicle_type">
+                    <td className="py-2 pr-3 font-semibold">Vehicle type requested:</td>
+                    <td className="text-gray-500">{{ request?.vehicle_type }}</td>
+                </tr>
+                <!-- Date requested -->
                 <tr>
                     <td className="py-2 pr-3 font-semibold">Date requested:</td>
                     <td className="text-gray-500">{{ dayjs(request?.createdAt).format("MMM DD, YYYY") }} ({{

@@ -4,12 +4,12 @@
             <div class="space-y-4">
 
                 <div class="">
-                    <h2 class="font-bold text-xl">{{ clientUser?.college?.name }}</h2>
-                    <p class="text-gray-500 text-sm"><span class="">Staff:</span> <span class="">{{ clientUser?.name
-                    }}</span>
+                    <h2 class="font-bold text-xl">{{ clientUser?.name }}</h2>
+                    <p class="text-gray-500 text-sm"><span class="">College:</span> <span class="">{{
+                        clientUser?.college?.name }}</span>
                     </p>
                     <p class="text-gray-500 text-sm"><span class="">Email:</span> <span class="">{{ clientUser?.email
-                    }}</span>
+                            }}</span>
                     </p>
                     <p class="text-gray-500 text-sm"><span class="">Contact:</span> <span class="">{{
                         clientUser?.contact
@@ -23,10 +23,12 @@
 
                 <SearchAndButtonBar button-text="Request a vehicle" :filter="true" @add="showAdd = true" />
 
+                <p class="text-lg font-semibold">Your requests</p>
+
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
                 <TableComponent :table-data="tableData" :table-head="tableHead" @add="showAdd = true"
                     :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getStatus"
-                    :actions="actions" />
+                    :actions="actions" :exclude="['requestId']" />
             </div>
         </main>
     </div>
@@ -51,9 +53,10 @@ const tableData = computed(() => {
     return requestStore.requests.map(item => {
         return {
             requestId: item?.id || "N/A",
-            college: item?.purpose || "N/A",
-            tripDate: dayjs(item?.trip_date).format("MMM DD, YYYY") || "N/A",
-            return_date: dayjs(item?.return_date).format("MMM DD, YYYY") || "N/A",
+            purpose: item?.purpose || "N/A",
+            type: item?.type.charAt(0).toUpperCase() + item?.type.slice(1) || "N/A",
+            trip_date: dayjs(item?.trip_date).format('MMM DD, YYYY [-] hh:mma') || "N/A",
+            return_date: dayjs(item?.return_date).format('MMM DD, YYYY [-] hh:mma') || "N/A",
             passengers: item?.no_of_passengers || "N/A",
             status: item?.status || "N/A",
         }
@@ -61,8 +64,9 @@ const tableData = computed(() => {
 })
 
 const tableHead = [
-    { title: 'Request ID' },
+    // { title: 'Request ID' },
     { title: 'Purpose' },
+    { title: 'Trip Type' },
     { title: 'Trip Date' },
     { title: 'Return Date' },
     { title: 'Passengers' },
