@@ -33,10 +33,10 @@ const overviewData = ref([
     icon: 'heroicons:truck'
   },
   {
-    title: 'Total Staff',
+    title: 'Total Drivers',
     link: { name: 'DriverManagement' },
-    linkName: 'View All Staff',
-    statistic: statisticStore.totalStaff,
+    linkName: 'View All Drivers',
+    statistic: statisticStore.totalDrivers,
     icon: 'heroicons:user-group'
   },
   {

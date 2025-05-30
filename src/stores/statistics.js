@@ -3,12 +3,12 @@ import { defineStore } from 'pinia'
 import { useCollegeStore } from './college'
 import { useSupplierStore } from './supplier'
 import { useVehicleStore } from './vehicle'
-import { useStaffStore } from './staff'
+import { useDriverStore } from './driver'
 // import { api } from '@/api/api'
 
 export const useStatisticStore = defineStore('statistic', () => {
   const loading = ref(false)
-  const totalStaff = ref(null)
+  const totalDrivers = ref(null)
   const totalVehicles = ref(null)
   const totalSuppliers = ref(null)
   const totalColleges = ref(null)
@@ -17,7 +17,7 @@ export const useStatisticStore = defineStore('statistic', () => {
     loading.value = true
     await Promise.all([
       useCollegeStore().getAllColleges(),
-      useStaffStore().getAllStaff(),
+      useDriverStore().getAllDriver(),
       useSupplierStore().getAllSuppliers(),
       useVehicleStore().getAllVehicles()
     ])
@@ -25,9 +25,9 @@ export const useStatisticStore = defineStore('statistic', () => {
     totalColleges.value = useCollegeStore().colleges.length
     totalSuppliers.value = useSupplierStore().suppliers.length
     totalVehicles.value = useVehicleStore().vehicles.length
-    totalStaff.value = useStaffStore().staff.length
-    console.log(totalColleges.value, totalSuppliers.value, totalStaff.value, totalVehicles.value)
+    totalDrivers.value = useDriverStore().drivers.length
+    console.log(totalColleges.value, totalSuppliers.value, totalDrivers.value, totalVehicles.value)
   }
 
-  return { fetchData, totalColleges, totalStaff, totalSuppliers, totalVehicles, loading }
+  return { fetchData, totalColleges, totalDrivers, totalSuppliers, totalVehicles, loading }
 })
