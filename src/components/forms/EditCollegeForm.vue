@@ -9,6 +9,34 @@
           v-model="collegeData.name" />
       </div>
 
+      <!-- College Head name -->
+      <div class="">
+        <label for="name" class="">Name of college head</label>
+        <input required class="input mt-1" type="text" id="name" placeholder="Enter staff name"
+          v-model="collegeData.staff_name" />
+      </div>
+
+      <!-- College Head id -->
+      <div class="">
+        <label for="staff_id">ID of college head</label>
+        <input required class="input mt-1" type="text" id="staff_id" placeholder="Enter ID no. of college head"
+          v-model="collegeData.staff_no" />
+      </div>
+
+      <!-- email -->
+      <div class="">
+        <label for="email">Email of college head</label>
+        <input required class="input mt-1" type="email" id="email" placeholder="Enter email"
+          v-model="collegeData.email" />
+      </div>
+
+      <!-- Phone number -->
+      <div class="">
+        <label for="phone_number">Phone number of ollege head</label>
+        <input required class="input mt-1" type="number" id="phone_number" placeholder="Enter phone number"
+          v-model="collegeData.contact" />
+      </div>
+
       <div class="flex justify-end mt-6 gap-2">
         <ButtonComponent text="Close" type="border" @click="closeForm" typeButton="button" />
         <ButtonComponent text="Save Changes" type="success" :loading="collegeStore.loading" />
@@ -30,7 +58,11 @@ const router = useRouter()
 const collegeStore = useCollegeStore()
 const collegeId = ref(route.query.edit)
 const collegeData = ref({
-  name: ''
+  name: '',
+  staff_name: '',
+  staff_no: '',
+  email: '',
+  contact: '',
 })
 
 function closeForm() {
@@ -44,7 +76,11 @@ async function submitForm() {
   if (collegeStore.isSuccessful) {
     await collegeStore.getAllColleges()
     collegeData.value = {
-      name: ''
+      name: '',
+      staff_name: '',
+      staff_no: '',
+      email: '',
+      contact: '',
     }
     closeForm()
   }
@@ -53,6 +89,10 @@ onBeforeMount(() => {
   console.log(collegeId.value)
   const temp = collegeStore.findCollege(collegeId.value)
   collegeData.value.name = temp.name
+  collegeData.value.staff_name = temp?.staff_name
+  collegeData.value.staff_no = temp?.staff_no
+  collegeData.value.email = temp?.email
+  collegeData.value.contact = temp?.contact
 })
 </script>
 

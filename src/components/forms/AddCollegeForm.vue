@@ -4,9 +4,37 @@
     <form @submit.prevent="submitForm" class="p-4 space-y-4">
       <!-- Name -->
       <div class="">
-        <label for="name" class="">College Name</label>
+        <label for="name" class="">College name</label>
         <input required class="input mt-1" type="text" id="name" placeholder="Enter the name of the college"
           v-model="collegeData.name" />
+      </div>
+
+      <!-- College head name -->
+      <div class="">
+        <label for="name" class="">Name of college head</label>
+        <input required class="input mt-1" type="text" id="name" placeholder="Enter staff name"
+          v-model="collegeData.staff_name" />
+      </div>
+
+      <!-- College Head id -->
+      <div class="">
+        <label for="staff_id">ID of college head</label>
+        <input required class="input mt-1" type="text" id="staff_id" placeholder="Enter ID no. of college head"
+          v-model="collegeData.staff_no" />
+      </div>
+
+      <!-- email -->
+      <div class="">
+        <label for="email">Email of college head</label>
+        <input required class="input mt-1" type="email" id="email" placeholder="Enter email"
+          v-model="collegeData.email" />
+      </div>
+
+      <!-- Phone number -->
+      <div class="">
+        <label for="phone_number">Phone number of ollege head</label>
+        <input required class="input mt-1" type="number" id="phone_number" placeholder="Enter phone number"
+          v-model="collegeData.contact" />
       </div>
 
       <div class="flex justify-end mt-6 gap-2">
@@ -26,7 +54,11 @@ import { ref } from 'vue'
 const emit = defineEmits(['close'])
 const collegeStore = useCollegeStore()
 const collegeData = ref({
-  name: ''
+  name: '',
+  staff_name: '',
+  staff_no: '',
+  email: '',
+  contact: '',
 })
 
 async function submitForm() {
@@ -35,7 +67,11 @@ async function submitForm() {
   if (collegeStore.isSuccessful) {
     await collegeStore.getAllColleges()
     collegeData.value = {
-      name: ''
+      name: '',
+      staff_name: '',
+      staff_no: '',
+      email: '',
+      contact: '',
     }
     emit('close')
     console.log('emmiting')

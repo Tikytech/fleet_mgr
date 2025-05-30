@@ -1,11 +1,15 @@
 <template>
   <div class="bg-white border-b sticky top-0 z-40">
-    <nav class="flex gap-3 md:gap-5 maximum-width">
+    <nav class="flex gap-3 md:gap-3 maximum-width">
       <div class="py-4 flex justify-between items-center w-full">
-        <!-- search and collapse icon -->
-        <div class="flex items-center gap-4" v-if="client">
-          <h2 class="uppercase font-bold">Vehicle request portal</h2>
+
+        <!-- client -->
+        <div class="flex items-center gap-2" v-if="client">
+          <img src="/images/ug-logo.png" alt="ug logo" class="w-12">
+          <h2 class="uppercase font-bold text-sm">Vehicle request portal</h2>
         </div>
+
+        <!-- admin -->
         <div class="flex items-center gap-4" v-else>
           <Icon icon="heroicons:bars-3-bottom-left" class="gray-text text-3xl cursor-pointer lg:block hidden"
             @click="navbarStore.showSideNav = !navbarStore.showSideNav" />
@@ -24,10 +28,13 @@
       </div>
 
       <!-- user profile -->
+      <!-- client -->
       <div class="w-fit shrink-0 flex items-center relative cursor-pointer" v-if="client" title="logout">
         <Icon icon="heroicons:arrow-left-start-on-rectangle" class="text-2xl text-red-500"
           @click="useAuthStore().clientLogout" />
       </div>
+
+      <!-- admin -->
       <div class="w-fit shrink-0 flex items-center relative" v-else>
         <UserProfile />
       </div>

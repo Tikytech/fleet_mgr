@@ -36,17 +36,39 @@ const router = createRouter({
       meta: {
         requiresClientAuth: true
       },
-      name: 'StaffRequests',
-      component: () => import('../views/staff-requests/StaffRequests.vue'),
-      redirect: { name: 'StaffRequestList' },
+      name: 'StaffRequestsLayout',
+      component: () => import('../views/staff-requests/StaffRequestsLayout.vue'),
       children: [
         {
           path: '',
-          name: 'StaffRequestList',
-          component: () => import('../views/staff-requests/StaffRequestList.vue')
+          name: 'StaffRequests',
+          component: () => import('../views/staff-requests/StaffRequests.vue'),
+          redirect: { name: 'StaffRequestList' },
+          children: [
+            {
+              path: '',
+              name: 'StaffRequestList',
+              component: () => import('../views/staff-requests/StaffRequestList.vue')
+            },
+            {
+              path: 'all-requests',
+              name: 'AllStaffRequests',
+              component: () => import('../views/staff-requests/AllStaffRequests.vue')
+            },
+            {
+              path: 'staff',
+              name: 'AllStaffList',
+              component: () => import('../views/staff-requests/AllStaffList.vue')
+            },
+            {
+              path: 'departments',
+              name: 'DepartmentsList',
+              component: () => import('../views/staff-requests/DepartmentsList.vue')
+            }
+          ]
         },
         {
-          path: 'request-:id',
+          path: 'requests/request-:id',
           name: 'StaffRequestDetails',
           component: () => import('../views/staff-requests/StaffRequestDetails.vue')
         }

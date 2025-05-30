@@ -14,7 +14,7 @@
 
         <!-- back button -->
         <div class="mb-5 flex">
-            <BackComponent :link-object="{ name: 'RequestList' }" />
+            <BackComponent />
         </div>
 
         <div class="flex justify-between gap-2 flex-wrap mb-10">

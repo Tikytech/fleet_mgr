@@ -14,7 +14,7 @@
 <script setup>
 const { tabs } = defineProps({
     tabs: {
-        type: Array,
+        type: Array, //elements {tab: String, link: String}
         required: true
     },
 

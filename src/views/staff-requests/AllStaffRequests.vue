@@ -3,13 +3,13 @@
         <main class="">
             <div class="space-y-4">
 
-                <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Request a vehicle" width="500px">
+                <!-- <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Request a vehicle" width="500px">
                     <RequestVehicleForm @close="showAdd = false" :is-client="true" />
-                </ModalComponent>
+                </ModalComponent> -->
 
-                <p class="text-lg font-semibold !mt-0">Your requests</p>
+                <p class="text-lg font-semibold">All staff requests</p>
 
-                <SearchAndButtonBar button-text="Request a vehicle" :filter="true" @add="showAdd = true" />
+                <SearchAndButtonBar :filter="true" />
 
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
                 <TableComponent :table-data="tableData" :table-head="tableHead" @add="showAdd = true"
@@ -21,8 +21,8 @@
 </template>
 
 <script setup>
-import RequestVehicleForm from '@/components/forms/RequestVehicleForm.vue';
-import ModalComponent from '@/components/ui/ModalComponent.vue';
+// import RequestVehicleForm from '@/components/forms/RequestVehicleForm.vue';
+// import ModalComponent from '@/components/ui/ModalComponent.vue';
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'
 // import StaffRequestTable from '@/components/tables/staff-request/StaffRequestTable.vue';
 import { onMounted, ref, computed } from 'vue'

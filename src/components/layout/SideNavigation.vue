@@ -53,19 +53,19 @@ const sideMenu = [
     link: { name: 'VehiclesOverview' },
     icon: 'heroicons:truck'
   },
-  {
-    name: 'Departmental Requests',
-    link: { name: 'RequestList' },
-    icon: 'heroicons:clipboard-document-list'
-  },
+  // {
+  //   name: 'Departmental Requests',
+  //   link: { name: 'RequestList' },
+  //   icon: 'heroicons:clipboard-document-list'
+  // },
   {
     name: 'Vehicle Requests',
     link: { name: 'VehicleRequestList' },
     icon: 'heroicons:clipboard-document-list'
   },
   {
-    name: 'Staff/Drivers',
-    link: { name: 'StaffManagement' },
+    name: 'Drivers',
+    link: { name: 'DriverManagement' },
     icon: 'heroicons:user-group'
   },
   {

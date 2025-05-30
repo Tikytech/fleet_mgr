@@ -15,12 +15,12 @@ export const dashboardRoutes = [
         }
       },
       {
-        path: 'staff-management',
-        name: 'StaffManagement',
-        component: () => import('../views/dashboard/StaffManagement.vue'),
+        path: 'driver-management',
+        name: 'DriverManagement',
+        component: () => import('../views/dashboard/DriverManagement.vue'),
         meta: {
-          pageTitle: 'Staff Management',
-          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'staff' }]
+          pageTitle: 'Driver Management',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'driver' }]
         }
       },
       {
@@ -122,36 +122,36 @@ export const dashboardRoutes = [
         ]
       },
       // Department head requests
-      {
-        path: 'requests',
-        name: 'Requests',
-        redirect: { name: 'RequestList' },
-        component: () => import('../views/dashboard/requests/RequestsView.vue'),
-        children: [
-          {
-            path: '',
-            name: 'RequestList',
-            component: () => import('../views/dashboard/requests/RequestList.vue'),
-            meta: {
-              pageTitle: 'Requests',
-              links: [{ name: 'dashboard', link: 'Overview' }, { name: 'requests' }]
-            }
-          },
-          {
-            path: 'request-:id',
-            name: 'RequestDetails',
-            component: () => import('../views/dashboard/requests/RequestDetails.vue'),
-            meta: {
-              pageTitle: 'Request Details',
-              links: [
-                { name: 'dashboard', link: 'Overview' },
-                { name: 'request', link: 'RequestList' },
-                { name: 'request details' }
-              ]
-            }
-          }
-        ]
-      },
+      // {
+      //   path: 'requests',
+      //   name: 'Requests',
+      //   redirect: { name: 'RequestList' },
+      //   component: () => import('../views/dashboard/requests/RequestsView.vue'),
+      //   children: [
+      //     {
+      //       path: '',
+      //       name: 'RequestList',
+      //       component: () => import('../views/dashboard/requests/RequestList.vue'),
+      //       meta: {
+      //         pageTitle: 'Requests',
+      //         links: [{ name: 'dashboard', link: 'Overview' }, { name: 'requests' }]
+      //       }
+      //     },
+      //     {
+      //       path: 'request-:id',
+      //       name: 'RequestDetails',
+      //       component: () => import('../views/dashboard/requests/RequestDetails.vue'),
+      //       meta: {
+      //         pageTitle: 'Request Details',
+      //         links: [
+      //           { name: 'dashboard', link: 'Overview' },
+      //           { name: 'request', link: 'RequestList' },
+      //           { name: 'request details' }
+      //         ]
+      //       }
+      //     }
+      //   ]
+      // },
       // vehicle manager's requests
       {
         path: 'vehicle-requests',

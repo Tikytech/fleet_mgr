@@ -32,7 +32,7 @@
                             class="text-green-500 inline relative bottom-0.5 text-lg"
                             v-if="request?.type === 'official'" />
                         {{
-                            request?.type.charAt(0).toUpperCase() + request?.type.slice(1) }}
+                            request?.type?.charAt(0).toUpperCase() + request?.type?.slice(1) }}
                     </td>
                 </tr>
                 <!-- date -->

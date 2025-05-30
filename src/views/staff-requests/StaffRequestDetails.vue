@@ -4,11 +4,16 @@
 
         <!-- back button -->
         <div class="mb-5 flex">
-            <BackComponent :link-object="{ name: 'StaffRequestList' }" />
+            <BackComponent />
         </div>
 
         <div class="flex justify-between gap-2 flex-wrap mb-10">
             <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - {{ request?.purpose }}</h3>
+
+            <div class="flex gap-2">
+                <ButtonComponent text="Approve Request" />
+                <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
+            </div>
         </div>
 
 
@@ -19,7 +24,7 @@
             <!-- contact person -->
 
 
-            <!-- <ContactPersonCard v-if="request?.staff" :contact="request.staff" /> -->
+            <ContactPersonCard v-if="request?.staff" :contact="request.staff" />
             <!-- recurring request -->
             <!-- <div class="">
             <h3 class="text-lg font-medium border-b border-gray-400 pb-2">
@@ -46,7 +51,8 @@ import { ref, onMounted } from 'vue';
 import { useRequestStore } from '@/stores/requests'
 import { useRoute } from 'vue-router';
 import RequestDetailsCard from '@/components/custom/requests/RequestDetailsCard.vue';
-// import ContactPersonCard from '@/components/custom/requests/ContactPersonCard.vue';
+import ButtonComponent from '@/components/ui/ButtonComponent.vue'
+import ContactPersonCard from '@/components/custom/requests/ContactPersonCard.vue';
 
 dayjs.extend(relativeTime)
 const request = ref({})

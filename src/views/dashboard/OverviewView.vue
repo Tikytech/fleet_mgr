@@ -34,7 +34,7 @@ const overviewData = ref([
   },
   {
     title: 'Total Staff',
-    link: { name: 'StaffManagement' },
+    link: { name: 'DriverManagement' },
     linkName: 'View All Staff',
     statistic: statisticStore.totalStaff,
     icon: 'heroicons:user-group'
