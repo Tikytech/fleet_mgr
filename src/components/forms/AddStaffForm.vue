@@ -23,6 +23,20 @@
           v-model="staffData.staff_no" />
       </div>
 
+      <!-- email -->
+      <div class="">
+        <label for="email">Staff email</label>
+        <input required class="input mt-1" type="email" id="email" placeholder="Enter staff email"
+          v-model="staffData.email" />
+      </div>
+
+      <!-- Phone number -->
+      <div class="">
+        <label for="phone_number">Staff phone number</label>
+        <input required class="input mt-1" type="number" id="phone_number" placeholder="Enter staff phone number"
+          v-model="staffData.contact" />
+      </div>
+
       <!-- College -->
       <div class="">
         <label for="college">Choose Staff College</label>
@@ -45,18 +59,14 @@
         </select>
       </div>
 
-      <!-- email -->
-      <div class="">
-        <label for="email">Staff email</label>
-        <input required class="input mt-1" type="email" id="email" placeholder="Enter staff email"
-          v-model="staffData.email" />
-      </div>
-
-      <!-- Phone number -->
-      <div class="">
-        <label for="staff_id">Staff phone number</label>
-        <input required class="input mt-1" type="number" id="staff_id" placeholder="Enter staff phone number"
-          v-model="staffData.contact" />
+      <!-- Is head of department? -->
+      <div class="space-y-1">
+        <label class="required">Indicate if staff is Head of Department</label>
+        <div class="space-x-4">
+          <label for="is_head" class="cursor-pointer"><input required id="is_head" type="checkbox" name="trip_type"
+              v-model="staffData.is_head" />
+            Head of department</label>
+        </div>
       </div>
 
       <div class="flex justify-end mt-6 gap-2">
@@ -82,21 +92,25 @@ const staffData = ref({
   name: '',
   staff_no: '',
   collegeId: '',
+  departmentId: '',
   email: '',
   contact: '',
+  is_head: false,
 })
 
 async function submitForm() {
   console.log(staffData.value)
-  await staffStore.addStaff({ ...staffData.value, collegeId: Number(staffData.value.collegeId), contact: '233' + staffData.value.contact })
+  await staffStore.addStaff({ ...staffData.value, collegeId: Number(staffData.value.collegeId), contact: '233' + staffData.value.contact, departmentId: Number(staffData.value.departmentId), })
   if (staffStore.isSuccessful) {
     await staffStore.getAllStaff()
     staffData.value = {
       name: '',
       staff_no: '',
-      college: '',
+      collegeId: '',
+      departmentId: '',
       email: '',
       contact: '',
+      is_head: false,
     }
     emit('close')
     console.log('emmiting')
@@ -107,6 +121,11 @@ onMounted(async () => {
   await collegeStore.getAllColleges()
   colleges.value = collegeStore.colleges
 })
+
+const departments = [
+  { name: "Computer Science", id: 1 },
+
+]
 
 
 </script>
