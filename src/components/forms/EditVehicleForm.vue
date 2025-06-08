@@ -2,7 +2,7 @@
   <div class="">
 
     <form action="" class="p-4 space-y-4" @submit.prevent="submitForm">
-      <div class="grid grid-cols-3 gap-5 mb-6">
+      <div class="grid min-[450px]:grid-cols-2  md:grid-cols-3 gap-5 mb-6">
         <!-- Upload Vehicle Image -->
         <div class="bg-slate-100 row-span-3 relative">
           <div class="bg-white pb-2">
@@ -10,7 +10,7 @@
             <small class="inline-block">Vehicle image must meet certain specifications</small>
           </div>
 
-          <div class="flex justify-center items-center p-4 pt-14 rounded-sm">
+          <div class="flex justify-center items-center min-[450px]:pt-16 rounded-sm h-[150px] min-[450px]:h-auto">
             <button type="button" class="text-xs p-2 px-3 rounded border border-dashed border-gray-400">
               Add Image
             </button>
@@ -20,8 +20,9 @@
         <!-- Form inputs -->
         <template v-for="data in vehicleFormData" :key="data.v_model">
           <div class="" v-if="data.input_type === 'select'">
-            <label :for="data.v_model" class="capitalize">{{ data.name }}</label>
-            <select @change="updateVehicleData($event, data.v_model)" class="input">
+            <label :for="data.v_model" class="capitalize">{{ data.name }} <span v-if="data?.required"
+                class="text-red-500">*</span></label>
+            <select :required="data?.required" @change="updateVehicleData($event, data.v_model)" class="input">
               <option disabled selected value="">{{ data.placeholder }}</option>
               <template v-for="option in getSelectOptions(data.v_model)" :key="option">
                 <option :value="option.id">{{ option.name }}</option>
@@ -29,8 +30,9 @@
             </select>
           </div>
           <div class="">
-            <label :for="data.v_model" class="capitalize">{{ data.name }}</label>
-            <input required class="input mt-1" :type="data.input_type" :id="data.v_model"
+            <label :for="data.v_model" class="capitalize">{{ data.name }} <span v-if="data?.required"
+                class="text-red-500">*</span></label>
+            <input :required="data?.required" class="input mt-1" :type="data.input_type" :id="data.v_model"
               :placeholder="data.placeholder" @input="updateVehicleData($event, data.v_model)"
               v-model="vehicleData[data.v_model]" />
           </div>

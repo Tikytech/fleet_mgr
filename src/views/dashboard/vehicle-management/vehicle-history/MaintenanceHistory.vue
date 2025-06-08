@@ -1,73 +1,80 @@
 <template>
     <div class="flex justify-between mb-5 flex-wrap gap-2">
+
+        <!-- Add maintenance form -->
+        <ModalComponent v-if="showAdd" :show-modal="showAdd" @close="showAdd = false" title="Add Maintenance Record"
+            width="700px">
+            <AddMaintenanceHistoryForm @close="showAdd = false" />
+        </ModalComponent>
+
         <div class="">
             <h2 class="text-base font-semibold mb-1">Vehicle maintenance information</h2>
             <p class="text-sm">
-                <span>Next maintenance scheduled: </span><span class="text-gray-500">25th December, 2024</span>
+                <!-- <span>Next maintenance scheduled: </span><span class="text-gray-500">25th December, 2024</span> -->
+                Add maintenance records to keep track of all services performed on the vehicle.
             </p>
         </div>
-        <ButtonComponent text="Add maintenance record" />
+        <ButtonComponent @click="showAdd = true" text="Add maintenance record" />
     </div>
 
     <TableComponent :table-data="tableData" :table-head="tableHead" :actions="actions" />
 </template>
 
 <script setup>
+import AddMaintenanceHistoryForm from '@/components/forms/vehicle-history/AddMaintenanceHistoryForm.vue';
 import TableComponent from '@/components/tables/TableComponent.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
+import ModalComponent from '@/components/ui/ModalComponent.vue';
+
+import { ref } from 'vue';
+const showAdd = ref(false);
 
 const actions = {
     view: {
-        link: '',
+        link: 'MaintenanceHistory',
         param: '',
     }
 }
 
 const tableHead = [
     { title: 'Date' },
-    { title: 'Mileage' },
-    { title: 'Service performed' },
     { title: 'Service provider' },
-    { title: 'Cost' },
+    { title: 'Service performed' },
+    { title: 'Total Cost(₵)' },
     { title: 'Notes' },
 ]
 
 const tableData = [
     {
-        "date": "2024-11-15",
-        "mileage": 15000,
+        "date": "3rd June, 2024",
         "servicePerformed": "Brake Pad Replacement",
         "serviceProvider": "AutoPro Garage",
         "cost": 200,
         "notes": "Front brake pads replaced, rotors checked and cleaned."
     },
     {
-        "date": "2024-12-10",
-        "mileage": 18000,
+        "date": "4th January, 2024",
         "servicePerformed": "Battery Replacement",
         "serviceProvider": "Dealer Service Center",
         "cost": 150,
         "notes": "Replaced with a new AGM battery."
     },
     {
-        "date": "2025-01-20",
-        "mileage": 21000,
+        "date": "December 10, 2023",
         "servicePerformed": "Air Filter Replacement",
         "serviceProvider": "QuickFix Auto",
         "cost": 50,
         "notes": "Cabin air filter replaced as part of routine maintenance."
     },
     {
-        "date": "2025-02-15",
-        "mileage": 23000,
+        "date": "April 15, 2023",
         "servicePerformed": "Suspension Check",
         "serviceProvider": "AutoPro Garage",
         "cost": 120,
         "notes": "Minor adjustments to suspension system."
     },
     {
-        "date": "2025-03-12",
-        "mileage": 25000,
+        "date": "March 5, 2022",
         "servicePerformed": "Wheel Alignment",
         "serviceProvider": "Speedy Align Center",
         "cost": 80,

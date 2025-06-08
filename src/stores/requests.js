@@ -26,7 +26,7 @@ export const useRequestStore = defineStore('request', () => {
   async function getAllClientRequests() {
     try {
       loading.value = true
-      requests.value = (await clientApi.get('staff/requests')).data
+      requests.value = (await clientApi.get('my-requests')).data
       console.log(requests.value)
       loading.value = false
     } catch (error) {

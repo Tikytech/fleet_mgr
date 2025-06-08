@@ -142,10 +142,9 @@ const showEdit = ref(false)
 
 const tabLinks = [
   { tab: 'Requests', link: 'RequestHistory' },
-  { tab: 'Maintenance', link: 'MaintenanceHistory' },
-  { tab: 'Tyres', link: 'TyreHistory' },
-  { tab: 'Oil Change', link: 'OilHistory' },
-  { tab: 'Performance', link: 'PerformanceHistory' },
+  { tab: 'Maintenance/Repairs', link: 'MaintenanceHistory' },
+  { tab: 'Vehicle Accessories', link: 'AccessoriesHistory' },
+  { tab: 'Insurance', link: 'InsuranceHistory' },
 ]
 
 onMounted(async () => {

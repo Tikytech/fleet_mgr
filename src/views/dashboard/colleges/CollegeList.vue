@@ -4,13 +4,13 @@
             showAdd = false
             showEdit = false
         }
-            " :title="showAdd ? 'Add College' : showEdit ? 'Edit College Details' : ''" width="500px">
+        " :title="showAdd ? 'Add College' : showEdit ? 'Edit College Details' : ''" width="500px">
             <AddCollegeForm @close="showAdd = false" v-if="showAdd" />
             <EditCollegeForm @close="() => {
                 // $router.push({ name: 'Colleges' })
                 showEdit = false
             }
-                " v-if="showEdit" />
+            " v-if="showEdit" />
         </ModalComponent>
 
         <!-- search and button -->

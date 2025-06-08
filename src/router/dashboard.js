@@ -90,7 +90,7 @@ export const dashboardRoutes = [
                   import('../views/dashboard/vehicle-management/vehicle-history/RequestHistory.vue')
               },
               {
-                path: 'maintenance-history',
+                path: 'maintenance',
                 name: 'MaintenanceHistory',
                 component: () =>
                   import(
@@ -98,23 +98,19 @@ export const dashboardRoutes = [
                   )
               },
               {
-                path: 'tyre-history',
-                name: 'TyreHistory',
-                component: () =>
-                  import('../views/dashboard/vehicle-management/vehicle-history/TyreHistory.vue')
-              },
-              {
-                path: 'oil-history',
-                name: 'OilHistory',
-                component: () =>
-                  import('../views/dashboard/vehicle-management/vehicle-history/OilHistory.vue')
-              },
-              {
-                path: 'performance-history',
-                name: 'PerformanceHistory',
+                path: 'accessories',
+                name: 'AccessoriesHistory',
                 component: () =>
                   import(
-                    '../views/dashboard/vehicle-management/vehicle-history/PerformanceHistory.vue'
+                    '../views/dashboard/vehicle-management/vehicle-history/AccessoriesHistory.vue'
+                  )
+              },
+              {
+                path: 'insurance',
+                name: 'InsuranceHistory',
+                component: () =>
+                  import(
+                    '../views/dashboard/vehicle-management/vehicle-history/InsuranceHistory.vue'
                   )
               }
             ]
