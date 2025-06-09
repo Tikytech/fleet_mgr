@@ -1,7 +1,8 @@
 import { useAuthStore } from '@/stores/authentication'
 import axios from 'axios'
 
-const baseURL = 'https://fm.wavebeep.com/v1/'
+// const baseURL = 'https://fm.wavebeep.com/v1/'
+const baseURL = 'https://fleet-mgr.wavebeep.com/v1/'
 
 // admin api
 export const api = axios.create({

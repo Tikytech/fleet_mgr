@@ -91,7 +91,7 @@ export const useAuthStore = defineStore('auth', () => {
       error.value = null
       return response.data.status
     } catch (err) {
-      error.value = err.response.data.message
+      error.value = err.response?.data?.message || 'An error occurred'
     } finally {
       loading.value = false
     }

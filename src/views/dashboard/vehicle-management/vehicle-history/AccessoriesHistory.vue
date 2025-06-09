@@ -1,12 +1,18 @@
 <template>
     <div class="flex justify-between mb-5 flex-wrap gap-2">
+        <!-- Add accessories form -->
+        <ModalComponent v-if="showAdd" :show-modal="showAdd" @close="showAdd = false" title="Add Accessories Record"
+            width="700px">
+            <AddAccessoriesHistoryForm @close="showAdd = false" />
+        </ModalComponent>
+
         <div class="">
-            <h2 class="text-base font-semibold mb-1">Vehicle tyre information</h2>
+            <h2 class="text-base font-semibold mb-1">Vehicle tyre and battery information</h2>
             <p class="text-sm">
                 <span>Next tyre service scheduled: </span><span class="text-gray-500">25th December, 2024</span>
             </p>
         </div>
-        <ButtonComponent text="Add tyre maintenance log" />
+        <ButtonComponent @click="showAdd = true" text="Add Record" />
     </div>
 
     <TableComponent :table-data="tableData" :table-head="tableHead" :actions="actions" />
@@ -15,6 +21,11 @@
 <script setup>
 import TableComponent from '@/components/tables/TableComponent.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
+import ModalComponent from '@/components/ui/ModalComponent.vue';
+import AddAccessoriesHistoryForm from '@/components/forms/vehicle-history/AddAccessoriesHistoryForm.vue';
+import { ref } from 'vue';
+
+const showAdd = ref(false);
 
 const actions = {
     view: {
@@ -25,57 +36,45 @@ const actions = {
 
 const tableHead = [
     { title: 'Date' },
-    { title: 'Mileage' },
-    { title: 'Tyre brand' },
-    { title: 'Tyre position' },
-    { title: 'Tyre condition' },
-    { title: 'Cost' },
+    { title: 'Service provided' },
+    { title: 'Service provider' },
+    { title: 'Total Cost(₵)' },
     { title: 'Notes' },
 ]
 
 const tableData = [
     {
-        date: "2024-10-05",
-        mileage: 12000,
-        tyreBrand: "Michelin",
-        tyrePosition: "Front Left",
-        tyreCondition: "Replaced",
-        cost: 120,
-        notes: "Punctured beyond repair."
+        date: "3rd June, 2024",
+        serviceProvided: "Brake Pad Replacement",
+        serviceProvider: "AutoPro Garage",
+        cost: 200,
+        notes: "Front brake pads replaced, rotors checked and cleaned."
     },
     {
-        date: "2024-11-18",
-        mileage: 16000,
-        tyreBrand: "Goodyear",
-        tyrePosition: "Rear Right",
-        tyreCondition: "Rotated",
-        cost: 20,
-        notes: "Rotated rear tyres for even wear."
+        date: "4th January, 2024",
+        serviceProvided: "Battery Replacement",
+        serviceProvider: "Dealer Service Center",
+        cost: 150,
+        notes: "Replaced with a new AGM battery."
     },
     {
-        date: "2024-12-22",
-        mileage: 19000,
-        tyreBrand: "Michelin",
-        tyrePosition: "Front Right",
-        tyreCondition: "Replaced",
-        cost: 120,
-        notes: "Worn out, replaced with new."
+        date: "December 10, 2023",
+        serviceProvided: "Air Filter Replacement",
+        serviceProvider: "QuickFix Auto",
+        cost: 50,
+        notes: "Cabin air filter replaced as part of routine maintenance."
     },
     {
         date: "2025-01-15",
-        mileage: 21000,
-        tyreBrand: "Pirelli",
-        tyrePosition: "Rear Left",
-        tyreCondition: "Repaired",
-        cost: 50,
-        notes: "Patch applied to minor puncture."
+        serviceProvided: "Oil Change",
+        serviceProvider: "AutoPro Garage",
+        cost: 100,
+        notes: "Oil changed and filter replaced."
     },
     {
         date: "2025-02-28",
-        mileage: 23000,
-        tyreBrand: "Continental",
-        tyrePosition: "Rear Right",
-        tyreCondition: "Replaced",
+        serviceProvided: "Tire Rotation",
+        serviceProvider: "Dealer Service Center",
         cost: 110,
         notes: "Tread depth below legal limit."
     }

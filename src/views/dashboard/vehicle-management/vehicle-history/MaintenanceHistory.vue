@@ -38,8 +38,8 @@ const actions = {
 
 const tableHead = [
     { title: 'Date' },
-    { title: 'Service provider' },
-    { title: 'Service performed' },
+    { title: 'Service provided' },
+    { title: 'Garage' },
     { title: 'Total Cost(₵)' },
     { title: 'Notes' },
 ]

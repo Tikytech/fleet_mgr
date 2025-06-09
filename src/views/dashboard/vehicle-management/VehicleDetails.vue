@@ -143,7 +143,7 @@ const showEdit = ref(false)
 const tabLinks = [
   { tab: 'Requests', link: 'RequestHistory' },
   { tab: 'Maintenance/Repairs', link: 'MaintenanceHistory' },
-  { tab: 'Vehicle Accessories', link: 'AccessoriesHistory' },
+  { tab: 'Tyres/Batteries', link: 'AccessoriesHistory' },
   { tab: 'Insurance', link: 'InsuranceHistory' },
 ]
 
