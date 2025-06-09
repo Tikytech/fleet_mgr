@@ -1,12 +1,18 @@
 <template>
     <div class="flex justify-between mb-5 flex-wrap gap-2">
+        <!-- Add insurance form -->
+        <ModalComponent v-if="showAdd" :show-modal="showAdd" @close="showAdd = false" title="Add Insurance Record"
+            width="700px">
+            <AddInsuranceHistoryForm @close="showAdd = false" />
+        </ModalComponent>
+
         <div class="">
-            <h2 class="text-base font-semibold mb-1">Vehicle oil change information</h2>
+            <h2 class="text-base font-semibold mb-1">Vehicle insurance information</h2>
             <p class="text-sm">
-                <span>Next oil change scheduled: </span><span class="text-gray-500">25th December, 2024</span>
+                <span>Current insurance status: </span><span class="text-green-500">Active</span>
             </p>
         </div>
-        <ButtonComponent text="Add oil change record" />
+        <ButtonComponent @click="showAdd = true" text="Add insurance record" />
     </div>
 
     <TableComponent :table-data="tableData" :table-head="tableHead" :actions="actions" />
@@ -15,72 +21,58 @@
 <script setup>
 import TableComponent from '@/components/tables/TableComponent.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
+import ModalComponent from '@/components/ui/ModalComponent.vue';
+import AddInsuranceHistoryForm from '@/components/forms/vehicle-history/AddInsuranceHistoryForm.vue';
+import { ref } from 'vue';
+
+const showAdd = ref(false);
 
 const actions = {
     view: {
-        link: '',
+        link: 'InsuranceHistory',
         param: '',
     }
 }
 
 const tableHead = [
-    { title: 'Date' },
-    { title: 'Mileage' },
-    { title: 'Oil type' },
-    { title: 'Service perfomed' },
-    { title: 'Service station' },
-    { title: 'Cost' },
-    { title: 'Notes' },
+    { title: 'Policy Number' },
+    { title: 'Insurance Company' },
+    { title: 'Start Date' },
+    { title: 'End Date' },
+    { title: 'Premium Amount(₵)' },
+    { title: 'Coverage Type' },
+    { title: 'Status' },
 ]
 
 const tableData = [
     {
-        date: "2024-09-01",
-        mileage: 10000,
-        oilType: "Synthetic 5W-30",
-        servicePerformed: "Oil and Filter Change",
-        serviceStation: "QuickLube Center",
-        cost: 60,
-        notes: "Oil filter replaced as part of the service."
+        policyNumber: "POL-2024-001",
+        insuranceCompany: "Ghana Insurance Co.",
+        startDate: "1st January, 2024",
+        endDate: "31st December, 2024",
+        premiumAmount: 2500,
+        coverageType: "Comprehensive",
+        status: "Active"
     },
     {
-        date: "2024-12-01",
-        mileage: 15000,
-        oilType: "Synthetic 5W-30",
-        servicePerformed: "Oil and Filter Change",
-        serviceStation: "AutoPro Garage",
-        cost: 70,
-        notes: "Routine service performed."
+        policyNumber: "POL-2023-001",
+        insuranceCompany: "Ghana Insurance Co.",
+        startDate: "1st January, 2023",
+        endDate: "31st December, 2023",
+        premiumAmount: 2300,
+        coverageType: "Comprehensive",
+        status: "Expired"
     },
     {
-        date: "2025-03-01",
-        mileage: 20000,
-        oilType: "Synthetic 5W-30",
-        servicePerformed: "Oil Change and Top-Up",
-        serviceStation: "Dealer Service Center",
-        cost: 80,
-        notes: "Inspection included in the service."
-    },
-    {
-        date: "2025-06-01",
-        mileage: 25000,
-        oilType: "Synthetic 10W-40",
-        servicePerformed: "High-Mileage Oil Change",
-        serviceStation: "QuickLube Center",
-        cost: 90,
-        notes: "Switched to high-mileage oil."
-    },
-    {
-        date: "2025-09-01",
-        mileage: 30000,
-        oilType: "Synthetic 5W-30",
-        servicePerformed: "Full-Service Oil Change",
-        serviceStation: "AutoPro Garage",
-        cost: 100,
-        notes: "Included engine cleaning service."
+        policyNumber: "POL-2022-001",
+        insuranceCompany: "Metropolitan Insurance",
+        startDate: "1st January, 2022",
+        endDate: "31st December, 2022",
+        premiumAmount: 2100,
+        coverageType: "Third Party",
+        status: "Expired"
     }
-];
-
+]
 </script>
 
 <style lang="scss" scoped></style>
