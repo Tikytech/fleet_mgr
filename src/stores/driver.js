@@ -23,7 +23,7 @@ export const useDriverStore = defineStore('driver', () => {
     try {
       isSuccessful.value = false
       loading.value = true
-      const response = await api.post('driver', driverData)
+      const response = await api.post('drivers', driverData)
       console.log(response)
       isSuccessful.value = true
     } catch (error) {

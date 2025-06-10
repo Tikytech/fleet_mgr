@@ -32,7 +32,7 @@
 
       <!-- Phone number -->
       <div class="">
-        <label for="phone_number">Phone number of ollege head</label>
+        <label for="phone_number">Phone number of college head</label>
         <input required class="input mt-1" type="number" id="phone_number" placeholder="Enter phone number"
           v-model="collegeData.contact" />
       </div>

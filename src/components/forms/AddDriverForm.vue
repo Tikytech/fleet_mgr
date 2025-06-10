@@ -56,7 +56,7 @@ const driverData = ref({
 
 async function submitForm() {
     console.log(driverData.value)
-    // await driverStore.addDriver({ ...driverData.value, contact: '233' + driverData.value.contact })
+    await driverStore.addDriver({ ...driverData.value, contact: '233' + driverData.value.contact })
     if (driverStore.isSuccessful) {
         await driverStore.getAllDriver()
         driverData.value = {
@@ -68,7 +68,6 @@ async function submitForm() {
         emit('close')
         console.log('emmiting')
     }
-    emit('close') // remove this when driver endpoint is ready
 }
 
 </script>
