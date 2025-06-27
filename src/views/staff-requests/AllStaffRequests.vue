@@ -34,7 +34,7 @@ const showAdd = ref(false)
 const requestStore = useRequestStore()
 
 const tableData = computed(() => {
-    return requestStore.requests.map(item => {
+    return requestStore.staffRequests.map(item => {
         return {
             requestId: item?.id || "N/A",
             purpose: item?.purpose || "N/A",
@@ -78,7 +78,7 @@ function getStatus(status) {
 }
 
 onMounted(async () => {
-    await requestStore.getAllClientRequests()
+    await requestStore.getAllStaffRequests()
 })
 
 </script>

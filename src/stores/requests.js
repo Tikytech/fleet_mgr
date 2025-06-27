@@ -9,7 +9,9 @@ export const useRequestStore = defineStore('request', () => {
   const loading = ref(false)
   const isSuccessful = ref(false)
   const toast = useToastStore()
+  const staffRequests = ref([])
 
+  // Vehicle Admin Functions
   // Get data
   async function getAllRequests() {
     try {
@@ -20,9 +22,68 @@ export const useRequestStore = defineStore('request', () => {
     } catch (error) {
       console.log(error)
       loading.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to fetch requests'
+      toast.addToastMessage('danger', 'Error', errorMessage)
     }
   }
 
+  // get single data
+  async function getRequestById(id) {
+    try {
+      isSuccessful.value = false
+      loading.value = true
+      const response = await api.get(`requests/${id}`)
+      isSuccessful.value = true
+      loading.value = false
+      return response.data
+    } catch (error) {
+      console.log(error)
+      loading.value = false
+      isSuccessful.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to fetch request details'
+      toast.addToastMessage('danger', 'Error', errorMessage)
+    }
+  }
+
+  // edit requests
+  // Post data
+  async function updateVehicleRequest(requestData, id) {
+    try {
+      isSuccessful.value = false
+      loading.value = true
+      const response = await api.post(`requests/${id}`, requestData)
+      console.log(response)
+      isSuccessful.value = true
+      loading.value = false
+    } catch (error) {
+      console.log(error)
+      loading.value = false
+      isSuccessful.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to update request'
+      toast.addToastMessage('danger', 'Error', errorMessage)
+    }
+  }
+
+  // Post data
+  // async function requestVehicle(requestData) {
+  //   try {
+  //     isSuccessful.value = false
+  //     loading.value = true
+  //     const response = await api.post('requests', requestData)
+  //     console.log(response)
+  //     isSuccessful.value = true
+  //   } catch (error) {
+  //     console.log(error)
+  //     loading.value = false
+  //     isSuccessful.value = false
+  //   }
+  // }
+
+  // Client/Staff Functions
+  // Get all personal requests
   async function getAllClientRequests() {
     try {
       loading.value = true
@@ -32,21 +93,25 @@ export const useRequestStore = defineStore('request', () => {
     } catch (error) {
       console.log(error)
       loading.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to fetch your requests'
+      toast.addToastMessage('danger', 'Error', errorMessage)
     }
   }
 
-  // Post data
-  async function requestVehicle(requestData) {
+  //get all staff requests
+  async function getAllStaffRequests() {
     try {
-      isSuccessful.value = false
       loading.value = true
-      const response = await api.post('requests', requestData)
-      console.log(response)
-      isSuccessful.value = true
+      staffRequests.value = (await api.get('requests')).data
+      console.log(staffRequests.value)
+      loading.value = false
     } catch (error) {
       console.log(error)
       loading.value = false
-      isSuccessful.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to fetch staff requests'
+      toast.addToastMessage('danger', 'Error', errorMessage)
     }
   }
 
@@ -65,22 +130,6 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
-  // get single data
-  async function getRequestById(id) {
-    try {
-      isSuccessful.value = false
-      loading.value = true
-      const response = await api.get(`requests/${id}`)
-      isSuccessful.value = true
-      loading.value = false
-      return response.data
-    } catch (error) {
-      console.log(error)
-      loading.value = false
-      isSuccessful.value = false
-    }
-  }
-
   async function getClientRequestById(id) {
     try {
       isSuccessful.value = false
@@ -93,22 +142,9 @@ export const useRequestStore = defineStore('request', () => {
       console.log(error)
       loading.value = false
       isSuccessful.value = false
-    }
-  }
-
-  // edit requests
-  // Post data
-  async function updateVehicleRequest(requestData, id) {
-    try {
-      isSuccessful.value = false
-      loading.value = true
-      const response = await api.post(`requests/${id}`, requestData)
-      console.log(response)
-      isSuccessful.value = true
-    } catch (error) {
-      console.log(error)
-      loading.value = false
-      isSuccessful.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to fetch request details'
+      toast.addToastMessage('danger', 'Error', errorMessage)
     }
   }
 
@@ -116,12 +152,14 @@ export const useRequestStore = defineStore('request', () => {
     requests,
     loading,
     getAllRequests,
-    requestVehicle,
+    // requestVehicle,
     isSuccessful,
     getAllClientRequests,
     clientRequestVehicle,
     getRequestById,
     getClientRequestById,
-    updateVehicleRequest
+    updateVehicleRequest,
+    getAllStaffRequests,
+    staffRequests
   }
 })
