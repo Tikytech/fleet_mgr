@@ -103,7 +103,7 @@ export const useRequestStore = defineStore('request', () => {
   async function getAllStaffRequests() {
     try {
       loading.value = true
-      staffRequests.value = (await api.get('requests')).data
+      staffRequests.value = (await clientApi.get('requests')).data
       console.log(staffRequests.value)
       loading.value = false
     } catch (error) {
