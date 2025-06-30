@@ -10,7 +10,7 @@
         <div class="flex justify-between gap-2 flex-wrap mb-10">
             <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - {{ request?.purpose }}</h3>
 
-            <div class="flex gap-2">
+            <div class="flex gap-2" v-if="clientUser.is_department_head || clientUser.is_college_head">
                 <ButtonComponent text="Approve Request" />
                 <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
             </div>
@@ -53,8 +53,10 @@ import { useRoute } from 'vue-router';
 import RequestDetailsCard from '@/components/custom/requests/RequestDetailsCard.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import ContactPersonCard from '@/components/custom/requests/ContactPersonCard.vue';
+import { useAuthStore } from '@/stores/authentication';
 
 dayjs.extend(relativeTime)
+const { clientUser } = useAuthStore()
 const request = ref({})
 const requestStore = useRequestStore()
 const route = useRoute()
