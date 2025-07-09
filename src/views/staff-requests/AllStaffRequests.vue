@@ -13,7 +13,7 @@
 
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
                 <TableComponent :table-data="tableData" :table-head="tableHead" @add="showAdd = true"
-                    :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getStatus"
+                    :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getRequestStatusColor"
                     :actions="actions" :exclude="['requestId']" />
             </div>
         </main>
@@ -29,6 +29,7 @@ import { onMounted, ref, computed } from 'vue'
 import { useRequestStore } from '@/stores/requests';
 import TableComponent from '@/components/tables/TableComponent.vue';
 import dayjs from 'dayjs';
+import { getRequestStatusColor } from '@/utils/utils';
 
 const showAdd = ref(false)
 const requestStore = useRequestStore()
@@ -64,18 +65,24 @@ const actions = {
     }
 }
 
-function getStatus(status) {
-    switch (status.toLowerCase()) {
-        case 'approved':
-            return 'success';
-        case 'pending':
-            return 'warning';
-        case 'rejected':
-            return 'danger';
-        default:
-            return '';
-    }
-}
+// function getStatus(status) {
+//     switch (status) {
+//         case 'Pending':
+//             return 'warning';
+//         case 'Approved Pending Vehicle':
+//             return 'info';
+//         case 'Approved Vehicle Assigned':
+//             return 'success';
+//         case 'Rejected':
+//             return 'danger';
+//         case 'Canceled':
+//             return 'neutral';
+//         case 'Completed':
+//             return 'success';
+//         default:
+//             return 'neutral';
+//     }
+// }
 
 onMounted(async () => {
     await requestStore.getAllStaffRequests()

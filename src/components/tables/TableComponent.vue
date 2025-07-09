@@ -73,7 +73,8 @@
         <!-- No data -->
         <div class="flex justify-center py-10" v-else>
             <NoResults>
-                <ButtonComponent :text="noResults.buttonText" icon="heroicons:plus" type="info" @click="$emit('add')" />
+                <ButtonComponent v-if="showAddButton" :text="noResults.buttonText" icon="heroicons:plus" type="info"
+                    @click="$emit('add')" />
             </NoResults>
         </div>
 
@@ -85,7 +86,12 @@ import { Icon } from '@iconify/vue';
 import NoResults from '../ui/NoResults.vue';
 import ButtonComponent from '../ui/ButtonComponent.vue';
 import BadgeComponent from '../ui/BadgeComponent.vue';
-const { loading, tableData, tableHead, actions, noResults, badge, getStatus } = defineProps({
+import '../../types/table.js'; // Import JSDoc types for IntelliSense
+
+/**
+ * @type {import('../../types/table.js').TableComponentProps}
+ */
+const { loading, tableData, tableHead, actions, noResults, badge, getStatus, exclude, showAddButton } = defineProps({
     loading: Boolean,
     tableHead: {
         type: Object,
@@ -105,6 +111,11 @@ const { loading, tableData, tableHead, actions, noResults, badge, getStatus } = 
                 buttonText: 'Add'
             }
         }
+    },
+    // for the add button when no data is found
+    showAddButton: {
+        type: Boolean,
+        default: true,
     },
     badge: {
         type: Object,

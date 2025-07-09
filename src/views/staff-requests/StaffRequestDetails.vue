@@ -5,12 +5,12 @@
         <!-- prompts and modals -->
         <!-- reject request -->
         <ModalComponent :show-modal="showReject" @close="showReject = false" title="Reject request">
-            <RejectVehicleRequestForm @close="showReject = false" @button-click="rejectRequest" />
+            <RejectVehicleRequestForm @close="showReject = false" @button-click="rejectRequest" :loading="loading" />
         </ModalComponent>
 
         <ModalComponent :show-modal="showCancel" @close="showCancel = false" title="Cancel request" width="400px">
             <PromptCard @close="showCancel = false" @button-click="cancelRequest"
-                text="Are you sure you want to cancel this request?" />
+                text="Are you sure you want to cancel this request?" :loading="loading" />
         </ModalComponent>
 
         <!-- back button -->
@@ -22,7 +22,7 @@
             <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - {{ request?.purpose }}</h3>
 
             <div class="flex gap-2" v-if="clientUser.is_department_head || clientUser.is_college_head">
-                <ButtonComponent text="Approve Request" />
+                <ButtonComponent text="Approve Request" @click="approveRequest" :loading="loading" />
                 <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
             </div>
         </div>
@@ -67,6 +67,7 @@ import { useAuthStore } from '@/stores/authentication';
 import ModalComponent from '@/components/ui/ModalComponent.vue';
 import RejectVehicleRequestForm from '@/components/forms/RejectVehicleRequestForm.vue';
 import PromptCard from '@/components/cards/PromptCard.vue';
+import { useToastStore } from '@/stores/toast';
 dayjs.extend(relativeTime)
 const { clientUser } = useAuthStore()
 const request = ref({})
@@ -74,14 +75,49 @@ const requestStore = useRequestStore()
 const route = useRoute()
 const showReject = ref(false)
 const showCancel = ref(false)
+// const router = useRouter()
+const loading = ref(false)
+const toast = useToastStore()
 
-function cancelRequest() {
+async function approveRequest() {
+    loading.value = true
+    console.log('approve request')
+    await requestStore.editClientRequest({ status: 'Approved Pending Vehicle' }, route.params.id)
+    if (requestStore.isSuccessful) {
+        request.value = await requestStore.getClientRequestById(route.params.id, false)
+        loading.value = false
+        toast.addToastMessage('success', 'Success', 'Request approved successfully')
+    }
+    loading.value = false
+}
+
+async function cancelRequest() {
+    loading.value = true
     console.log('cancel request')
+    await requestStore.editClientRequest({ status: 'Canceled' }, route.params.id)
+    if (requestStore.isSuccessful) {
+        request.value = await requestStore.getClientRequestById(route.params.id, false)
+        loading.value = false
+        showCancel.value = false
+        toast.addToastMessage('success', 'Success', 'Request canceled successfully')
+    }
+    loading.value = false
 }
 
-function rejectRequest() {
+async function rejectRequest() {
+    loading.value = true
     console.log('reject request')
+    await requestStore.editClientRequest({ status: 'Rejected' }, route.params.id)
+    if (requestStore.isSuccessful) {
+        request.value = await requestStore.getClientRequestById(route.params.id, false)
+        loading.value = false
+        showReject.value = false
+        toast.addToastMessage('success', 'Success', 'Request rejected successfully')
+    }
+    loading.value = false
 }
+
+
 
 onMounted(async () => {
     request.value = await requestStore.getClientRequestById(route.params.id)

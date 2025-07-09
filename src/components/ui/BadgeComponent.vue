@@ -5,7 +5,9 @@
       ? 'bg-yellow-400/30 text-yellow-800'
       : type === 'danger'
         ? 'bg-red-400/30 text-red-800'
-        : ''
+        : type === 'neutral'
+          ? 'bg-gray-400/30 text-gray-800'
+          : ''
     ">
     <div>
       <slot></slot>

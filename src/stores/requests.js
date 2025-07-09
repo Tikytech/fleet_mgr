@@ -3,10 +3,15 @@ import { defineStore } from 'pinia'
 import { api } from '@/api/api'
 import { clientApi } from '@/api/api'
 import { useToastStore } from './toast'
+import '../types/requests.js' // Import JSDoc types for IntelliSense
 
+/**
+ * @type {import('../types/requests.js').RequestStore}
+ */
 export const useRequestStore = defineStore('request', () => {
   const requests = ref([])
   const loading = ref(false)
+  const updating = ref(false)
   const isSuccessful = ref(false)
   const toast = useToastStore()
   const staffRequests = ref([])
@@ -28,7 +33,10 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
-  // get single data
+  /**
+   * Get single request by ID
+   * @type {import('../types/requests.js').GetRequestByIdFunction}
+   */
   async function getRequestById(id) {
     try {
       isSuccessful.value = false
@@ -47,8 +55,10 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
-  // edit requests
-  // Post data
+  /**
+   * Update vehicle request
+   * @type {import('../types/requests.js').UpdateVehicleRequestFunction}
+   */
   async function updateVehicleRequest(requestData, id) {
     try {
       isSuccessful.value = false
@@ -67,20 +77,27 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
-  // Post data
-  // async function requestVehicle(requestData) {
-  //   try {
-  //     isSuccessful.value = false
-  //     loading.value = true
-  //     const response = await api.post('requests', requestData)
-  //     console.log(response)
-  //     isSuccessful.value = true
-  //   } catch (error) {
-  //     console.log(error)
-  //     loading.value = false
-  //     isSuccessful.value = false
-  //   }
-  // }
+  /**
+   * Edit request... for editing, approving, rejecting, canceling
+   * @type {import('../types/requests.js').EditRequestFunction}
+   */
+  async function editRequestByAdmin(requestData, id) {
+    try {
+      isSuccessful.value = false
+      updating.value = true
+      const response = await api.put(`requests/${id}`, requestData)
+      console.log(response)
+      isSuccessful.value = true
+      updating.value = false
+    } catch (error) {
+      console.log(error)
+      updating.value = false
+      isSuccessful.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to edit request'
+      toast.addToastMessage('danger', 'Error', errorMessage)
+    }
+  }
 
   // Client/Staff Functions
   // Get all personal requests
@@ -115,6 +132,10 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
+  /**
+   * Create client vehicle request
+   * @type {import('../types/requests.js').CreateRequestFunction}
+   */
   async function clientRequestVehicle(requestData) {
     try {
       isSuccessful.value = false
@@ -130,10 +151,14 @@ export const useRequestStore = defineStore('request', () => {
     }
   }
 
-  async function getClientRequestById(id) {
+  /**
+   * Get client request by ID
+   * @type {import('../types/requests.js').GetRequestByIdFunction}
+   */
+  async function getClientRequestById(id, showLoading = true) {
     try {
       isSuccessful.value = false
-      loading.value = true
+      loading.value = showLoading
       const response = await clientApi.get(`requests/${id}`)
       isSuccessful.value = true
       loading.value = false
@@ -144,6 +169,28 @@ export const useRequestStore = defineStore('request', () => {
       isSuccessful.value = false
       const errorMessage =
         error.response?.data?.message || error.message || 'Failed to fetch request details'
+      toast.addToastMessage('danger', 'Error', errorMessage)
+    }
+  }
+
+  /**
+   * Edit request... for editing, approving, rejecting, canceling
+   * @type {import('../types/requests.js').EditRequestFunction}
+   */
+  async function editClientRequest(requestData, id) {
+    try {
+      isSuccessful.value = false
+      updating.value = true
+      const response = await clientApi.put(`requests/${id}`, requestData)
+      console.log(response)
+      isSuccessful.value = true
+      updating.value = false
+    } catch (error) {
+      console.log(error)
+      updating.value = false
+      isSuccessful.value = false
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to edit request'
       toast.addToastMessage('danger', 'Error', errorMessage)
     }
   }
@@ -160,6 +207,9 @@ export const useRequestStore = defineStore('request', () => {
     getClientRequestById,
     updateVehicleRequest,
     getAllStaffRequests,
-    staffRequests
+    staffRequests,
+    editClientRequest,
+    editRequestByAdmin,
+    updating
   }
 })

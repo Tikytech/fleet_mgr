@@ -70,20 +70,22 @@
                     <td className="py-2 pr-3 font-semibold">Request status:</td>
                     <td className="text-gray-500">
                         <div class="w-fit">
-                            <BadgeComponent type="warning">{{ request?.status }}</BadgeComponent>
+                            <BadgeComponent :type="getRequestStatusColor(request?.status)">{{ request?.status }}
+                            </BadgeComponent>
                         </div>
                     </td>
                 </tr>
-                <!-- Vehicle Assigned -->
+                <!-- Vehicle Assigned
                 <tr>
                     <td className="py-2 pr-3 font-semibold">Vehicle assignment status:</td>
                     <td className="text-gray-500">
                         <div class="w-fit">
-                            <BadgeComponent type="warning">{{ request?.vehicleAssigned ? 'Assigned' : 'Not assigned'
+                            <BadgeComponent :type="getRequestStatusColor(request?.status)">{{ request?.vehicleAssigned ?
+                                'Assigned' : 'Not assigned'
                                 }}</BadgeComponent>
                         </div>
                     </td>
-                </tr>
+                </tr> -->
             </div>
         </div>
     </div>
@@ -91,6 +93,7 @@
 
 <script setup>
 import BadgeComponent from '@/components/ui/BadgeComponent.vue'
+import { getRequestStatusColor } from '@/utils/utils'
 import { Icon } from '@iconify/vue'
 import dayjs from 'dayjs'
 import { ref } from 'vue'
