@@ -11,7 +11,7 @@
 
 
     <TableComponent :get-status="getStatus" :table-data="tableData" :table-head="tableHead" :actions="actions"
-      :badge="{ column: 'status' }" @add="showAdd = true" :loading="requestStore.loading" />
+      :badge="{ column: 'status' }" @add="showAdd = true" :loading="requestStore.loading" :exclude="['requestId']" />
   </div>
 </template>
 
@@ -49,14 +49,13 @@ const actions = {
 // })
 
 const tableHead = [
-  { title: ' ID' },
   { title: 'College' },
   { title: 'Department' },
-  { title: 'Staff' },
-  { title: 'Requested At' },
+  { title: 'By' },
+  { title: 'Request type' },
+  { title: 'Trip date' },
   { title: 'Passengers' },
   { title: 'Purpose' },
-  { title: 'Status' },
 ]
 
 function getStatus(status) {
@@ -82,40 +81,44 @@ const tableData = [
     college: 'College of Humanities',
     department: 'Software Engineering',
     staff: 'John Doe',
+    type: 'Personal',
     createdAt: 'Sep 25, 2024',
     passengers: 18,
     purpose: 'Field Trip',
-    status: 'Approved'
+
   },
   {
     requestId: '002',
     college: 'College of Basic and Applied Sciences',
     department: 'Microbiology',
     staff: 'Jane Smith',
+    type: 'Official',
     createdAt: 'Sep 28, 2024',
     passengers: 15,
     purpose: 'Research Trip',
-    status: 'Approved'
+
   },
   {
     requestId: '003',
     college: 'College of Basic and Applied Sciences',
     department: 'Physical Education',
     staff: 'Mike Johnson',
+    type: 'Personal',
     createdAt: 'Sep 27, 2024',
     passengers: 20,
     purpose: 'Tournament',
-    status: 'Approved'
+
   },
   {
     requestId: '004',
     college: 'College of Humanities',
     department: 'Ancient History',
     staff: 'Sarah Wilson',
+    type: 'Official',
     createdAt: 'Sep 30, 2024',
     passengers: 22,
     purpose: 'Museum Visit',
-    status: 'Approved'
+
   }
 ]
 

@@ -52,11 +52,13 @@
                     <td className="py-2 pr-3 font-semibold">Passengers:</td>
                     <td className="text-gray-500">{{ request?.no_of_passengers }}</td>
                 </tr>
+
                 <!-- Vehicle type -->
-                <tr v-if="request?.vehicle_type">
+                <tr>
                     <td className="py-2 pr-3 font-semibold">Vehicle type requested:</td>
-                    <td className="text-gray-500">{{ request?.vehicle_type }}</td>
+                    <td className="text-gray-500">{{ request?.vehicle_type || 'N/A' }}</td>
                 </tr>
+
                 <!-- Date requested -->
                 <tr>
                     <td className="py-2 pr-3 font-semibold">Date requested:</td>
@@ -69,6 +71,16 @@
                     <td className="text-gray-500">
                         <div class="w-fit">
                             <BadgeComponent type="warning">{{ request?.status }}</BadgeComponent>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Vehicle Assigned -->
+                <tr>
+                    <td className="py-2 pr-3 font-semibold">Vehicle assignment status:</td>
+                    <td className="text-gray-500">
+                        <div class="w-fit">
+                            <BadgeComponent type="warning">{{ request?.vehicleAssigned ? 'Assigned' : 'Not assigned'
+                                }}</BadgeComponent>
                         </div>
                     </td>
                 </tr>

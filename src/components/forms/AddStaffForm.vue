@@ -118,7 +118,7 @@ async function submitForm() {
 }
 
 onMounted(async () => {
-  await collegeStore.getAllColleges()
+  // await collegeStore.getAllColleges()
   colleges.value = collegeStore.colleges
 })
 

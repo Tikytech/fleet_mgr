@@ -17,18 +17,16 @@
                     <!-- tbody -->
                     <template v-for="(data) in tableData" :key="data?.id">
                         <tr class="border-b">
-                            <template v-for="(item, index) in Object.keys(data)" :key="index">
-                                <template v-if="!exclude?.includes(item)">
-                                    <td class="text-left px-2 py-4" :class="{ '!pl-4': index === 0 }"
-                                        v-if="item === badge?.column">
-                                        <BadgeComponent class="w-fit text-xs font-semibold"
-                                            :type="getStatus(data[item])">
-                                            {{ data[item] }}
-                                        </BadgeComponent>
-                                    </td>
-                                    <td v-else class="text-left px-2 py-4" :class="{ '!pl-4': index === 0 }">{{
-                                        data[item] }}</td>
-                                </template>
+                            <template v-for="(item, index) in Object.keys(data).filter(key => !exclude?.includes(key))"
+                                :key="index">
+                                <td class="text-left px-2 py-4" :class="{ 'pl-4': index === 0 }"
+                                    v-if="item === badge?.column">
+                                    <BadgeComponent class="w-fit text-xs font-semibold" :type="getStatus(data[item])">
+                                        {{ data[item] }}
+                                    </BadgeComponent>
+                                </td>
+                                <td v-else class="text-left px-2 py-4" :class="{ 'pl-4': index === 0 }">{{
+                                    data[item] }}</td>
                             </template>
 
                             <!-- actions -->

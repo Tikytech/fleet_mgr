@@ -1,12 +1,14 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { api } from '@/api/api'
+import { api, clientApi } from '@/api/api'
 
 export const useStaffStore = defineStore('staff', () => {
   const staff = ref([])
+  const clientStaff = ref([])
   const loading = ref(false)
   const isSuccessful = ref(false)
 
+  //admin staff functions
   async function getAllStaff() {
     try {
       loading.value = true
@@ -33,5 +35,24 @@ export const useStaffStore = defineStore('staff', () => {
     }
   }
 
-  return { staff, loading, getAllStaff, addStaff, isSuccessful }
+  //client staff functions
+  async function getAllClientStaffInDepartment() {
+    try {
+      loading.value = true
+      clientStaff.value = (await clientApi.get(`staff`)).data
+    } catch (error) {
+      console.log(error)
+      loading.value = false
+    }
+  }
+
+  return {
+    staff,
+    clientStaff,
+    loading,
+    getAllStaff,
+    addStaff,
+    isSuccessful,
+    getAllClientStaffInDepartment
+  }
 })

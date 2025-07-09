@@ -56,8 +56,8 @@ const staffTableData = computed(() => {
 })
 
 onMounted(async () => {
-    await staffStore.getAllStaff()
-    tableData.value = staffStore.staff
+    await staffStore.getAllClientStaffInDepartment()
+    tableData.value = staffStore.clientStaff
 })
 </script>
 
