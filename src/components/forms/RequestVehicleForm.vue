@@ -80,6 +80,7 @@
                     <option value="car">Car</option>
                     <option value="bus">Bus</option>
                     <option value="van">Van</option>
+                    <option value="mini_bus">Pickup Truck</option>
                     <option value="truck">Truck</option>
                 </select>
             </div>

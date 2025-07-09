@@ -24,8 +24,8 @@ import { useAuthStore } from '@/stores/authentication';
 const { clientUser } = useAuthStore()
 const tabs = [
     { tab: 'Your Requests', link: 'StaffRequestList', show: true },
-    { tab: 'Staff Requests', link: 'AllStaffRequests', show: clientUser?.is_department_head  },
-    { tab: 'Staff', link: 'AllStaffList', show: clientUser?.is_department_head },
+    { tab: 'Staff Requests', link: 'AllStaffRequests', show: clientUser?.is_department_head || clientUser?.is_college_head },
+    { tab: 'Staff', link: 'AllStaffList', show: clientUser?.is_department_head || clientUser?.is_college_head },
     { tab: 'Departments', link: 'DepartmentsList', show: clientUser?.is_college_head },
 ];
 </script>

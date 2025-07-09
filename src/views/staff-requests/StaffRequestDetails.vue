@@ -2,6 +2,17 @@
     <div class="maximum-width py-6" v-if="requestStore.loading">Please wait...</div>
     <main v-else class="maximum-width py-6 ">
 
+        <!-- prompts and modals -->
+        <!-- reject request -->
+        <ModalComponent :show-modal="showReject" @close="showReject = false" title="Reject request">
+            <RejectVehicleRequestForm @close="showReject = false" @button-click="rejectRequest" />
+        </ModalComponent>
+
+        <ModalComponent :show-modal="showCancel" @close="showCancel = false" title="Cancel request" width="400px">
+            <PromptCard @close="showCancel = false" @button-click="cancelRequest"
+                text="Are you sure you want to cancel this request?" />
+        </ModalComponent>
+
         <!-- back button -->
         <div class="mb-5 flex">
             <BackComponent />
@@ -25,12 +36,11 @@
 
 
             <ContactPersonCard v-if="request?.staff" :contact="request.staff" />
-            <!-- recurring request -->
-            <!-- <div class="">
-            <h3 class="text-lg font-medium border-b border-gray-400 pb-2">
-              Recurring request details
-            </h3>
-          </div> -->
+
+            <!-- Cancel Request -->
+            <div class="flex justify-end" v-if="clientUser?.id === request?.staff?.id">
+                <ButtonComponent text="Cancel Request" type="border" @click="showCancel = true" />
+            </div>
         </div>
 
         <!-- <div class="w-[30%]">
@@ -54,17 +64,30 @@ import RequestDetailsCard from '@/components/custom/requests/RequestDetailsCard.
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import ContactPersonCard from '@/components/custom/requests/ContactPersonCard.vue';
 import { useAuthStore } from '@/stores/authentication';
-
+import ModalComponent from '@/components/ui/ModalComponent.vue';
+import RejectVehicleRequestForm from '@/components/forms/RejectVehicleRequestForm.vue';
+import PromptCard from '@/components/cards/PromptCard.vue';
 dayjs.extend(relativeTime)
 const { clientUser } = useAuthStore()
 const request = ref({})
 const requestStore = useRequestStore()
 const route = useRoute()
+const showReject = ref(false)
+const showCancel = ref(false)
+
+function cancelRequest() {
+    console.log('cancel request')
+}
+
+function rejectRequest() {
+    console.log('reject request')
+}
 
 onMounted(async () => {
     request.value = await requestStore.getClientRequestById(route.params.id)
     console.log(route.params.id)
     console.log(request.value)
+    console.log(clientUser)
 })
 
 </script>
