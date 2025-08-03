@@ -16,6 +16,11 @@
 
         <!--Driver selection -->
         <div class="" v-else>
+
+            <div class="mb-4 flex items-center text-sm hover:underline cursor-pointer w-fit"
+                @click="showAssignDriver = false">
+                <Icon icon="heroicons:chevron-left-16-solid" class="text-xl" /> <span>Back</span>
+            </div>
             <!-- selected Vehicles -->
             <!-- <SelectedVehicles :selected-vehicles="selectedVehicles" /> -->
             <p class="text-[15px] font-semibold mb-2">Vehicles selected</p>
@@ -23,7 +28,11 @@
             <div class="space-y-4">
                 <div v-for="vehicle in selectedVehicles" :key="vehicle?.id">
                     <AssignDriverToSelectedVehicle :vehicle="vehicle" :selected-drivers="selectedDrivers"
-                        @driver-selected="setSelectedDriversForVehicles" />
+                        @driver-selected="setSelectedDriversForVehicles" @remove-vehicle="removeVehicle" />
+                </div>
+
+                <div class="flex justify-center items-center my-20" v-if="selectedVehicles.length === 0">
+                    <p class="text-sm text-gray-500">No vehicles selected</p>
                 </div>
             </div>
         </div>
@@ -41,6 +50,7 @@
 <script setup>
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
+import { Icon } from '@iconify/vue';
 // import DriverAssignTable from '@/components/tables/vehicle-assignment/DriverAssignTable.vue';
 import { computed, ref } from 'vue';
 import VehicleAssignmentTable from '@/components/tables/vehicle-assignment/VehicleAssignmentTable.vue';
@@ -80,7 +90,11 @@ function setSelectedDriversForVehicles(data) {
         }
         return item
     })
+    console.log(selectedVehicles.value)
+}
 
+function removeVehicle(data) {
+    selectedVehicles.value = selectedVehicles.value.filter(item => item.id !== data.id)
 }
 
 const approveRequest = () => {
@@ -90,8 +104,15 @@ const approveRequest = () => {
         return
     }
     // hit some api or something
+    console.log(selectedVehicles.value)
+    //clear the selected vehicles array
+    selectedVehicles.value = []
+    showAssignDriver.value = false
     emit('close')
 }
+
+//Vehicles and Drivers fetched from the database and provided to the using components
+
 
 
 </script>

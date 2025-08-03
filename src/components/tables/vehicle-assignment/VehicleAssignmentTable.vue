@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="flex justify-center py-10" v-else-if="supplierStore.loading">
+        <div class="flex justify-center py-10" v-else-if="vehicleStore.loading">
             <div class="">
                 <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
                 <p>Fetching data...</p>
@@ -60,18 +60,21 @@
 
         <div class="flex justify-center py-10" v-else>
             <NoResults>
-                <ButtonComponent text="Add Supplier" icon="heroicons:plus" type="success" @click="$emit('add')" />
+                <!-- <ButtonComponent text="Add Vehicle" icon="heroicons:plus" type="success" @click="$emit('add')" /> -->
             </NoResults>
         </div>
     </div>
 </template>
 
 <script setup>
-import ButtonComponent from '@/components/ui/ButtonComponent.vue'
+// import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue';
+import { useVehicleStore } from '@/stores/vehicle';
+import { onMounted, computed } from 'vue';
 
+const vehicleStore = useVehicleStore()
 const { selectedVehicles } = defineProps({
     selectedVehicles: {
         type: Array,
@@ -80,7 +83,7 @@ const { selectedVehicles } = defineProps({
 })
 
 function getStatus(status) {
-    switch (status.toLowerCase()) {
+    switch (status?.toLowerCase()) {
         case 'active':
             return 'success';
         case 'in maint.':
@@ -100,63 +103,75 @@ const tableHead = [
     { title: 'Action' }
 ]
 
-const tableData = [
-    {
-        id: 1,
-        vehicle: 'Toyota Corolla',
-        capacity: 5,
-        regNo: 'ABC-1234',
-        status: 'Active',
-    },
-    {
-        id: 2,
-        vehicle: 'Honda Civic',
-        capacity: 4,
-        regNo: 'DEF-5678',
-        status: 'In Maint.',
-    },
-    {
-        id: 3,
-        vehicle: 'Ford Explorer',
-        capacity: 7,
-        regNo: 'GHI-9012',
-        status: 'Free',
-    },
-    {
-        id: 4,
-        vehicle: 'Chevrolet Impala',
-        capacity: 5,
-        regNo: 'JKL-3456',
-        status: 'Inactive',
-    },
-    {
-        id: 5,
-        vehicle: 'Nissan Altima',
-        capacity: 5,
-        regNo: 'MNO-7890',
-        status: 'Active',
-    },
-    {
-        id: 6,
-        vehicle: 'Hyundai Elantra',
-        capacity: 4,
-        regNo: 'PQR-1123',
-        status: 'Free',
-    },
-    {
-        id: 7,
-        vehicle: 'Subaru Outback',
-        capacity: 6,
-        regNo: 'STU-4456',
-        status: 'In Maint.',
-    },
-];
+const tableData = computed(() => {
+    return vehicleStore.vehicles.map(item => {
+        return {
+            id: item?.id,
+            vehicle: item?.make + ' ' + item?.model,
+            capacity: item?.capacity || Math.floor(Math.random() * 25) + 1,
+            regNo: item?.reg_no,
+            status: item?.status || 'Active',
+        }
+    })
+})
+
+// const tableDataa = [
+//     {
+//         id: 1,
+//         vehicle: 'Toyota Corolla',
+//         capacity: 5,
+//         regNo: 'ABC-1234',
+//         status: 'Active',
+//     },
+//     {
+//         id: 2,
+//         vehicle: 'Honda Civic',
+//         capacity: 4,
+//         regNo: 'DEF-5678',
+//         status: 'In Maint.',
+//     },
+//     {
+//         id: 3,
+//         vehicle: 'Ford Explorer',
+//         capacity: 7,
+//         regNo: 'GHI-9012',
+//         status: 'Free',
+//     },
+//     {
+//         id: 4,
+//         vehicle: 'Chevrolet Impala',
+//         capacity: 5,
+//         regNo: 'JKL-3456',
+//         status: 'Inactive',
+//     },
+//     {
+//         id: 5,
+//         vehicle: 'Nissan Altima',
+//         capacity: 5,
+//         regNo: 'MNO-7890',
+//         status: 'Active',
+//     },
+//     {
+//         id: 6,
+//         vehicle: 'Hyundai Elantra',
+//         capacity: 4,
+//         regNo: 'PQR-1123',
+//         status: 'Free',
+//     },
+//     {
+//         id: 7,
+//         vehicle: 'Subaru Outback',
+//         capacity: 6,
+//         regNo: 'STU-4456',
+//         status: 'In Maint.',
+//     },
+// ];
 
 
-//   onMounted(async () => {
-//     await supplierStore.getAllSuppliers()
-//     tableData.value = supplierStore.suppliers
-//   })
+onMounted(async () => {
+    await vehicleStore.getAllVehicles()
+    tableData.value = vehicleStore.vehicles
+})
 </script>
 
 <style lang="scss" scoped></style>
