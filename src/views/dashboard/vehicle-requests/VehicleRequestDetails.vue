@@ -9,7 +9,7 @@
 
         <!-- Approve request -->
         <ModalComponent :show-modal="showAssign" @close="showAssign = false" title="Assign vehicle" width="900px">
-            <AssignVehicle @close="showAssign = false" />
+            <AssignVehicle @close="showAssign = false" :request-data="request" @refresh="refreshRequest" />
         </ModalComponent>
 
         <!-- back button -->
@@ -66,11 +66,16 @@ const request = ref({})
 const requestStore = useRequestStore()
 const route = useRoute()
 
+const refreshRequest = async () => {
+    request.value = await requestStore.getRequestById(route.params.id)
+}
+
 onMounted(async () => {
     request.value = await requestStore.getRequestById(route.params.id)
     console.log(route.params.id)
     console.log(request.value)
 })
+
 
 </script>
 

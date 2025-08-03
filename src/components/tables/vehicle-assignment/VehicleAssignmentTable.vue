@@ -72,7 +72,7 @@ import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue';
 import { useVehicleStore } from '@/stores/vehicle';
-import { onMounted, computed } from 'vue';
+import { computed } from 'vue';
 
 const vehicleStore = useVehicleStore()
 const { selectedVehicles } = defineProps({
@@ -167,11 +167,6 @@ const tableData = computed(() => {
 //     },
 // ];
 
-
-onMounted(async () => {
-    await vehicleStore.getAllVehicles()
-    tableData.value = vehicleStore.vehicles
-})
 </script>
 
 <style lang="scss" scoped></style>

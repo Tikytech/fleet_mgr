@@ -81,7 +81,7 @@ export const useRequestStore = defineStore('request', () => {
    * Edit request... for editing, approving, rejecting, canceling
    * @type {import('../types/requests.js').EditRequestFunction}
    */
-  async function editRequestByAdmin(requestData, id) {
+  async function editRequestByAdmin(id, requestData) {
     try {
       isSuccessful.value = false
       updating.value = true

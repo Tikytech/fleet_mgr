@@ -78,6 +78,10 @@ import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue';
+import { useDriverStore } from '@/stores/driver';
+import { computed } from 'vue';
+
+const driverStore = useDriverStore()
 
 const { selectedDriver, selectedDrivers } = defineProps({
     selectedDriver: {
@@ -108,38 +112,49 @@ const tableHead = [
     { title: 'Action' }
 ]
 
-const tableData = [
-    {
-        id: 1,
-        driver: 'John Doe',
-        phoneNo: '123-456-7890',
-        status: 'Busy',
-    },
-    {
-        id: 2,
-        driver: 'Jane Smith',
-        phoneNo: '234-567-8901',
-        status: 'Free',
-    },
-    {
-        id: 3,
-        driver: 'Robert Johnson',
-        phoneNo: '345-678-9012',
-        status: 'Free',
-    },
-    {
-        id: 4,
-        driver: 'Emily Davis',
-        phoneNo: '456-789-0123',
-        status: 'Busy',
-    },
-    {
-        id: 5,
-        driver: 'Michael Brown',
-        phoneNo: '567-890-1234',
-        status: 'Free',
-    },
-];
+const tableData = computed(() => {
+    return driverStore.drivers.map(item => {
+        return {
+            id: item?.id,
+            driver: item?.name,
+            phoneNo: item?.contact,
+            status: item?.status || 'Free',
+        }
+    })
+})
+
+// const tableDataa = [
+//     {
+//         id: 1,
+//         driver: 'John Doe',
+//         phoneNo: '123-456-7890',
+//         status: 'Busy',
+//     },
+//     {
+//         id: 2,
+//         driver: 'Jane Smith',
+//         phoneNo: '234-567-8901',
+//         status: 'Free',
+//     },
+//     {
+//         id: 3,
+//         driver: 'Robert Johnson',
+//         phoneNo: '345-678-9012',
+//         status: 'Free',
+//     },
+//     {
+//         id: 4,
+//         driver: 'Emily Davis',
+//         phoneNo: '456-789-0123',
+//         status: 'Busy',
+//     },
+//     {
+//         id: 5,
+//         driver: 'Michael Brown',
+//         phoneNo: '567-890-1234',
+//         status: 'Free',
+//     },
+// ];
 
 
 

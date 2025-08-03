@@ -40,7 +40,7 @@
         <!-- buttons -->
         <div class="flex justify-end mt-6 gap-2">
             <ButtonComponent v-if="showAssignDriver" text="Finish" type="success" type-button="button"
-                @click="approveRequest" />
+                :loading="requestStore.updating" @click="approveRequest" />
             <ButtonComponent v-else text="Next" type="info" @click="assignDriver" type-button="button" />
             <ButtonComponent text="Cancel" type="border" @click="$emit('close')" type-button="button" />
         </div>
@@ -52,12 +52,31 @@ import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue';
 import { Icon } from '@iconify/vue';
 // import DriverAssignTable from '@/components/tables/vehicle-assignment/DriverAssignTable.vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref, toRefs } from 'vue';
 import VehicleAssignmentTable from '@/components/tables/vehicle-assignment/VehicleAssignmentTable.vue';
 // import SelectedVehicles from '@/components/custom/requests/SelectedVehicles.vue';
 import AssignDriverToSelectedVehicle from '@/components/custom/requests/AssignDriverToSelectedVehicle.vue';
+import { useVehicleStore } from '@/stores/vehicle';
+import { useDriverStore } from '@/stores/driver';
+import { useRequestStore } from '@/stores/requests';
+import { useToastStore } from '@/stores/toast';
 
-const emit = defineEmits(['close'])
+const vehicleStore = useVehicleStore()
+const driverStore = useDriverStore()
+const requestStore = useRequestStore()
+const toast = useToastStore()
+
+const emit = defineEmits(['close', 'refresh'])
+
+const props = defineProps({
+    requestData: {
+        type: Object,
+        required: true
+    }
+})
+
+const { requestData } = toRefs(props)
+
 
 const selectedVehicles = ref([])
 // const selectedDriversForVehicles = ref([])
@@ -97,22 +116,38 @@ function removeVehicle(data) {
     selectedVehicles.value = selectedVehicles.value.filter(item => item.id !== data.id)
 }
 
-const approveRequest = () => {
+const approveRequest = async () => {
+    //check if all vehicles have drivers
     const allVehiclesAssigned = selectedVehicles.value.every(vehicle => vehicle.driver)
     if (!allVehiclesAssigned) {
         alert('Please assign a driver to all selected vehicles before approving the request.')
         return
     }
-    // hit some api or something
-    console.log(selectedVehicles.value)
-    //clear the selected vehicles array
-    selectedVehicles.value = []
-    showAssignDriver.value = false
-    emit('close')
+    // get the vehicle and driver ids
+    const vehicleId = selectedVehicles.value.map(v => v.id);
+    const driverId = selectedVehicles.value.map(v => v.driver.id);
+
+    //hit the api to update the request
+    const response = await requestStore.editRequestByAdmin(requestData.value.id, { ...requestData.value, vehicleId, driverId, status: 'Approved Vehicle Assigned' })
+    console.log(response)
+    console.log(requestData.value)
+
+    if (response && requestStore.isSuccessful) {
+        toast.addToastMessage('success', 'Success', 'Request approved and vehicle assigned successfully')
+        //reset modal data.
+        selectedVehicles.value = []
+        showAssignDriver.value = false
+        emit('refresh') //refresh details page
+        emit('close')
+    }
 }
 
 //Vehicles and Drivers fetched from the database and provided to the using components
-
+onMounted(async () => {
+    console.log(requestData)
+    await vehicleStore.getAllVehicles()
+    await driverStore.getAllDriver()
+})
 
 
 </script>
