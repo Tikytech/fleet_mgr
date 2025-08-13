@@ -21,7 +21,8 @@
         <div class="flex justify-between gap-2 flex-wrap mb-10">
             <h3 class="font-bold text-xl md:text-2xl ">Vehicle Request - {{ request?.purpose }}</h3>
 
-            <div class="flex gap-2" v-if="clientUser.is_department_head || clientUser.is_college_head">
+            <div class="flex gap-2"
+                v-if="clientUser.is_department_head || clientUser.is_college_head && request.status === 'Pending'">
                 <ButtonComponent text="Approve Request" @click="approveRequest" :loading="loading" />
                 <ButtonComponent text="Reject Request" type="danger" @click="showReject = true" />
             </div>

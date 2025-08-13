@@ -9,6 +9,7 @@ export function toISODate(date, time) {
   return isoString
 }
 
+//get request status color function
 export function getRequestStatusColor(status) {
   switch (status) {
     case 'Pending':
@@ -25,5 +26,21 @@ export function getRequestStatusColor(status) {
       return 'success'
     default:
       return 'neutral'
+  }
+}
+
+//validate contact number function to return 233 + contact number or false
+export function validateContact(contact) {
+  if (typeof contact !== 'string') return false
+  // Remove any spaces
+  contact = contact.trim()
+  if (contact.length === 10 && contact.startsWith('0')) {
+    // Remove the leading zero and prepend '233'
+    return '233' + contact.slice(1)
+  } else if (contact.length === 9) {
+    // Prepend '233'
+    return '233' + contact
+  } else {
+    return false
   }
 }

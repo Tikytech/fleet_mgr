@@ -50,9 +50,12 @@
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useCollegeStore } from '@/stores/college'
 import { ref } from 'vue'
+import { validateContact } from '@/utils/utils'
+import { useToastStore } from '@/stores/toast'
 
 const emit = defineEmits(['close'])
 const collegeStore = useCollegeStore()
+const toastStore = useToastStore()
 const collegeData = ref({
   name: '',
   staff_name: '',
@@ -63,6 +66,11 @@ const collegeData = ref({
 
 async function submitForm() {
   console.log(collegeData.value)
+  const contact = validateContact(collegeData.value.contact)
+  if (!contact) {
+    toastStore.addToastMessage('danger', 'Error', 'Invalid contact number format')
+    return
+  }
   await collegeStore.addCollege(collegeData.value)
   if (collegeStore.isSuccessful) {
     await collegeStore.getAllColleges()

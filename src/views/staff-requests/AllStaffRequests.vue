@@ -12,9 +12,9 @@
                 <SearchAndButtonBar :filter="true" />
 
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
-                <TableComponent :table-data="tableData" :table-head="tableHead" @add="showAdd = true"
-                    :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getRequestStatusColor"
-                    :actions="actions" :exclude="['requestId']" />
+                <TableComponent :table-data="tableData" :table-head="tableHead" :loading="requestStore.loading"
+                    :badge="{ column: 'status' }" :get-status="getRequestStatusColor" :actions="actions"
+                    :exclude="['requestId']" :show-add-button="false" />
             </div>
         </main>
     </div>
@@ -25,13 +25,13 @@
 // import ModalComponent from '@/components/ui/ModalComponent.vue';
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue'
 // import StaffRequestTable from '@/components/tables/staff-request/StaffRequestTable.vue';
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRequestStore } from '@/stores/requests';
 import TableComponent from '@/components/tables/TableComponent.vue';
 import dayjs from 'dayjs';
 import { getRequestStatusColor } from '@/utils/utils';
 
-const showAdd = ref(false)
+// const showAdd = ref(false)
 const requestStore = useRequestStore()
 
 const tableData = computed(() => {

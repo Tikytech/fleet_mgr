@@ -48,9 +48,12 @@
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useDepartmentStore } from '@/stores/department'
 import { ref } from 'vue'
+import { useToastStore } from '@/stores/toast'
+import { validateContact } from '@/utils/utils'
 
 const emit = defineEmits(['close'])
 const departmentStore = useDepartmentStore()
+const toastStore = useToastStore()
 
 const props = defineProps({
     collegeId: {
@@ -70,10 +73,15 @@ const departmentData = ref({
 
 async function submitForm() {
     console.log(departmentData.value)
+    const contact = validateContact(departmentData.value.contact)
+    if (!contact) {
+        toastStore.addToastMessage('danger', 'Error', 'Invalid contact number format')
+        return
+    }
     await departmentStore.createDepartment({
         ...departmentData.value,
         collegeId: props.collegeId,
-        contact: '233' + departmentData.value.contact
+        contact
     })
     if (departmentStore.isSuccessful) {
         await departmentStore.getAllDepartments()
