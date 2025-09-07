@@ -12,7 +12,8 @@
                 <SearchAndButtonBar :filter="true" />
 
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
-                <TableComponent :table-data="tableData" :table-head="tableHead" :loading="requestStore.loading"
+                <TableComponent :table-data="tableData" :table-head="tableHead"
+                    :loading="requestStore.loading && requestStore.staffRequests.length === 0"
                     :badge="{ column: 'status' }" :get-status="getRequestStatusColor" :actions="actions"
                     :exclude="['requestId']" :show-add-button="false" />
             </div>
@@ -85,7 +86,9 @@ const actions = {
 // }
 
 onMounted(async () => {
-    await requestStore.getAllStaffRequests()
+    if (requestStore.staffRequests.length === 0) {
+        await requestStore.getAllRequests()
+    }
 })
 
 </script>

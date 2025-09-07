@@ -21,13 +21,14 @@
 import UserInformation from '@/components/custom/staff-requests/UserInformation.vue';
 import NavigationTabs from '@/components/ui/NavigationTabs.vue';
 import { useAuthStore } from '@/stores/authentication';
-const { clientUser } = useAuthStore()
+const { user } = useAuthStore()
 const tabs = [
     { tab: 'Your Requests', link: 'StaffRequestList', show: true },
-    { tab: 'Staff Requests', link: 'AllStaffRequests', show: clientUser?.is_department_head || clientUser?.is_college_head },
-    { tab: 'Staff', link: 'AllStaffList', show: clientUser?.is_department_head || clientUser?.is_college_head },
-    { tab: 'Departments', link: 'DepartmentsList', show: clientUser?.is_college_head },
+    { tab: 'Staff Requests', link: 'AllStaffRequests', show: true },
+    { tab: 'Staff', link: 'AllStaffList', show: true },
+    { tab: 'Departments', link: 'DepartmentsList', show: true },
 ];
+console.log(user)
 </script>
 
 <style lang="scss" scoped></style>

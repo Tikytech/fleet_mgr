@@ -142,7 +142,7 @@ async function submitForm() {
 
     isClient ? await requestStore.clientRequestVehicle(formattedData) : await requestStore.requestVehicle(formattedData)
     if (requestStore.isSuccessful) {
-        isClient ? await requestStore.getAllClientRequests() : await requestStore.getAllRequests()
+        await requestStore.getAllRequests()
         requestData.value = {
             purpose: '',
             detailed_reason: '',

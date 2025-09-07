@@ -5,7 +5,7 @@
             <div class="bg-white p-8 px-4 sm:px-8 rounded-lg shadow-md w-full max-w-fit">
                 <h2 class="text-2xl font-bold mb-4 text-center">Enter OTP</h2>
                 <p v-if="mess" class="p-2 text-center mb-4" :class="stat ? 'bg-green-400/50' : 'bg-red-400/50'">{{ mess
-                }}
+                    }}
                 </p>
                 <div class="flex gap-2 mb-6">
                     <input v-for="(digit, index) in otp" :key="index" type="text" maxlength="1"
@@ -78,10 +78,14 @@ const confirmOtp = async () => {
     mess.value = message
     stat.value = status
     if (status) {
-        await authStore.getClientUser()
+        await authStore.getUser()
+        // check if the user has a role of 6 which is the admin role
+        // if so, redirect to the admin dashboard
+        // if not, redirect to the staff requests dashboard
+        const appropriateRoute = authStore.user.role.level === 6 ? 'Overview' : 'StaffRequests'
         timeout.value = setTimeout(() => {
-            router.push({ name: 'StaffRequests' })
-        }, 2000)
+            router.push({ name: appropriateRoute })
+        }, 500)
     } else {
         timeout.value = setTimeout(() => {
             mess.value = ''
@@ -95,19 +99,12 @@ const resendOtp = async () => {
         timer.value = 30;
         startTimer();
         const email = localStorage.getItem('OTPmail')
-        const { status, message } = await authStore.login({ email })
+        const { status, message } = await authStore.login(email)
         mess.value = message
         stat.value = status
-        if (status) {
-            timeout.value = setTimeout(() => {
-                mess.value = ''
-            }, 5000)
-        } else {
-            timeout.value = setTimeout(() => {
-                mess.value = ''
-            }, 5000)
-        }
-
+        timeout.value = setTimeout(() => {
+            mess.value = ''
+        }, 5000)
     }
 };
 

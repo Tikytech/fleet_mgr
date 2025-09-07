@@ -9,7 +9,7 @@
                 <h1 class="text-2xl font-bold text-center">Login</h1>
                 <!-- messages -->
                 <p v-if="mess" class="p-2 text-center my-4" :class="stat ? 'bg-green-400/50' : 'bg-red-400/50'">{{ mess
-                    }}
+                }}
                 </p>
                 <!-- form -->
                 <form @submit.prevent="handleLogin" class="space-y-6">
@@ -45,7 +45,7 @@ const timeout = ref()
 const handleLogin = async () => {
     // Handle login logic here
     console.log('Email:', email.value);
-    const { status, message } = await authStore.login({ email: email.value })
+    const { status, message } = await authStore.login(email.value)
     mess.value = message
     stat.value = status
     if (status) {

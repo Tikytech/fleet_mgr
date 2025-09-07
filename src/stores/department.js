@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { clientApi } from '@/api/api'
+import { api } from '@/api/api'
 import { useToastStore } from './toast'
 
 export const useDepartmentStore = defineStore('department', () => {
@@ -18,7 +18,7 @@ export const useDepartmentStore = defineStore('department', () => {
   async function getAllDepartments() {
     try {
       loading.value = true
-      departments.value = (await clientApi.get('departments')).data
+      departments.value = (await api.get('departments')).data
       console.log(departments.value)
       loading.value = false
     } catch (error) {
@@ -31,7 +31,7 @@ export const useDepartmentStore = defineStore('department', () => {
     try {
       isSuccessful.value = false
       updating.value = true
-      const response = await clientApi.post('departments', departmentData)
+      const response = await api.post('departments', departmentData)
       console.log(response)
       isSuccessful.value = true
       updating.value = false
@@ -51,7 +51,7 @@ export const useDepartmentStore = defineStore('department', () => {
     try {
       isSuccessful.value = false
       updating.value = true
-      const response = await clientApi.put(`departments/${departmentId}`, departmentData)
+      const response = await api.put(`departments/${departmentId}`, departmentData)
       console.log(response)
       isSuccessful.value = true
       updating.value = false

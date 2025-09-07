@@ -24,13 +24,13 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 const showAdd = ref(false)
 const staffStore = useStaffStore()
-const tableData = ref(staffStore.staff)
+const tableData = ref([])
 
 watch(
-    () => staffStore.staff,
+    () => staffStore.clientStaff,
     () => {
         console.log('seen')
-        tableData.value = staffStore.staff
+        tableData.value = staffStore.clientStaff
     }
 )
 
@@ -56,7 +56,9 @@ const staffTableData = computed(() => {
 })
 
 onMounted(async () => {
-    await staffStore.getAllClientStaffInDepartment()
+    if (staffStore.clientStaff.length === 0) {
+        await staffStore.getAllClientStaffInDepartment()
+    }
     tableData.value = staffStore.clientStaff
 })
 </script>

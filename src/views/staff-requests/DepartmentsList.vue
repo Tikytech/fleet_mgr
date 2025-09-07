@@ -1,7 +1,7 @@
 <template>
     <div class="space-y-4">
         <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Add Department">
-            <AddDepartmentForm @close="showAdd = false" :college-id="clientUser?.college?.id" />
+            <AddDepartmentForm @close="showAdd = false" :college-id="user?.college?.id" />
         </ModalComponent>
 
         <SearchAndButtonBar button-text="Add Department" :filter="true" @add="showAdd = true" />
@@ -23,7 +23,7 @@ import { useAuthStore } from '@/stores/authentication'
 const showAdd = ref(false)
 const departmentStore = useDepartmentStore()
 const tableData = ref(departmentStore.departments)
-const { clientUser } = useAuthStore()
+const { user } = useAuthStore()
 
 watch(
     () => departmentStore.departments,

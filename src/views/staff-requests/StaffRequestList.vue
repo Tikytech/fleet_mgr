@@ -13,8 +13,8 @@
 
                 <!-- <StaffRequestTable @add="showAdd = true" /> -->
                 <TableComponent :table-data="tableData" :table-head="tableHead" @add="showAdd = true"
-                    :loading="requestStore.loading" :badge="{ column: 'status' }" :get-status="getRequestStatusColor"
-                    :actions="actions" :exclude="['requestId']" />
+                    :loading="requestStore.loading && requestStore.requests.length === 0" :badge="{ column: 'status' }"
+                    :get-status="getRequestStatusColor" :actions="actions" :exclude="['requestId']" />
             </div>
         </main>
     </div>
@@ -66,7 +66,10 @@ const actions = {
 }
 
 onMounted(async () => {
-    await requestStore.getAllClientRequests()
+    if (requestStore.requests.length === 0) {
+        await requestStore.getAllRequests()
+    }
+
 })
 
 </script>

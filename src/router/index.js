@@ -34,7 +34,7 @@ const router = createRouter({
       path: '/',
       alias: '/requests',
       meta: {
-        requiresClientAuth: true
+        requiresAuth: true
       },
       name: 'StaffRequestsLayout',
       component: () => import('../views/staff-requests/StaffRequestsLayout.vue'),
@@ -74,11 +74,11 @@ const router = createRouter({
         }
       ]
     },
-    {
-      path: '/admin/login',
-      name: 'AdminLogin',
-      component: () => import('../views/auth/AdminLogin.vue')
-    },
+    // {
+    //   path: '/admin/login',
+    //   name: 'AdminLogin',
+    //   component: () => import('../views/auth/AdminLogin.vue')
+    // },
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
@@ -91,15 +91,11 @@ const router = createRouter({
 // authenticate routes
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  const clientToken = authStore.getToken('clientToken')
-  const adminToken = authStore.getToken('adminToken')
-  if (to.meta.requiresClientAuth && !clientToken) {
-    console.log('clieeeeenttttt')
+  const token = authStore.getToken()
+  if (to.meta.requiresAuth && !token) {
+    console.log('Unauthorized user')
     next('/login')
     // next()
-  } else if (to.meta.requiresAdminAuth && !adminToken) {
-    console.log('admiiiiiiiinnnn')
-    next('/admin/login')
   } else {
     next()
   }

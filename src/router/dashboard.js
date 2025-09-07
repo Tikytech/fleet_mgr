@@ -3,7 +3,7 @@ export const dashboardRoutes = [
     path: '/admin',
     redirect: { name: 'Overview' },
     name: 'Layout',
-    meta: { requiresAdminAuth: true },
+    meta: { requiresAuth: true },
     component: () => import('../views/dashboard/LayoutView.vue'),
     children: [
       {

@@ -4,8 +4,8 @@
         <!-- head -->
         <div class="flex items-center justify-between border-b pb-2 mb-4">
             <h3 class="font-semibold text-lg">Request details</h3>
-            <div v-if="edit" class="cursor-pointer active:scale-90" title="Edit vehicle details"
-                @click="showEdit = true">
+            <div v-if="edit && request?.status === 'Pending'" class="cursor-pointer active:scale-90"
+                title="Edit vehicle details" @click="showEdit = true">
                 <Icon icon="heroicons:pencil" class="text-2xl" />
             </div>
         </div>
@@ -13,7 +13,7 @@
         <div className="text-[15px]">
             <div>
                 <!-- college -->
-                <tr>
+                <tr v-if="request?.staff?.college">
                     <td className="py-2 pr-3 font-semibold">College:</td>
                     <td className="text-gray-500">{{ request?.staff?.college?.name }}</td>
                 </tr>

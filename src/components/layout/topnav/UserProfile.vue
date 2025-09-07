@@ -26,7 +26,7 @@
   <!-- prompts and modals -->
   <!-- logout prompt -->
   <ModalComponent :show-modal="showPrompt" @close="showPrompt = false" title="Logout" width="400px">
-    <PromptCard @close="showPrompt = false" @button-click="adminLogout" text="Are you sure you want to logout?" />
+    <PromptCard @close="showPrompt = false" @button-click="logout" text="Are you sure you want to logout?" />
   </ModalComponent>
 </template>
 
@@ -40,7 +40,7 @@ import { useAuthStore } from '@/stores/authentication'
 const showDropdown = ref(false)
 const router = useRouter()
 const showPrompt = ref(false)
-const { adminLogout, user } = useAuthStore()
+const { logout, user } = useAuthStore()
 
 function navigateToSettings() {
   router.push({ name: 'AccountSettings' })

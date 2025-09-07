@@ -8,7 +8,7 @@
                     <Icon icon="heroicons:user" class="text-white text-lg" />
                 </div>
                 <div>
-                    <h2 class="font-bold text-lg text-gray-900">{{ clientUser?.name }}</h2>
+                    <h2 class="font-bold text-lg text-gray-900">{{ user?.name }}</h2>
                     <p class="text-xs text-gray-500">User Profile</p>
                 </div>
             </div>
@@ -17,31 +17,31 @@
                 <div class="flex items-center gap-2 text-sm">
                     <Icon icon="heroicons:academic-cap" class="text-blue-600 text-base" />
                     <span class="text-gray-500">College:</span>
-                    <span class="text-gray-900 font-medium">{{ clientUser?.college?.name || 'Not Assigned' }}</span>
+                    <span class="text-gray-900 font-medium">{{ user?.college?.name || 'Not Assigned' }}</span>
                 </div>
 
                 <div class="flex items-center gap-2 text-sm">
                     <Icon icon="heroicons:building-office" class="text-indigo-600 text-base" />
                     <span class="text-gray-500">Department:</span>
-                    <span class="text-gray-900 font-medium">{{ clientUser?.department?.name || 'Not Assigned' }}</span>
+                    <span class="text-gray-900 font-medium">{{ user?.department?.name || 'Not Assigned' }}</span>
                 </div>
 
                 <div class="flex items-center gap-2 text-sm">
                     <Icon icon="heroicons:envelope" class="text-green-600 text-base" />
                     <span class="text-gray-500">Email:</span>
-                    <span class="text-gray-900 font-medium">{{ clientUser?.email || 'Not Available' }}</span>
+                    <span class="text-gray-900 font-medium">{{ user?.email || 'Not Available' }}</span>
                 </div>
 
                 <div class="flex items-center gap-2 text-sm">
                     <Icon icon="heroicons:phone" class="text-purple-600 text-base" />
                     <span class="text-gray-500">Contact:</span>
-                    <span class="text-gray-900 font-medium">{{ clientUser?.contact || 'Not Available' }}</span>
+                    <span class="text-gray-900 font-medium">{{ user?.contact || 'Not Available' }}</span>
                 </div>
             </div>
         </div>
 
         <!-- Right side - Department Information (only for college heads) -->
-        <SelectDepartment v-if="clientUser?.is_college_head" :initial-department="clientUser?.department?.name"
+        <SelectDepartment v-if="true" :initial-department="user?.department?.name"
             @department-changed="handleDepartmentChange" />
     </div>
 </template>
@@ -51,7 +51,7 @@ import { useAuthStore } from '@/stores/authentication';
 import { Icon } from '@iconify/vue';
 import SelectDepartment from './SelectDepartment.vue';
 
-const { clientUser } = useAuthStore()
+const { user } = useAuthStore()
 
 function handleDepartmentChange(newDepartment) {
     console.log('Department changed to:', newDepartment)

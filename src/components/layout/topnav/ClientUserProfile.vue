@@ -7,15 +7,15 @@
                 </div>
 
                 <div class="space-y- ">
-                    <p class="font-semibold w-[150px] text-sm text-ellipsis overflow-clip" :title="clientUser?.email">{{
-                        clientUser?.email }}</p>
-                    <p :title="clientUser?.name" class="gray-text text-xs">{{ clientUser?.name }}</p>
-                    <p :title="clientUser?.contact" class="gray-text text-xs">+{{ clientUser?.contact }}</p>
+                    <p class="font-semibold w-[150px] text-sm text-ellipsis overflow-clip" :title="user?.email">{{
+                        user?.email }}</p>
+                    <p :title="user?.name" class="gray-text text-xs">{{ user?.name }}</p>
+                    <p :title="user?.contact" class="gray-text text-xs">+{{ user?.contact }}</p>
                 </div>
             </div>
         </div>
         <div class="md:hidden flex items-center">
-            <div class="rounded-full size-8 overflow-hidden" :title="clientUser?.email">
+            <div class="rounded-full size-8 overflow-hidden" :title="user?.email">
                 <img src="/images/default-avatar.png" class="w-full size-full" />
             </div>
         </div>
@@ -28,7 +28,7 @@
     <!-- prompts and modals -->
     <!-- logout prompt -->
     <ModalComponent :show-modal="showPrompt" @close="showPrompt = false" title="Logout" width="400px">
-        <PromptCard @close="showPrompt = false" @button-click="clientLogout" text="Are you sure you want to logout?" />
+        <PromptCard @close="showPrompt = false" @button-click="logout" text="Are you sure you want to logout?" />
     </ModalComponent>
 </template>
 
@@ -42,7 +42,7 @@ import { useAuthStore } from '@/stores/authentication'
 const showDropdown = ref(false)
 const router = useRouter()
 const showPrompt = ref(false)
-const { clientLogout, clientUser } = useAuthStore()
+const { logout, user } = useAuthStore()
 
 function navigateToSettings() {
     router.push({ name: 'AccountSettings' })
@@ -58,7 +58,7 @@ const dropdown = [
 ]
 
 onMounted(() => {
-    useAuthStore().getClientUser()
+    useAuthStore().getUser()
 })
 </script>
 

@@ -30,14 +30,20 @@
       <!-- user profile -->
       <!-- client -->
       <div class="w-fit shrink-0 flex items-center relative cursor-pointer" v-if="client" title="logout">
-        <Icon icon="heroicons:arrow-left-start-on-rectangle" class="text-2xl text-red-500"
-          @click="useAuthStore().clientLogout" />
+        <Icon icon="heroicons:arrow-left-start-on-rectangle" class="text-2xl text-red-500" @click="showPrompt = true" />
       </div>
 
       <!-- admin -->
       <div class="w-fit shrink-0 flex items-center relative" v-else>
         <UserProfile />
       </div>
+
+      <!-- logout propmt for client -->
+      <!-- logout prompt -->
+      <ModalComponent :show-modal="showPrompt" @close="showPrompt = false" title="Logout" width="400px">
+        <PromptCard @close="showPrompt = false" @button-click="useAuthStore().logout()"
+          text="Are you sure you want to logout?" />
+      </ModalComponent>
     </nav>
 
     <!-- mobile nav -->
@@ -63,12 +69,18 @@ import UserProfile from '@/components/layout/topnav/UserProfile.vue'
 import { useNavbarStore } from '@/stores/navbar'
 import SideNavigation from '../SideNavigation.vue'
 import { useAuthStore } from '@/stores/authentication'
+import ModalComponent from '@/components/ui/ModalComponent.vue'
+import PromptCard from '@/components/cards/PromptCard.vue'
+import { ref } from 'vue'
 
 const navbarStore = useNavbarStore()
 
 const { client } = defineProps({
   client: Boolean
 })
+
+const showPrompt = ref(false)
+
 </script>
 
 <style scoped>
