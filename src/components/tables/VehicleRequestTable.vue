@@ -26,39 +26,61 @@
           </tr>
         </template>
       </table>
+
+      <div class="flex justify-center items-center py-4" v-if="requestStore.staffRequests.length === 0">
+        <NoResults tag-line="No vehicle requests found">
+        </NoResults>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { Icon } from '@iconify/vue'
+import { useRequestStore } from '@/stores/requests'
+import { computed } from 'vue'
+import dayjs from 'dayjs'
+import NoResults from '@/components/ui/NoResults.vue'
 
-const tableData = [
-  {
-    date: 25,
-    day: 'Wed',
-    request: 'Engineering college requesting a vehicle for a field trip to a construction site',
-    college: 'Engineering'
-  },
-  {
-    date: 26,
-    day: 'Thu',
-    request: 'Business college requesting a vehicle for a conference in the city',
-    college: 'Business'
-  },
-  {
-    date: 27,
-    day: 'Fri',
-    request: 'Health Sciences college requesting a vehicle for a hospital visit',
-    college: 'Health Sciences'
-  },
-  {
-    date: 28,
-    day: 'Sat',
-    request: 'Arts and Humanities college requesting a vehicle for a museum visit',
-    college: 'Arts and Humanities'
-  }
-]
+const requestStore = useRequestStore()
+
+const tableData = computed(() => {
+  return requestStore.staffRequests.map(item => {
+    return {
+      date: dayjs(item?.trip_date).format('MMM DD'),
+      day: dayjs(item?.trip_date).format('ddd'),
+      request: item?.purpose,
+      college: item?.staff?.college?.name,
+    }
+  })
+})
+
+// const tableDataa = [
+//   {
+//     date: 25,
+//     day: 'Wed',
+//     request: 'Engineering college requesting a vehicle for a field trip to a construction site',
+//     college: 'Engineering'
+//   },
+//   {
+//     date: 26,
+//     day: 'Thu',
+//     request: 'Business college requesting a vehicle for a conference in the city',
+//     college: 'Business'
+//   },
+//   {
+//     date: 27,
+//     day: 'Fri',
+//     request: 'Health Sciences college requesting a vehicle for a hospital visit',
+//     college: 'Health Sciences'
+//   },
+//   {
+//     date: 28,
+//     day: 'Sat',
+//     request: 'Arts and Humanities college requesting a vehicle for a museum visit',
+//     college: 'Arts and Humanities'
+//   }
+// ]
 </script>
 
 <style lang="scss" scoped></style>

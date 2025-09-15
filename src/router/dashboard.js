@@ -6,6 +6,7 @@ export const dashboardRoutes = [
     meta: { requiresAuth: true },
     component: () => import('../views/dashboard/LayoutView.vue'),
     children: [
+      // Overview
       {
         path: 'overview',
         name: 'Overview',
@@ -14,15 +15,15 @@ export const dashboardRoutes = [
           pageTitle: 'Overview'
         }
       },
-      {
-        path: 'driver-management',
-        name: 'DriverManagement',
-        component: () => import('../views/dashboard/DriverManagement.vue'),
-        meta: {
-          pageTitle: 'Driver Management',
-          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'driver' }]
-        }
-      },
+      // {
+      //   path: 'driver-management',
+      //   name: 'DriverManagement',
+      //   component: () => import('../views/dashboard/DriverManagement.vue'),
+      //   meta: {
+      //     pageTitle: 'Driver Management',
+      //     links: [{ name: 'dashboard', link: 'Overview' }, { name: 'driver' }]
+      //   }
+      // },
       // {
       //   path: 'colleges',
       //   name: 'Colleges',
@@ -53,6 +54,7 @@ export const dashboardRoutes = [
       //     }
       //   ]
       // },
+      // Vehicle Management
       {
         path: 'vehicles',
         redirect: { name: 'VehiclesOverview' },
@@ -148,7 +150,8 @@ export const dashboardRoutes = [
       //     }
       //   ]
       // },
-      // vehicle manager's requests
+
+      // Vehicle manager's requests
       {
         path: 'vehicle-requests',
         name: 'VehicleRequests',
@@ -180,6 +183,8 @@ export const dashboardRoutes = [
           }
         ]
       },
+
+      // Supplier Management
       {
         path: 'supplier-management',
         name: 'SupplierManagement',
@@ -189,6 +194,8 @@ export const dashboardRoutes = [
           links: [{ name: 'dashboard', link: 'Overview' }, { name: 'suppliers' }]
         }
       },
+
+      // Account Profile
       {
         path: 'profile',
         name: 'AccountProfile',
@@ -198,6 +205,8 @@ export const dashboardRoutes = [
           links: [{ name: 'dashboard', link: 'Overview' }, { name: 'account profile' }]
         }
       },
+
+      // Users Management
       {
         path: 'users',
         name: 'Users',
@@ -234,6 +243,8 @@ export const dashboardRoutes = [
           }
         ]
       },
+
+      // College Details
       {
         path: 'users/colleges/college-:id',
         name: 'CollegeDetails',

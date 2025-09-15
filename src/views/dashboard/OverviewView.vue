@@ -28,28 +28,28 @@ const overviewData = ref([
   {
     title: 'Total Vehicles',
     link: { name: 'VehicleManagement' },
-    linkName: 'View Vehicle Details',
+    linkName: 'View all vehicles',
     statistic: statisticStore.totalVehicles || 0,
     icon: 'heroicons:truck'
   },
   {
-    title: 'Total Drivers',
-    link: { name: 'DriverManagement' },
-    linkName: 'View All Drivers',
-    statistic: statisticStore.totalDrivers || 0,
-    icon: 'heroicons:user-group'
+    title: 'Total Requests',
+    link: { name: 'VehicleRequestList' },
+    linkName: 'View all requests',
+    statistic: statisticStore.totalRequests || 0,
+    icon: 'heroicons:arrows-right-left-solid'
   },
   {
     title: 'Total Suppliers',
     link: { name: 'SupplierManagement' },
-    linkName: 'View Supplier Details',
+    linkName: 'View all suppliers',
     statistic: statisticStore.totalSuppliers || 0,
     icon: 'heroicons:newspaper'
   },
   {
     title: 'Total Colleges',
     link: { name: 'Colleges' },
-    linkName: 'View Colleges',
+    linkName: 'View all colleges',
     statistic: statisticStore.totalColleges || 0,
     icon: 'heroicons:building-library'
   }
@@ -58,10 +58,10 @@ const overviewData = ref([
 onMounted(async () => {
   await statisticStore.fetchData()
   overviewData.value = overviewData.value.map((item) => {
-    if (item.title === 'Total Drivers') {
+    if (item.title === 'Total Requests') {
       return {
         ...item,
-        statistic: statisticStore.totalDrivers
+        statistic: statisticStore.totalRequests
       }
     } else if (item.title === 'Total Vehicles') {
       return {
