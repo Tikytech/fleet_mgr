@@ -49,17 +49,17 @@ export const vehicleFormData = [
     required: true
   },
   {
-    v_model: 'supplierId',
-    name: 'supplier',
-    input_type: 'select',
-    placeholder: 'Please select a supplier',
-    required: true
-  },
-  {
     v_model: 'date_purchased',
     name: 'date purchased',
     input_type: 'date',
     placeholder: 'Enter date purchased',
+    required: true
+  },
+  {
+    v_model: 'net_weight',
+    name: 'net weight',
+    input_type: 'text',
+    placeholder: 'Enter net weight of vehicle',
     required: true
   },
   {
@@ -68,6 +68,12 @@ export const vehicleFormData = [
     input_type: 'text',
     placeholder: 'Enter total cost of vehicle',
     required: true
+  },
+  {
+    v_model: 'supplierId',
+    name: 'supplier',
+    input_type: 'select',
+    placeholder: 'Please select a supplier'
   },
   {
     v_model: 'date_written_off',

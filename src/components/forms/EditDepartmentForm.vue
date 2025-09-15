@@ -51,7 +51,7 @@
             </div> -->
 
             <div class="flex justify-end mt-6 gap-2">
-                <ButtonComponent text="Close" type="border" @click="$emit('close')" type-button="button" />
+                <ButtonComponent text="Close" type="border" @click="closeForm" type-button="button" />
                 <ButtonComponent text="Add Department" type="success" :loading="departmentStore.updating" />
             </div>
         </form>
@@ -61,15 +61,18 @@
 <script setup>
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useDepartmentStore } from '@/stores/department'
-import { ref, onMounted } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 // import { useToastStore } from '@/stores/toast'
 // import { validateContact } from '@/utils/utils'
 import { useCollegeStore } from '@/stores/college'
+import { useRoute, useRouter } from 'vue-router'
 
 const emit = defineEmits(['close'])
 const departmentStore = useDepartmentStore()
 // const toastStore = useToastStore()
 const collegeStore = useCollegeStore()
+const route = useRoute()
+const router = useRouter()
 
 const props = defineProps({
     collegeId: {
@@ -87,6 +90,11 @@ const departmentData = ref({
     // email: '',
     // contact: '',
 })
+
+function closeForm() {
+    emit('close')
+    router.push({ name: 'Departments' })
+}
 
 async function submitForm() {
     // console.log(departmentData.value)
@@ -112,13 +120,18 @@ async function submitForm() {
         }
         emit('close')
         console.log('emmiting')
+        closeForm()
     }
 }
 
 
 
-onMounted(() => {
-    collegeStore.getAllColleges()
+onBeforeMount(async () => {
+    await collegeStore.getAllColleges()
+    const temp = departmentStore.findDepartment(route.query.edit)
+    console.log(temp)
+    departmentData.value.name = temp?.name
+    departmentData.value.collegeId = temp?.collegeId
     colleges.value = collegeStore.colleges
 })
 </script>

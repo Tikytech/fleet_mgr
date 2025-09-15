@@ -1,21 +1,36 @@
 <template>
     <div>
-        <div class="bg-slate-200 p-3 px-4 text-sm flex flex-wrap justify-between gap-2 items-center rounded-lg">
+        <div
+            class="bg-slate-200 p-4 pr-10 px-4 text-sm flex flex-wrap justify-between gap-2 items-center rounded-lg relative">
+
+            <!-- Remove vehicle -->
+            <Icon icon="heroicons:x-circle" title="Remove vehicle"
+                class="text-red-500 text-xl cursor-pointer absolute top-2 right-2" @click="removeVehicle" />
+
+
             <div class="">
                 <p class=""><span>Name:</span> <span>{{ vehicle?.vehicle }}</span></p>
                 <p class=""><span>Capacity:</span> <span>{{ vehicle?.capacity }}</span></p>
                 <p class=""><span>Reg. No.:</span> <span>{{ vehicle?.regNo }}</span></p>
                 <p class=""><span>Driver:</span> <span>{{ vehicle?.driver ? vehicle.driver.driver : 'Unassigned'
-                }}</span>
+                        }}</span>
                 </p>
 
             </div>
 
-            <div class="flex gap-2 items-center">
+            <div class="flex gap-2 items-center ">
+                <!-- Enter number of passengers per vehicle -->
+                <div class="">
+                    <input type="number" class="input" placeholder="No of passengers" v-model="noOfPassengers" />
+                    <p class="text-red-500 text-xs" v-if="errorMessage">{{ errorMessage }}</p>
+                </div>
+
+
+                <!-- Assign driver -->
                 <ButtonComponent :type="isDriverAssigned ? 'neutral' : 'info'"
-                    :text="isDriverAssigned ? 'Driver Assigned' : 'Assign Driver'" @click="showAssignDriver = true" />
-                <Icon icon="heroicons:trash" title="Remove vehicle" class="text-red-500 text-xl cursor-pointer"
-                    @click="removeVehicle" />
+                    :text="isDriverAssigned ? 'Driver Assigned' : 'Assign Driver'"
+                    @click="validateAndShowAssignDriver" />
+
             </div>
 
 
@@ -58,6 +73,8 @@ const emit = defineEmits(['driverSelected', 'removeVehicle'])
 
 const selectedDriver = ref(vehicle?.driver || {})
 const showAssignDriver = ref(false)
+const noOfPassengers = ref()
+const errorMessage = ref('')
 
 const isDriverAssigned = computed(() => {
     // Check if vehicle has a driver or if we have a selected driver with an ID
@@ -71,12 +88,22 @@ const setSelectedDriver = (data) => {
     selectedDriver.value = data
 
     // Emit the selected driver and vehicle to the parent component
-    emit('driverSelected', { ...vehicle, driver: data })
-    console.log('Selected Driver:', { ...vehicle, driver: data })
+    emit('driverSelected', { ...vehicle, driver: data, no_of_passengers: noOfPassengers.value })
+    console.log('Selected Driver:', { ...vehicle, driver: data, no_of_passengers: noOfPassengers.value })
 }
 
 const removeVehicle = () => {
     emit('removeVehicle', vehicle)
+}
+
+const validateAndShowAssignDriver = () => {
+    if (noOfPassengers.value) {
+        showAssignDriver.value = true
+        errorMessage.value = ''
+    } else {
+        errorMessage.value = 'Enter number of passengers for this vehicle'
+        return
+    }
 }
 </script>
 

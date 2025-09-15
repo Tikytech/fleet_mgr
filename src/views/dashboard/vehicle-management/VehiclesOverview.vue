@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Add Vehicle" width="1000px">
-      <AddVehicleForm @close="showAdd = false" />
+      <AddVehicleForm @close="showAdd = false" v-if="showAdd" />
     </ModalComponent>
 
     <!-- statistics -->

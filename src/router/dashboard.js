@@ -23,36 +23,36 @@ export const dashboardRoutes = [
           links: [{ name: 'dashboard', link: 'Overview' }, { name: 'driver' }]
         }
       },
-      {
-        path: 'colleges',
-        name: 'Colleges',
-        redirect: { name: 'CollegeList' },
-        component: () => import('../views/dashboard/colleges/CollegesView.vue'),
-        children: [
-          {
-            path: '',
-            name: 'CollegeList',
-            component: () => import('../views/dashboard/colleges/CollegeList.vue'),
-            meta: {
-              pageTitle: 'Colleges',
-              links: [{ name: 'dashboard', link: 'Overview' }, { name: 'colleges' }]
-            }
-          },
-          {
-            path: 'college-:id',
-            name: 'CollegeDetails',
-            component: () => import('../views/dashboard/colleges/CollegeDetails.vue'),
-            meta: {
-              pageTitle: 'Colleges',
-              links: [
-                { name: 'dashboard', link: 'Overview' },
-                { name: 'college', link: 'CollegeList' },
-                { name: 'college details' }
-              ]
-            }
-          }
-        ]
-      },
+      // {
+      //   path: 'colleges',
+      //   name: 'Colleges',
+      //   redirect: { name: 'CollegeList' },
+      //   component: () => import('../views/dashboard/colleges/CollegesView.vue'),
+      //   children: [
+      //     {
+      //       path: '',
+      //       name: 'CollegeList',
+      //       component: () => import('../views/dashboard/colleges/CollegeList.vue'),
+      //       meta: {
+      //         pageTitle: 'Colleges',
+      //         links: [{ name: 'dashboard', link: 'Overview' }, { name: 'colleges' }]
+      //       }
+      //     },
+      //     {
+      //       path: 'college-:id',
+      //       name: 'CollegeDetails',
+      //       component: () => import('../views/dashboard/colleges/CollegeDetails.vue'),
+      //       meta: {
+      //         pageTitle: 'Colleges',
+      //         links: [
+      //           { name: 'dashboard', link: 'Overview' },
+      //           { name: 'college', link: 'CollegeList' },
+      //           { name: 'college details' }
+      //         ]
+      //       }
+      //     }
+      //   ]
+      // },
       {
         path: 'vehicles',
         redirect: { name: 'VehiclesOverview' },
@@ -190,26 +190,62 @@ export const dashboardRoutes = [
         }
       },
       {
-        path: 'account-settings',
-        name: 'AccountSettings',
-        redirect: { name: 'AccountProfile' },
-        component: () => import('../views/dashboard/account-settings/AccountSettings.vue'),
+        path: 'profile',
+        name: 'AccountProfile',
+        component: () => import('../views/dashboard/AccountProfile.vue'),
         meta: {
-          pageTitle: 'Account Settings',
-          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'account settings' }]
+          pageTitle: 'Account Profile',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'account profile' }]
+        }
+      },
+      {
+        path: 'users',
+        name: 'Users',
+        redirect: { name: 'Colleges' },
+        component: () => import('../views/dashboard/users/UsersView.vue'),
+        meta: {
+          pageTitle: 'Users',
+          links: [{ name: 'dashboard', link: 'Overview' }, { name: 'users' }]
         },
         children: [
           {
-            path: 'profile',
-            name: 'AccountProfile',
-            component: () => import('../views/dashboard/account-settings/AccountProfile.vue')
+            path: 'staff',
+            name: 'StaffManagement',
+            component: () => import('../views/dashboard/users/StaffManagement.vue')
           },
           {
-            path: 'user-management',
-            name: 'UserManagement',
-            component: () => import('../views/dashboard/account-settings/UserManagement.vue')
+            path: 'colleges',
+            name: 'Colleges',
+            redirect: { name: 'CollegeList' },
+            component: () => import('../views/dashboard/colleges/CollegesView.vue'),
+            children: [
+              {
+                path: '',
+                name: 'CollegeList',
+                component: () => import('../views/dashboard/colleges/CollegeList.vue')
+              }
+            ]
+          },
+
+          {
+            path: 'departments',
+            name: 'Departments',
+            component: () => import('../views/dashboard/users/DepartmentsList.vue')
           }
         ]
+      },
+      {
+        path: 'users/colleges/college-:id',
+        name: 'CollegeDetails',
+        component: () => import('../views/dashboard/colleges/CollegeDetails.vue'),
+        meta: {
+          pageTitle: 'Colleges',
+          links: [
+            { name: 'dashboard', link: 'Overview' },
+            { name: 'college', link: 'CollegeList' },
+            { name: 'college details' }
+          ]
+        }
       }
     ]
   }

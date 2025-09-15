@@ -57,12 +57,12 @@ import VehicleAssignmentTable from '@/components/tables/vehicle-assignment/Vehic
 // import SelectedVehicles from '@/components/custom/requests/SelectedVehicles.vue';
 import AssignDriverToSelectedVehicle from '@/components/custom/requests/AssignDriverToSelectedVehicle.vue';
 import { useVehicleStore } from '@/stores/vehicle';
-import { useDriverStore } from '@/stores/driver';
+import { useStaffStore } from '@/stores/staff';
 import { useRequestStore } from '@/stores/requests';
 import { useToastStore } from '@/stores/toast';
 
 const vehicleStore = useVehicleStore()
-const driverStore = useDriverStore()
+const staffStore = useStaffStore()
 const requestStore = useRequestStore()
 const toast = useToastStore()
 
@@ -124,15 +124,22 @@ const approveRequest = async () => {
         return
     }
     // get the vehicle and driver ids
-    const vehicleId = selectedVehicles.value.map(v => v.id);
-    const driverId = selectedVehicles.value.map(v => v.driver.id);
+    const vehicles = selectedVehicles.value.map(v => {
+        return {
+            vehicleId: v.id,
+            no_of_passengers: v.no_of_passengers,
+            driverId: v.driver.id
+        }
+    });
+    //initially request wanted array of driver ids but now we are sending an array of objects with vehicle id, no of passengers and driver id
+    // const driverIds = selectedVehicles.value.map(v => v.driver.id);
 
     //hit the api to update the request
-    const response = await requestStore.editRequestByAdmin(requestData.value.id, { ...requestData.value, vehicleId, driverId, status: 'Approved Vehicle Assigned' })
+    const response = await requestStore.updateVehicleRequest({ vehicles, status: 'Approved Vehicle Assigned' }, requestData.value.id)
     console.log(response)
     console.log(requestData.value)
 
-    if (response && requestStore.isSuccessful) {
+    if (requestStore.isSuccessful) {
         toast.addToastMessage('success', 'Success', 'Request approved and vehicle assigned successfully')
         //reset modal data.
         selectedVehicles.value = []
@@ -146,7 +153,7 @@ const approveRequest = async () => {
 onMounted(async () => {
     console.log(requestData)
     await vehicleStore.getAllVehicles()
-    await driverStore.getAllDriver()
+    await staffStore.getAllStaff()
 })
 
 

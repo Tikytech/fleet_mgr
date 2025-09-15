@@ -22,7 +22,7 @@
             </td>
             <td class="text-left px-4 py-4 capitalize">{{ data?.name }}</td>
             <td class="text-left px-4 py-4">{{ data?.staff_no }}</td>
-            <td class="text-left px-4 py-4 capitalize">{{ data?.college.name ?? 'N/A' }}</td>
+            <td class="text-left px-4 py-4 capitalize">{{ data?.college?.name ?? 'N/A' }}</td>
             <td class="text-left px-4 py-4">{{ data?.email }}</td>
             <td class="text-left px-4 py-4">{{ data?.contact }}</td>
             <td class="text-left px-4 py-4">

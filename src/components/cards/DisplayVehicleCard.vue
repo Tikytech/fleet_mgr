@@ -4,11 +4,12 @@
     <router-link :to="{ name: 'VehicleDetails', params: { id: vehicleData.id } }">
       <div class="p-4  gap-5  text-gray-600 pb-6 h-full">
         <!-- image -->
-        <div class="relative">
-          <img src="/images/vehicles/img-placeholder.jpg" alt="" class="w-full rounded-md" />
+        <div class="relative h-[180px]">
+          <img src="/images/vehicles/img-placeholder.jpg" alt="" class="w-full h-full object-cover rounded-md" />
 
           <div class="absolute top-0 right-0 text-sm">
-            <BadgeComponent :show-ping="true" type="success">Active</BadgeComponent>
+            <BadgeComponent :show-ping="true" type="info"><span class="capitalize">{{ vehicleData.status }}</span>
+            </BadgeComponent>
           </div>
         </div>
 
@@ -31,14 +32,15 @@
           <div class="overflow-x-auto no-scrollbar">
             <div class="text-gray-400 flex gap-2 justify-start text-sm ">
               <div class="flex gap-1 items-center">
-                <Icon icon="material-symbols:person" class="text-2xl" /> <span>5</span>
+                <Icon icon="material-symbols:person" class="text-2xl" /> <span>{{ vehicleData?.persons_allowed || 'N/A'
+                }}</span>
               </div>
               <!-- <div class="flex gap-1 items-center">
                 <Icon icon="material-symbols:settings" class="text-2xl" /> <span>Automatic</span>
               </div> -->
               <div class="flex gap-1 items-center">
                 <Icon icon="ant-design:dashboard-twotone" class="text-2xl" />
-                <span class=" text-nowrap">Mileage / 13000km</span>
+                <span class=" text-nowrap">Mileage / {{ vehicleData?.mileage || 'N/A' }}</span>
               </div>
               <!-- <div class="flex gap-1 items-center">
                 <Icon icon="mdi:snowflake" class="text-2xl" /> <span>A/C</span>
@@ -50,19 +52,19 @@
           <div class="text-sm mt-3 space-y-1">
             <p>
               <span class="">Driver:</span>
-              <span class="text-gray-400 ml-2">John Doe</span>
+              <span class="text-gray-400 ml-2">{{ vehicleData?.driver?.driver || 'N/A' }}</span>
             </p>
             <p>
               <span class="">College:</span>
-              <span class="text-gray-400 ml-2">Engineering</span>
+              <span class="text-gray-400 ml-2">{{ vehicleData?.college?.name || 'N/A' }}</span>
             </p>
             <p>
               <span>Last Maintenance:</span>
-              <span class="text-gray-400 ml-2">25th Feb 2024</span>
+              <span class="text-gray-400 ml-2">{{ vehicleData?.last_maintenance || 'N/A' }}</span>
             </p>
             <p>
               <span>Insurance Expiry:</span>
-              <span class="text-gray-400 ml-2">25th Feb 2024</span>
+              <span class="text-gray-400 ml-2">{{ vehicleData?.insurance_expiry || 'N/A' }}</span>
             </p>
           </div>
         </div>

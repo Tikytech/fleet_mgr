@@ -9,7 +9,8 @@
 
         <!-- Approve request -->
         <ModalComponent :show-modal="showAssign" @close="showAssign = false" title="Assign vehicle" width="900px">
-            <AssignVehicle @close="showAssign = false" :request-data="request" @refresh="refreshRequest" />
+            <AssignVehicle @close="showAssign = false" :request-data="request" @refresh="refreshRequest"
+                v-if="showAssign" />
         </ModalComponent>
 
         <!-- back button -->

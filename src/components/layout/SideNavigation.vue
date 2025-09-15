@@ -63,20 +63,25 @@ const sideMenu = [
     link: { name: 'VehicleRequestList' },
     icon: 'heroicons:clipboard-document-list'
   },
-  {
-    name: 'Drivers',
-    link: { name: 'DriverManagement' },
-    icon: 'heroicons:user-group'
-  },
-  {
-    name: 'Colleges',
-    link: { name: 'Colleges' },
-    icon: 'heroicons:building-library'
-  },
+  // {
+  //   name: 'Drivers',
+  //   link: { name: 'DriverManagement' },
+  //   icon: 'heroicons:user-group'
+  // },
+  // {
+  //   name: 'Colleges',
+  //   link: { name: 'Colleges' },
+  //   icon: 'heroicons:building-library'
+  // },
   {
     name: 'Suppliers',
     link: { name: 'SupplierManagement' },
     icon: 'heroicons:newspaper'
+  },
+  {
+    name: 'Users',
+    link: { name: 'Users' },
+    icon: 'heroicons:user-group'
   }
 ]
 </script>

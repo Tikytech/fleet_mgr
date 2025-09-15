@@ -63,14 +63,11 @@ watch(
 )
 
 const tableData = computed(() => {
-    return colleges.value.map((item, index) => {
+    return colleges.value.map((item) => {
         return {
             collegeId: item?.id,
-            collegeName: item?.name,
-            location: collegeData[index % 4]?.location,
-            contactPerson: collegeData[index % 4]?.contactPerson,
-            contactNumber: collegeData[index % 4]?.contactNumber,
-            noOfVehicles: collegeData[index % 4]?.numberOfVehiclesAssigned,
+            collegeName: item?.name || 'N/A',
+            noOfVehicles: item?.numberOfVehiclesAssigned || 'N/A',
         }
     })
 })
@@ -78,61 +75,61 @@ const tableData = computed(() => {
 const tableHead = [
     { title: 'College ID' },
     { title: 'College Name' },
-    { title: 'Location' },
-    { title: 'Contact Person' },
-    { title: 'Contact Number' },
+    // { title: 'Location' },
+    // { title: 'Contact Person' },
+    // { title: 'Contact Number' },
     { title: 'No of Vehicles Assigned' },
 ]
 
 const actions = {
-    view: {
-        link: 'CollegeDetails',
-        param: 'collegeId',
-    },
+    // view: {
+    //     link: 'CollegeDetails',
+    //     param: 'collegeId',
+    // },
     edit: {
         link: 'CollegeList',
         param: 'collegeId'
     }
 }
 
-const collegeData = [
-    {
-        collegeId: '001',
-        collegeName: 'Computer Science',
-        location: 'Main Campus',
-        contactPerson: 'Alice Johnson',
-        contactNumber: '123-456-7890',
-        email: 'alice.johnson@university.edu',
-        numberOfVehiclesAssigned: 5
-    },
-    {
-        collegeId: '002',
-        collegeName: 'Biology Department',
-        location: 'Science Building',
-        contactPerson: 'Bob Smith',
-        contactNumber: '234-567-8901',
-        email: 'bob.smith@university.edu',
-        numberOfVehiclesAssigned: 3
-    },
-    {
-        collegeId: '003',
-        collegeName: 'Sports Department',
-        location: 'Athletic Center',
-        contactPerson: 'Charlie Brown',
-        contactNumber: '345-678-9012',
-        email: 'charlie.brown@university.edu',
-        numberOfVehiclesAssigned: 4
-    },
-    {
-        collegeId: '004',
-        collegeName: 'History Department',
-        location: 'Humanities Building',
-        contactPerson: 'Diana Prince',
-        contactNumber: '456-789-0123',
-        email: 'diana.prince@university.edu',
-        numberOfVehiclesAssigned: 2
-    }
-]
+// const collegeData = [
+//     {
+//         collegeId: '001',
+//         collegeName: 'Computer Science',
+//         location: 'Main Campus',
+//         contactPerson: 'Alice Johnson',
+//         contactNumber: '123-456-7890',
+//         email: 'alice.johnson@university.edu',
+//         numberOfVehiclesAssigned: 5
+//     },
+//     {
+//         collegeId: '002',
+//         collegeName: 'Biology Department',
+//         location: 'Science Building',
+//         contactPerson: 'Bob Smith',
+//         contactNumber: '234-567-8901',
+//         email: 'bob.smith@university.edu',
+//         numberOfVehiclesAssigned: 3
+//     },
+//     {
+//         collegeId: '003',
+//         collegeName: 'Sports Department',
+//         location: 'Athletic Center',
+//         contactPerson: 'Charlie Brown',
+//         contactNumber: '345-678-9012',
+//         email: 'charlie.brown@university.edu',
+//         numberOfVehiclesAssigned: 4
+//     },
+//     {
+//         collegeId: '004',
+//         collegeName: 'History Department',
+//         location: 'Humanities Building',
+//         contactPerson: 'Diana Prince',
+//         contactNumber: '456-789-0123',
+//         email: 'diana.prince@university.edu',
+//         numberOfVehiclesAssigned: 2
+//     }
+// ]
 
 onMounted(async () => {
     await collegeStore.getAllColleges()

@@ -10,32 +10,32 @@
       </div>
 
       <!-- College head name -->
-      <div class="">
+      <!-- <div class="">
         <label for="name" class="">Name of college head</label>
         <input required class="input mt-1" type="text" id="name" placeholder="Enter staff name"
           v-model="collegeData.staff_name" />
-      </div>
+      </div> -->
 
       <!-- College Head id -->
-      <div class="">
+      <!-- <div class="">
         <label for="staff_id">ID of college head</label>
         <input required class="input mt-1" type="text" id="staff_id" placeholder="Enter ID no. of college head"
           v-model="collegeData.staff_no" />
-      </div>
+      </div> -->
 
       <!-- email -->
-      <div class="">
+      <!-- <div class="">
         <label for="email">Email of college head</label>
         <input required class="input mt-1" type="email" id="email" placeholder="Enter email"
           v-model="collegeData.email" />
-      </div>
+      </div> -->
 
       <!-- Phone number -->
-      <div class="">
+      <!-- <div class="">
         <label for="phone_number">Phone number of college head</label>
         <input required class="input mt-1" type="text" id="phone_number" placeholder="Enter phone number"
           v-model="collegeData.contact" />
-      </div>
+      </div> -->
 
       <div class="flex justify-end mt-6 gap-2">
         <ButtonComponent text="Close" type="border" @click="$emit('close')" typeButton="button" />
@@ -50,36 +50,29 @@
 import ButtonComponent from '../ui/ButtonComponent.vue'
 import { useCollegeStore } from '@/stores/college'
 import { ref } from 'vue'
-import { validateContact } from '@/utils/utils'
-import { useToastStore } from '@/stores/toast'
 
 const emit = defineEmits(['close'])
 const collegeStore = useCollegeStore()
-const toastStore = useToastStore()
 const collegeData = ref({
   name: '',
-  staff_name: '',
-  staff_no: '',
-  email: '',
-  contact: '',
+  // staff_name: '',
+  // staff_no: '',
+  // email: '',
+  // contact: '',
 })
 
 async function submitForm() {
   console.log(collegeData.value)
-  const contact = validateContact(collegeData.value.contact)
-  if (!contact) {
-    toastStore.addToastMessage('danger', 'Error', 'Invalid contact number format')
-    return
-  }
+
   await collegeStore.addCollege(collegeData.value)
   if (collegeStore.isSuccessful) {
     await collegeStore.getAllColleges()
     collegeData.value = {
       name: '',
-      staff_name: '',
-      staff_no: '',
-      email: '',
-      contact: '',
+      // staff_name: '',
+      // staff_no: '',
+      // email: '',
+      // contact: '',
     }
     emit('close')
     console.log('emmiting')

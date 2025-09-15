@@ -24,7 +24,7 @@ const { tabs } = defineProps({
 </script>
 
 <style scoped>
-.router-link-exact-active {
+.router-link-active {
     @apply border-b-2 border-cyan-500 text-cyan-500
 }
 </style>

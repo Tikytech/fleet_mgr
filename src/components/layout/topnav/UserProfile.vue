@@ -21,7 +21,7 @@
 
   <!-- dropdown -->
   <DropdownComponent :show-dropdown="showDropdown" :dropdown-content="dropdown" @close="showDropdown = false"
-    v-if="showDropdown" @settings="navigateToSettings" @logout="showPrompt = true" />
+    v-if="showDropdown" @profile="navigateToProfile" @logout="showPrompt = true" />
 
   <!-- prompts and modals -->
   <!-- logout prompt -->
@@ -42,15 +42,15 @@ const router = useRouter()
 const showPrompt = ref(false)
 const { logout, user } = useAuthStore()
 
-function navigateToSettings() {
-  router.push({ name: 'AccountSettings' })
+function navigateToProfile() {
+  router.push({ name: 'AccountProfile' })
 }
 
 const dropdown = [
   {
-    name: 'Account Settings',
-    emit: 'settings',
-    icon: 'heroicons:cog-6-tooth'
+    name: 'Profile',
+    emit: 'profile',
+    icon: 'heroicons:user'
   },
   { name: 'Logout', emit: 'logout', icon: 'heroicons:arrow-left-start-on-rectangle' }
 ]

@@ -108,9 +108,9 @@ const tableData = computed(() => {
         return {
             id: item?.id,
             vehicle: item?.make + ' ' + item?.model,
-            capacity: item?.capacity || Math.floor(Math.random() * 25) + 1,
+            capacity: item?.persons_allowed || 'N/A',
             regNo: item?.reg_no,
-            status: item?.status || 'Active',
+            status: item?.status.charAt(0).toUpperCase() + item?.status.slice(1) || 'Active',
         }
     })
 })

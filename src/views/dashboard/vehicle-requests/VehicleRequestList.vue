@@ -45,7 +45,7 @@ const actions = {
 }
 
 const tableData = computed(() => {
-  return requestStore.requests.map(item => {
+  return requestStore.staffRequests.map(item => {
     return {
       requestId: item?.id || "N/A",
       college: item?.staff?.college?.name || "N/A",

@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { api } from '@/api/api'
 
@@ -7,6 +7,13 @@ export const useStaffStore = defineStore('staff', () => {
   const clientStaff = ref([])
   const loading = ref(false)
   const isSuccessful = ref(false)
+  const roles = ref([])
+  const loadingRoles = ref(false)
+
+  //getters
+  const drivers = computed(() => {
+    return staff.value.filter((staff) => staff.role?.level == 0)
+  })
 
   //admin staff functions
   async function getAllStaff() {
@@ -48,7 +55,24 @@ export const useStaffStore = defineStore('staff', () => {
     }
   }
 
+  // get all roles
+  async function getAllRoles() {
+    try {
+      loadingRoles.value = true
+      roles.value = (await api.get(`roles`)).data
+      // console.log(roles.value)
+      loadingRoles.value = false
+    } catch (error) {
+      console.log(error)
+      loadingRoles.value = false
+    }
+  }
+
   return {
+    drivers,
+    roles,
+    loadingRoles,
+    getAllRoles,
     staff,
     clientStaff,
     loading,

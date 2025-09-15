@@ -83,8 +83,8 @@ export const useRequestStore = defineStore('request', () => {
       updating.value = true
       const response = await api.put(`requests/${id}`, requestData)
       console.log(response)
-      isSuccessful.value = true
       updating.value = false
+      isSuccessful.value = true
     } catch (error) {
       console.log(error)
       updating.value = false

@@ -2,13 +2,13 @@
     <div class="space-y-5">
         <!-- Modals and popups -->
         <!-- add user modal -->
-        <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Add user" width="500px">
-            <AddUserForm @close="showAdd = false" />
+        <ModalComponent :show-modal="showAdd" @close="showAdd = false" title="Add Staff" width="500px">
+            <AddStaffForm @close="showAdd = false" />
         </ModalComponent>
 
         <!-- Search and buttonbar -->
         <div class=" ">
-            <SearchAndButtonBar button-text="Add user" @add="showAdd = true" />
+            <SearchAndButtonBar button-text="Add Staff" @add="showAdd = true" />
         </div>
 
         <!-- table -->
@@ -20,50 +20,51 @@
 </template>
 
 <script setup>
-import AddUserForm from '@/components/forms/AddUserForm.vue';
+import AddStaffForm from '@/components/forms/AddStaffForm.vue';
 import TableComponent from '@/components/tables/TableComponent.vue';
 import ModalComponent from '@/components/ui/ModalComponent.vue';
 import SearchAndButtonBar from '@/components/ui/SearchAndButtonBar.vue';
 import { onMounted, ref, computed } from 'vue';
-import { useUserStore } from '@/stores/user'
-import dayjs from 'dayjs';
+// import { useUserStore } from '@/stores/user'
+// import dayjs from 'dayjs';
 import { storeToRefs } from 'pinia';
+import { useStaffStore } from '@/stores/staff'
 
 const showAdd = ref(false)
-const userStore = useUserStore()
-const { users, loading } = storeToRefs(userStore)
+// const userStore = useUserStore()
+const staffStore = useStaffStore()
+// const { users, loading: userLoading } = storeToRefs(userStore)
+const { staff, loading } = storeToRefs(staffStore)
 
 const tableHead = [
     { title: 'User ID' },
     { title: 'Name' },
     { title: 'Email' },
     { title: 'Phone' },
-    { title: 'Created At' },
-    { title: 'Status' },
-    { title: 'Last login' },
+    { title: 'Role' },
+    { title: 'Level' },
 ]
 
 const tableData = computed(() => {
-    return users.value.map(item => {
+    return staff.value.map(item => {
         return {
-            userId: item?.id || "N/A",
+            userId: item?.staff_no || "N/A",
             // college: item?.staff?.college?.name || "N/A",
-            name: item?.staff?.name || "N/A",
+            name: item?.name || "N/A",
             email: item?.email || "N/A",
-            phone: item?.staff?.contact || "N/A",
-            return_date: dayjs(item?.createdAt).format("MMM DD, YYYY") || "N/A",
-            status: "Active",
-            lastLogin: "N/A",
+            phone: item?.contact || "N/A",
+            role: item?.role?.name || "N/A",
+            level: item?.role?.level.toString() || "N/A",
         }
     })
 })
 
 const actions = {
     edit: {
-        link: 'UserManagement',
+        link: 'StaffManagement',
     },
     delete: {
-        link: 'UserManagement'
+        link: 'StaffManagement'
     }
 }
 
@@ -79,7 +80,8 @@ function getStatus(status) {
 }
 
 onMounted(async () => {
-    await userStore.getAllUsers()
+    // await userStore.getAllUsers()
+    await staffStore.getAllStaff()
 })
 
 // const tableData = [

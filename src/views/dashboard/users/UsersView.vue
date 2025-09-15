@@ -13,7 +13,10 @@
 <script setup>
 import NavigationTabs from '@/components/ui/NavigationTabs.vue';
 
-const tabs = [{ tab: "Profile", link: 'AccountProfile' }, { tab: "User Management", link: 'UserManagement' }]
+const tabs = [
+    { tab: "Colleges", show: true, link: 'Colleges' },
+    { tab: "Departments", show: true, link: 'Departments' },
+    { tab: "Staff", show: true, link: 'StaffManagement' },]
 </script>
 
 <style scoped></style>

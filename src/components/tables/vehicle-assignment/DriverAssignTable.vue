@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="flex justify-center py-10" v-else-if="supplierStore.loading">
+        <div class="flex justify-center py-10" v-else-if="staffStore.loading">
             <div class="">
                 <Icon icon="line-md:loading-loop" class="text-6xl text-cyan-800 mx-auto" />
                 <p>Fetching data...</p>
@@ -67,21 +67,21 @@
 
         <div class="flex justify-center py-10" v-else>
             <NoResults>
-                <ButtonComponent text="Add Supplier" icon="heroicons:plus" type="success" @click="$emit('add')" />
+                <span>No drivers found</span>
             </NoResults>
         </div>
     </div>
 </template>
 
 <script setup>
-import ButtonComponent from '@/components/ui/ButtonComponent.vue'
+// import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import NoResults from '@/components/ui/NoResults.vue'
 import { Icon } from '@iconify/vue'
 import BadgeComponent from '@/components/ui/BadgeComponent.vue';
-import { useDriverStore } from '@/stores/driver';
+import { useStaffStore } from '@/stores/staff';
 import { computed } from 'vue';
 
-const driverStore = useDriverStore()
+const staffStore = useStaffStore()
 
 const { selectedDriver, selectedDrivers } = defineProps({
     selectedDriver: {
@@ -113,7 +113,7 @@ const tableHead = [
 ]
 
 const tableData = computed(() => {
-    return driverStore.drivers.map(item => {
+    return staffStore.drivers.map(item => {
         return {
             id: item?.id,
             driver: item?.name,
