@@ -33,7 +33,7 @@
             <div class="text-gray-400 flex gap-2 justify-start text-sm ">
               <div class="flex gap-1 items-center">
                 <Icon icon="material-symbols:person" class="text-2xl" /> <span>{{ vehicleData?.persons_allowed || 'N/A'
-                }}</span>
+                  }}</span>
               </div>
               <!-- <div class="flex gap-1 items-center">
                 <Icon icon="material-symbols:settings" class="text-2xl" /> <span>Automatic</span>
@@ -50,10 +50,10 @@
 
           <!-- car extra details -->
           <div class="text-sm mt-3 space-y-1">
-            <p>
+            <!-- <p>
               <span class="">Driver:</span>
               <span class="text-gray-400 ml-2">{{ vehicleData?.driver?.driver || 'N/A' }}</span>
-            </p>
+            </p> -->
             <p>
               <span class="">College:</span>
               <span class="text-gray-400 ml-2">{{ vehicleData?.college?.name || 'N/A' }}</span>

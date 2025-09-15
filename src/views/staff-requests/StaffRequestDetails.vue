@@ -38,6 +38,10 @@
 
             <ContactPersonCard v-if="request?.staff" :contact="request.staff" />
 
+            <!-- assigned vehicle details -->
+            <AssignedVehicleDetails v-if="request?.assignedVehicles" :assigned-vehicles="request.assignedVehicles"
+                :return-date="request.return_date" :trip-date="request.trip_date" />
+
             <!-- Cancel Request -->
             <div class="flex justify-end" v-if="user?.id === request?.staff?.id && request.status === 'Pending'">
                 <ButtonComponent text="Cancel Request" type="border" @click="showCancel = true" />
@@ -64,6 +68,7 @@ import { useRoute } from 'vue-router';
 import RequestDetailsCard from '@/components/custom/requests/RequestDetailsCard.vue';
 import ButtonComponent from '@/components/ui/ButtonComponent.vue'
 import ContactPersonCard from '@/components/custom/requests/ContactPersonCard.vue';
+import AssignedVehicleDetails from '@/components/custom/requests/AssignedVehicleDetails.vue';
 import { useAuthStore } from '@/stores/authentication';
 import ModalComponent from '@/components/ui/ModalComponent.vue';
 import RejectVehicleRequestForm from '@/components/forms/RejectVehicleRequestForm.vue';

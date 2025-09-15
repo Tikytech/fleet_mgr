@@ -33,6 +33,10 @@
 
             <ContactPersonCard :contact="request.staff" v-if="request?.staff" />
 
+            <!-- assigned vehicle details -->
+            <AssignedVehicleDetails v-if="request?.assignedVehicles" :assigned-vehicles="request.assignedVehicles"
+                :return-date="request.return_date" :trip-date="request.trip_date" />
+
 
 
         </div>
@@ -58,6 +62,7 @@ import { useRoute } from 'vue-router';
 import RequestDetailsCard from '@/components/custom/requests/RequestDetailsCard.vue';
 import ContactPersonCard from '@/components/custom/requests/ContactPersonCard.vue';
 import AssignVehicle from '@/components/custom/requests/AssignVehicle.vue';
+import AssignedVehicleDetails from '@/components/custom/requests/AssignedVehicleDetails.vue';
 
 dayjs.extend(relativeTime)
 

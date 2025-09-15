@@ -25,8 +25,8 @@ const { user } = useAuthStore()
 const tabs = [
     { tab: 'Your Requests', link: 'StaffRequestList', show: true },
     { tab: 'Staff Requests', link: 'AllStaffRequests', show: true },
-    { tab: 'Staff', link: 'AllStaffList', show: true },
-    { tab: 'Departments', link: 'DepartmentsList', show: true },
+    // { tab: 'Staff', link: 'AllStaffList', show: true },
+    // { tab: 'Departments', link: 'DepartmentsList', show: true },
 ];
 console.log(user)
 </script>

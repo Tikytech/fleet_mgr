@@ -41,23 +41,23 @@
         </div>
 
         <!-- Right side - Department Information (only for college heads) -->
-        <SelectDepartment v-if="true" :initial-department="user?.department?.name"
-            @department-changed="handleDepartmentChange" />
+        <!-- <SelectDepartment v-if="true" :initial-department="user?.department?.name"
+            @department-changed="handleDepartmentChange" /> -->
     </div>
 </template>
 
 <script setup>
 import { useAuthStore } from '@/stores/authentication';
 import { Icon } from '@iconify/vue';
-import SelectDepartment from './SelectDepartment.vue';
+// import SelectDepartment from './SelectDepartment.vue';
 
 const { user } = useAuthStore()
 
-function handleDepartmentChange(newDepartment) {
-    console.log('Department changed to:', newDepartment)
-    // Here you can add logic to update the user's department
-    // For example, call an API to update the user's department
-}
+// function handleDepartmentChange(newDepartment) {
+//     console.log('Department changed to:', newDepartment)
+//     // Here you can add logic to update the user's department
+//     // For example, call an API to update the user's department
+// }
 </script>
 
 <style lang="scss" scoped></style>
