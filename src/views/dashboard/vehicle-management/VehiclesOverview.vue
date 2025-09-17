@@ -74,21 +74,21 @@ const overviewData = computed(() => {
       title: 'Available Vehicles',
       // link: { name: 'StaffManagement' },
       // linkName: 'View All Staff',
-      statistic: vehicles.value.length,
+      statistic: vehicles.value.filter(vehicle => vehicle.availability === 'Available').length,
       icon: 'material-symbols-light:electric-car-outline-rounded'
     },
     {
       title: 'In Use',
       // link: { name: 'SupplierManagement' },
       // linkName: 'View Supplier Details',
-      statistic: 0,
+      statistic: vehicles.value.filter(vehicle => vehicle.availability === 'Unavailable').length,
       icon: 'mdi:car-emergency'
     },
     {
       title: 'In maintenance',
       // link: { name: 'Colleges' },
       // linkName: 'View Colleges',
-      statistic: 0,
+      statistic: vehicles.value.filter(vehicle => vehicle.availability === 'In Maintenance').length,
       icon: 'material-symbols-light:car-crash-outline'
     }
   ]

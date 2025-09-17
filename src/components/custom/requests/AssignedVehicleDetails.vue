@@ -10,21 +10,13 @@
 <script setup>
 import TableComponent from '@/components/tables/TableComponent.vue'
 import { computed } from 'vue'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
-const { assignedVehicles, returnDate, tripDate } = defineProps({
+const { assignedVehicles } = defineProps({
     assignedVehicles: {
         type: Array,
         required: true
     },
-    returnDate: {
-        type: String,
-        required: true
-    },
-    tripDate: {
-        type: String,
-        required: true
-    }
 })
 
 const tableData = computed(() => {
@@ -35,7 +27,7 @@ const tableData = computed(() => {
             no_of_passengers: vehicle?.no_of_passengers,
             driverName: vehicle?.driver?.name,
             driverContact: vehicle?.driver?.contact,
-            tripStatus: getTripStatus(tripDate, returnDate),
+            tripStatus: vehicle?.status,
         }
     })
 })
@@ -49,27 +41,14 @@ const tableHead = [
     { title: 'Trip Status' },
 ]
 
-function getTripStatus(tripDate, returnDate) {
-    const now = dayjs()
-    const start = dayjs(tripDate)
-    const end = dayjs(returnDate)
-
-    if (now.isBefore(start)) {
-        return "not started"
-    } else if (now.isAfter(end)) {
-        return "ended"
-    } else {
-        return "on trip"
-    }
-}
 
 function getStatus(tripStatus) {
     switch (tripStatus.toLowerCase()) {
-        case 'not started':
+        case 'pending':
             return 'warning';
-        case 'on trip':
+        case 'in transit':
             return 'success';
-        case 'ended':
+        case 'completed':
             return 'info';
         default:
             return '';

@@ -32,18 +32,19 @@
           <!-- icons -->
           <div class="text-gray-500 flex gap-3 text-sm my-4">
             <div class="flex gap-1 items-center">
-              <Icon icon="material-symbols:person" class="text-2xl" /> <span>5</span>
+              <Icon icon="material-symbols:person" class="text-2xl" /> <span>{{ vehicleDetails.persons_allowed || 'N/A'
+                }}</span>
             </div>
-            <div class="flex gap-1 items-center">
+            <!-- <div class="flex gap-1 items-center">
               <Icon icon="material-symbols:settings" class="text-2xl" /> <span>Automatic</span>
-            </div>
+            </div> -->
             <div class="flex gap-1 items-center">
               <Icon icon="ant-design:dashboard-twotone" class="text-2xl" />
-              <span>Mileage / 13000km</span>
+              <span>{{ vehicleDetails.odometer_readings?.at(-1)?.reading }}</span>
             </div>
-            <div class="flex gap-1 items-center">
+            <!-- <div class="flex gap-1 items-center">
               <Icon icon="mdi:snowflake" class="text-2xl" /> <span>A/C</span>
-            </div>
+            </div> -->
           </div>
 
           <!-- details -->
@@ -84,14 +85,16 @@
               <!-- College -->
               <tr>
                 <td className="py-1.5 pr-3 font-semibold">College:</td>
-                <td className="text-gray-500">N/A</td>
+                <td className="text-gray-500">{{ vehicleDetails.college?.name || 'N/A' }}</td>
               </tr>
               <!-- Status -->
               <tr>
                 <td className="py-1.5 pr-3 font-semibold">Status:</td>
                 <td className="text-gray-500">
                   <div class="w-fit">
-                    <BadgeComponent type="warning">In Maintenance</BadgeComponent>
+                    <BadgeComponent
+                      :type="vehicleDetails.availability === 'Available' ? 'success' : vehicleDetails.availability === 'Unavailable' ? 'warning' : 'info'">
+                      {{ vehicleDetails.availability || 'N/A' }}</BadgeComponent>
                   </div>
                 </td>
               </tr>

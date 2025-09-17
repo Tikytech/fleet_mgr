@@ -33,7 +33,7 @@
                 {{ data?.status }}
               </div>
               <div class="text-[10px] bg-red-400/30 text-red-700 w-fit p-0.5 px-2 font-semibold rounded"
-                v-else-if="data?.status === 'Inactive'">
+                v-else-if="data?.status === 'Unavailable'">
                 {{ data?.status }}
               </div>
               <div class="text-[10px] bg-blue-400/30 text-blue-700 w-fit p-0.5 px-2 font-semibold rounded"
@@ -72,7 +72,7 @@ const tableData = computed(() => {
       vehicle: item?.make + ' ' + item?.model,
       regNo: item?.reg_no,
       college: item?.college?.name || 'N/A',
-      status: item?.status.charAt(0).toUpperCase() + item?.status.slice(1) || 'Active',
+      status: item?.availability || 'N/A',
     }
   })
 })

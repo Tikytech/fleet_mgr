@@ -10,7 +10,7 @@ export const useVehicleStore = defineStore('vehicle', () => {
   async function getAllVehicles() {
     try {
       loading.value = true
-      vehicles.value = (await api.get('vehicles')).data
+      vehicles.value = (await api.get('vehicles')).data?.data
       console.log(vehicles.value)
       loading.value = false
     } catch (error) {

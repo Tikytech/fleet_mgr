@@ -8,7 +8,9 @@
           <img src="/images/vehicles/img-placeholder.jpg" alt="" class="w-full h-full object-cover rounded-md" />
 
           <div class="absolute top-0 right-0 text-sm">
-            <BadgeComponent :show-ping="true" type="info"><span class="capitalize">{{ vehicleData.status }}</span>
+            <BadgeComponent :show-ping="true"
+              :type="vehicleData.availability === 'Available' ? 'success' : vehicleData.availability === 'Unavailable' ? 'warning' : 'info'">
+              <span class="capitalize">{{ vehicleData.availability }}</span>
             </BadgeComponent>
           </div>
         </div>
@@ -40,7 +42,8 @@
               </div> -->
               <div class="flex gap-1 items-center">
                 <Icon icon="ant-design:dashboard-twotone" class="text-2xl" />
-                <span class=" text-nowrap">Mileage / {{ vehicleData?.mileage || 'N/A' }}</span>
+                <span class=" text-nowrap">{{ vehicleData?.odometer_readings?.at(-1)?.reading || 'N/A'
+                }}</span>
               </div>
               <!-- <div class="flex gap-1 items-center">
                 <Icon icon="mdi:snowflake" class="text-2xl" /> <span>A/C</span>
