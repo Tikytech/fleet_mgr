@@ -92,9 +92,9 @@
                 <td className="py-1.5 pr-3 font-semibold">Status:</td>
                 <td className="text-gray-500">
                   <div class="w-fit">
-                    <BadgeComponent
-                      :type="vehicleDetails.availability === 'Available' ? 'success' : vehicleDetails.availability === 'Unavailable' ? 'warning' : 'info'">
-                      {{ vehicleDetails.availability || 'N/A' }}</BadgeComponent>
+                    <BadgeComponent class="capitalize"
+                      :type="vehicleDetails?.status?.toLowerCase() === 'available' ? 'success' : vehicleDetails?.status?.toLowerCase() === 'unavailable' ? 'warning' : 'info'">
+                      {{ vehicleDetails?.status || 'N/A' }}</BadgeComponent>
                   </div>
                 </td>
               </tr>

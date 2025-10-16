@@ -16,6 +16,14 @@
                     rows="4" v-model="requestData.detailed_reason"></textarea>
             </div>
 
+
+            <!-- location -->
+            <div class="">
+                <label for="location" class="required">Location</label>
+                <input required class="input mt-1" type="text" id="location" placeholder="Enter location"
+                    v-model="requestData.location" />
+            </div>
+
             <!-- Official Trip? -->
             <div class="space-y-1">
                 <label class="required">What type of trip is this</label>
@@ -115,6 +123,7 @@ const today = ref(new Date().toISOString().split("T")[0])
 const requestData = ref({
     purpose: '',
     detailed_reason: '',
+    location: '',
     type: '',
     trip_date: '',
     trip_time: '',
@@ -146,6 +155,7 @@ async function submitForm() {
         requestData.value = {
             purpose: '',
             detailed_reason: '',
+            location: '',
             type: '',
             trip_date: '',
             return_date: '',
