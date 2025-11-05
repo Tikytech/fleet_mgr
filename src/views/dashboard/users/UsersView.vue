@@ -14,7 +14,7 @@
 import NavigationTabs from '@/components/ui/NavigationTabs.vue';
 
 const tabs = [
-    { tab: "Colleges", show: true, link: 'Colleges' },
+    { tab: "Colleges", show: true, link: 'CollegeList' },
     { tab: "Departments", show: true, link: 'Departments' },
     { tab: "Staff", show: true, link: 'StaffManagement' },]
 </script>

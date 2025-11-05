@@ -33,7 +33,7 @@
           <div class="text-gray-500 flex gap-3 text-sm my-4">
             <div class="flex gap-1 items-center">
               <Icon icon="material-symbols:person" class="text-2xl" /> <span>{{ vehicleDetails.persons_allowed || 'N/A'
-                }}</span>
+              }}</span>
             </div>
             <!-- <div class="flex gap-1 items-center">
               <Icon icon="material-symbols:settings" class="text-2xl" /> <span>Automatic</span>
@@ -146,7 +146,8 @@ const showEdit = ref(false)
 const tabLinks = [
   { tab: 'Requests', link: 'RequestHistory', show: true },
   { tab: 'Maintenance/Repairs', link: 'MaintenanceHistory', show: true },
-  { tab: 'Tyres/Batteries', link: 'AccessoriesHistory', show: true },
+  { tab: 'Batteries', link: 'BatteriesHistory', show: true },
+  { tab: 'Tyres', link: 'TyresHistory', show: true },
   { tab: 'Insurance', link: 'InsuranceHistory', show: true },
 ]
 

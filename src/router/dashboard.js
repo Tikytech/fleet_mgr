@@ -108,6 +108,20 @@ export const dashboardRoutes = [
                   )
               },
               {
+                path: 'batteries',
+                name: 'BatteriesHistory',
+                component: () =>
+                  import(
+                    '../views/dashboard/vehicle-management/vehicle-history/BatteriesHistory.vue'
+                  )
+              },
+              {
+                path: 'tyres',
+                name: 'TyresHistory',
+                component: () =>
+                  import('../views/dashboard/vehicle-management/vehicle-history/TyresHistory.vue')
+              },
+              {
                 path: 'insurance',
                 name: 'InsuranceHistory',
                 component: () =>
@@ -235,7 +249,6 @@ export const dashboardRoutes = [
               }
             ]
           },
-
           {
             path: 'departments',
             name: 'Departments',
